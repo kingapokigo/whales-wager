@@ -24,11 +24,27 @@
     <img src="/images/turtle.svg" class="turtle swim-slow" alt="turtle">
   </div>
 
-  <h1 style="margin-top: 150px; color: white; font-size: 3.5rem;">Welcome to Whale's Wager!</h1>
-  <div style="display: flex; justify-content: center; margin-top: 25px;">
-    <button onclick="drawCard()" style="font-size: 1.4rem; padding: 16px 30px;">Draw a Card</button>
-  </div>
+  <h1>Welcome to Whale's Wager!</h1>
+  <button onclick="drawCard()">Draw a Card</button>
   <div id="card-output" class="card-box"></div>
+
+  <button onclick="toggleRules()" class="rules-btn">How to Play</button>
+  <div id="rules-section" class="rules hidden">
+    <h2>How to Play</h2>
+    <p><strong>Objective:</strong> Be the first whale to swim across the board by completing challenges and avoiding toxic traps!</p>
+    <h3>Card Types</h3>
+    <ul>
+      <li><strong>Whale Cards:</strong> Fun challenges, trivia, or bets. Complete to roll the dice and move forward.</li>
+      <li><strong>Toxic Mushroom Cards:</strong> Watch out! These may make you lose a turn, move backward, or swap spots.</li>
+    </ul>
+    <h3>Gameplay</h3>
+    <ol>
+      <li>Each player picks a whale piece.</li>
+      <li>On your turn: Draw a card → Complete challenge → Roll dice (1-6) → Move your whale.</li>
+      <li>First player to reach the final space wins!</li>
+    </ol>
+    <p>Optional: Keep score, add drinks, or team up for chaos!</p>
+  </div>
 
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
@@ -43,6 +59,11 @@
       playSound();
       originalDrawCard();
     };
+
+    function toggleRules() {
+      const section = document.getElementById('rules-section');
+      section.classList.toggle('hidden');
+    }
   </script>
 </body>
 </html>
