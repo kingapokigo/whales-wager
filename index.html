@@ -24,26 +24,24 @@
     <img src="/images/turtle.svg" class="turtle swim-slow" alt="turtle">
   </div>
 
-  <h1>Welcome to Whale's Wager!</h1>
+  <h1 style="color: white;">Welcome to Whale's Wager!</h1>
   <button onclick="drawCard()">Draw a Card</button>
+  <button onclick="toggleHowToPlay()">How to Play</button>
   <div id="card-output" class="card-box"></div>
 
-  <button onclick="toggleRules()" class="rules-btn">How to Play</button>
-  <div id="rules-section" class="rules hidden">
-    <h2>How to Play</h2>
+  <div id="how-to-play" style="display:none; color:white; max-width: 800px; margin: 30px auto; font-size: 1.1rem; line-height: 1.6;">
+    <h2 style="color:white;">How to Play</h2>
     <p><strong>Objective:</strong> Be the first whale to swim across the board by completing challenges and avoiding toxic traps!</p>
-    <h3>Card Types</h3>
-    <ul>
-      <li><strong>Whale Cards:</strong> Fun challenges, trivia, or bets. Complete to roll the dice and move forward.</li>
-      <li><strong>Toxic Mushroom Cards:</strong> Watch out! These may make you lose a turn, move backward, or swap spots.</li>
-    </ul>
-    <h3>Gameplay</h3>
+    <h3 style="color:white;">Card Types</h3>
+    <p><strong>Whale Cards:</strong> Fun challenges, trivia, or bets. Complete to roll the dice and move forward.<br>
+       <strong>Toxic Mushroom Cards:</strong> Watch out! These may make you lose a turn, move backward, or swap spots.</p>
+    <h3 style="color:white;">Gameplay</h3>
     <ol>
       <li>Each player picks a whale piece.</li>
-      <li>On your turn: Draw a card → Complete challenge → Roll dice (1-6) → Move your whale.</li>
+      <li>On your turn: Draw a card → Complete challenge → Roll dice (1–6) → Move your whale.</li>
       <li>First player to reach the final space wins!</li>
     </ol>
-    <p>Optional: Keep score, add drinks, or team up for chaos!</p>
+    <p><em>Optional:</em> Keep score, add drinks, or team up for chaos!</p>
   </div>
 
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
@@ -60,9 +58,9 @@
       originalDrawCard();
     };
 
-    function toggleRules() {
-      const section = document.getElementById('rules-section');
-      section.classList.toggle('hidden');
+    function toggleHowToPlay() {
+      const section = document.getElementById("how-to-play");
+      section.style.display = section.style.display === "none" ? "block" : "none";
     }
   </script>
 </body>
