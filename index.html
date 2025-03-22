@@ -26,7 +26,7 @@
 
   <h1 style="color: white;">Welcome to Whale's Wager!</h1>
   <div class="button-row">
-    <button onclick="showPlayerSetup()">Start Whaling!</button>
+    <button onclick="startWhaling()">Start Whaling!</button>
     <button onclick="showRules()">How to Play</button>
   </div>
 
@@ -46,30 +46,16 @@
     <button onclick="showPlayerSetup()">Let's Wager!</button>
   </div>
 
-  <div id="player-setup" class="hidden player-setup" style="color: white;">
+  <div id="player-setup" class="hidden" style="text-align: center; color: white;">
     <h2>Name Your Whales</h2>
     <p>Choose up to 6 players:</p>
-    <form id="playerForm">
-      <div class="player-entry">
-        <input type="text" placeholder="Player 1 Name" name="player1">
-      </div>
-      <div class="player-entry">
-        <input type="text" placeholder="Player 2 Name" name="player2">
-      </div>
-      <div class="player-entry">
-        <input type="text" placeholder="Player 3 Name" name="player3">
-      </div>
-      <div class="player-entry">
-        <input type="text" placeholder="Player 4 Name" name="player4">
-      </div>
-      <div class="player-entry">
-        <input type="text" placeholder="Player 5 Name" name="player5">
-      </div>
-      <div class="player-entry">
-        <input type="text" placeholder="Player 6 Name" name="player6">
-      </div>
-      <button type="button" onclick="startBoardGame()">Swim to Start ➤</button>
-    </form>
+    <input type="text" placeholder="Player 1 Name" /><br />
+    <input type="text" placeholder="Player 2 Name" /><br />
+    <input type="text" placeholder="Player 3 Name" /><br />
+    <input type="text" placeholder="Player 4 Name" /><br />
+    <input type="text" placeholder="Player 5 Name" /><br />
+    <input type="text" placeholder="Player 6 Name" /><br />
+    <button style="margin-top: 10px;" onclick="startGame()">Swim to Start ➤</button>
   </div>
 
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
@@ -92,10 +78,10 @@
       document.getElementById("player-setup").classList.add("hidden");
     }
 
-    function startGame() {
+    function startWhaling() {
       document.getElementById("how-to-play").classList.add("hidden");
-      document.getElementById("card-output").classList.remove("hidden");
-      document.getElementById("player-setup").classList.add("hidden");
+      document.getElementById("card-output").classList.add("hidden");
+      document.getElementById("player-setup").classList.remove("hidden");
     }
 
     function showPlayerSetup() {
@@ -104,15 +90,10 @@
       document.getElementById("player-setup").classList.remove("hidden");
     }
 
-    function startBoardGame() {
-      const players = [];
-      const form = document.getElementById('playerForm');
-      for (let i = 1; i <= 6; i++) {
-        const value = form[`player${i}`].value.trim();
-        if (value) players.push(value);
-      }
-      console.log("Players:", players); // placeholder for game logic
-      // TODO: Transition to board game screen
+    function startGame() {
+      document.getElementById("how-to-play").classList.add("hidden");
+      document.getElementById("player-setup").classList.add("hidden");
+      document.getElementById("card-output").classList.remove("hidden");
     }
   </script>
 </body>
