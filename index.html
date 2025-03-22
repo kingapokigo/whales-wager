@@ -26,11 +26,11 @@
 
   <h1 style="color: white;">Welcome to Whale's Wager!</h1>
   <div class="button-row">
-    <button onclick="startGame()">Start Whaling!</button>
+    <button onclick="showPlayerSetup()">Start Whaling!</button>
     <button onclick="showRules()">How to Play</button>
   </div>
 
-  <div id="card-output" class="card-box"></div>
+  <div id="card-output" class="card-box hidden"></div>
 
   <div id="how-to-play" class="rules-box hidden" style="color: white;">
     <h2>How to Play</h2>
@@ -43,7 +43,33 @@
     <p>On your turn: Draw a card → Complete challenge → Roll dice (1–6) → Move your whale.</p>
     <p>First player to reach the final space wins!</p>
     <p><em>Optional:</em> Keep score, add drinks, or team up for chaos!</p>
-    <button onclick="startGame()">Let's Wager!</button>
+    <button onclick="showPlayerSetup()">Let's Wager!</button>
+  </div>
+
+  <div id="player-setup" class="hidden player-setup" style="color: white;">
+    <h2>Name Your Whales</h2>
+    <p>Choose up to 6 players:</p>
+    <form id="playerForm">
+      <div class="player-entry">
+        <input type="text" placeholder="Player 1 Name" name="player1">
+      </div>
+      <div class="player-entry">
+        <input type="text" placeholder="Player 2 Name" name="player2">
+      </div>
+      <div class="player-entry">
+        <input type="text" placeholder="Player 3 Name" name="player3">
+      </div>
+      <div class="player-entry">
+        <input type="text" placeholder="Player 4 Name" name="player4">
+      </div>
+      <div class="player-entry">
+        <input type="text" placeholder="Player 5 Name" name="player5">
+      </div>
+      <div class="player-entry">
+        <input type="text" placeholder="Player 6 Name" name="player6">
+      </div>
+      <button type="button" onclick="startBoardGame()">Swim to Start ➤</button>
+    </form>
   </div>
 
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
@@ -63,11 +89,30 @@
     function showRules() {
       document.getElementById("how-to-play").classList.remove("hidden");
       document.getElementById("card-output").classList.add("hidden");
+      document.getElementById("player-setup").classList.add("hidden");
     }
 
     function startGame() {
       document.getElementById("how-to-play").classList.add("hidden");
       document.getElementById("card-output").classList.remove("hidden");
+      document.getElementById("player-setup").classList.add("hidden");
+    }
+
+    function showPlayerSetup() {
+      document.getElementById("how-to-play").classList.add("hidden");
+      document.getElementById("card-output").classList.add("hidden");
+      document.getElementById("player-setup").classList.remove("hidden");
+    }
+
+    function startBoardGame() {
+      const players = [];
+      const form = document.getElementById('playerForm');
+      for (let i = 1; i <= 6; i++) {
+        const value = form[`player${i}`].value.trim();
+        if (value) players.push(value);
+      }
+      console.log("Players:", players); // placeholder for game logic
+      // TODO: Transition to board game screen
     }
   </script>
 </body>
