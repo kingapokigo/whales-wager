@@ -2,22 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Whale's Wager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="bubbles-background">
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
+    <div class="bubble b4"></div>
+    <div class="bubble b5"></div>
+  </div>
+
+  <div class="sea-creatures">
+    <img src="/images/whale1.svg" class="whale swim-left whale1" alt="whale">
+    <img src="/images/whale2.svg" class="whale swim-right whale2" alt="whale">
+    <img src="/images/fish1.svg" class="fish swim-left fish1" alt="fish">
+    <img src="/images/octopus.svg" class="octopus float-up" alt="octopus">
+    <img src="/images/turtle.svg" class="turtle swim-slow" alt="turtle">
+  </div>
+
   <h1>Welcome to Whale's Wager!</h1>
   <button onclick="drawCard()">Draw a Card</button>
-  <div id="card-output"></div>
+  <div id="card-output" class="card-box"></div>
+
+  <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
   <script src="game-logic.js"></script>
- <div class="whale-container">
-  <img src="whale1.svg" class="whale whale1" alt="Whale 1" />
-  <img src="whale2.svg" class="whale whale2" alt="Whale 2" />
-</div>
+  <script>
+    function playSound() {
+      document.getElementById("draw-sound").play();
+    }
 
-
+    const originalDrawCard = drawCard;
+    drawCard = function () {
+      playSound();
+      originalDrawCard();
+    };
+  </script>
 </body>
 </html>
