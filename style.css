@@ -47,3 +47,41 @@ button:hover {
   display: inline-block;
   transition: all 0.3s ease;
 }
+.whale {
+  position: fixed;
+  font-size: 3rem;
+  z-index: 0;
+  opacity: 0.4;
+  animation-timing-function: linear;
+  pointer-events: none; /* So they don't block clicks */
+}
+
+.whale1 {
+  top: 20%;
+  left: -10%;
+  animation: swim1 25s infinite;
+}
+
+.whale2 {
+  top: 70%;
+  left: -15%;
+  animation: swim2 35s infinite;
+}
+
+@keyframes swim1 {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(120vw) rotate(360deg);
+  }
+}
+
+@keyframes swim2 {
+  0% {
+    transform: translateX(0) rotateY(180deg);
+  }
+  100% {
+    transform: translateX(130vw) rotateY(180deg);
+  }
+}
