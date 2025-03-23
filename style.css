@@ -5,9 +5,11 @@ body {
   margin: 0;
   padding: 0;
 }
+
 .hidden {
   display: none;
 }
+
 h1 {
   color: #ffffff;
   font-family: 'Antonio', sans-serif;
@@ -20,81 +22,54 @@ button {
   background-color: #00bcd4;
   color: white;
   font-family: 'Antonio', sans-serif;
-font-size: 1.2rem;
-font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  margin: 10px;
   border: none;
-  border-radius: 12px;
-  padding: 14px 24px;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-  transition: background 0.3s ease, transform 0.2s ease;
-  margin-right: 12px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #01456e;
-  transform: scale(1.05);
+  background-color: #008c9e;
 }
 
-#card-output {
-  margin-top: 20px;
-  background-color: #ffffff;
-  padding: 20px 30px;
-  border-radius: 12px;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #003344;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  display: inline-block;
-  transition: all 0.3s ease;
-}
-.whale {
-  position: fixed;
-  font-size: 3rem;
-  z-index: 0;
-  opacity: 0.4;
-  animation-timing-function: linear;
-  pointer-events: none; /* So they don't block clicks */
+.rules-box {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.whale1 {
-  top: 20%;
-  left: -10%;
-  animation: swim1 25s infinite;
+input[type="text"] {
+  margin: 4px 0;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-family: 'Antonio', sans-serif;
+  width: 220px;
 }
 
-.whale2 {
-  top: 70%;
-  left: -15%;
-  animation: swim2 35s infinite;
-}
-
-@keyframes swim1 {
-  0% {
-    transform: translateX(0) rotate(0deg);
-  }
-  100% {
-    transform: translateX(120vw) rotate(360deg);
-  }
-}
-
-@keyframes swim2 {
-  0% {
-    transform: translateX(0) rotateY(180deg);
-  }
+/* --- CARD FLIP STYLES --- */
 
 .card-container {
   perspective: 1000px;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 40px;
 }
 
 .card {
-  width: 300px;
+  width: 350px;
   height: 180px;
-  position: relative;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.6s;
   transform-style: preserve-3d;
-  transition: transform 0.8s;
+  position: relative;
   cursor: pointer;
 }
 
@@ -102,39 +77,40 @@ button:hover {
   transform: rotateY(180deg);
 }
 
-/* Front (Face) of the Card */
-.card-front, .card-back {
+.card-front,
+.card-back {
   position: absolute;
   width: 100%;
   height: 100%;
+  padding: 20px;
   border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   backface-visibility: hidden;
+  font-size: 1.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Antonio', sans-serif;
-  font-size: 1.3rem;
-  font-weight: 600;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Whale Card Front */
+/* Whale Cards */
 .card-front.whale {
   background-color: #ffffff;
-  border: 5px solid #003344;
+  border: 6px solid #003344;
   color: #003344;
 }
 
-/* Toxic Mushroom Card Front */
+/* Mushroom Cards – (we’ll style this one soon when we add it to HTML!) */
 .card-front.mushroom {
-  background-color: #fff8f6;
-  border: 5px solid #800020;
-  color: #800020;
+  background-color: #ffffff;
+  border: 6px solid #7b1e1e;
+  color: #7b1e1e;
 }
 
-/* Card*
-
-  100% {
-    transform: translateX(130vw) rotateY(180deg);
-  }
+/* Card back – universal */
+.card-back {
+  background-color: #ffffff;
+  color: #003344;
+  transform: rotateY(180deg);
+  font-weight: bold;
 }
