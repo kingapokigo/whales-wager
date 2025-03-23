@@ -29,16 +29,17 @@
     <button onclick="startWhaling()">Start Whaling!</button>
     <button onclick="showRules()">How to Play</button>
   </div>
-<div id="card-output" class="card-container hidden" onclick="flipCard(this)">
-  <div class="card" id="game-card">
-    <div class="card-front whale">
-      🐋 Impersonate Jake giving a TED Talk on why the Knicks are winning it all
-    </div>
-    <div class="card-back">
-      🌀 Whale's Wager
+
+  <div id="card-output" class="card-container hidden" onclick="flipCard(this)">
+    <div class="card" id="game-card">
+      <div class="card-front whale">
+        🐋 Impersonate Jake giving a TED Talk on why the Knicks are winning it all
+      </div>
+      <div class="card-back">
+        🌀 Whale's Wager
+      </div>
     </div>
   </div>
-</div>
 
   <div id="how-to-play" class="rules-box hidden" style="color: white;">
     <h2>How to Play</h2>
@@ -74,11 +75,10 @@
       document.getElementById("draw-sound").play();
     }
 
-    const originalDrawCard = drawCard;
-    drawCard = function () {
-      playSound();
-      originalDrawCard();
-    };
+    function flipCard(container) {
+      const card = container.querySelector('.card');
+      card.classList.toggle('is-flipped');
+    }
 
     function showRules() {
       document.getElementById("how-to-play").classList.remove("hidden");
@@ -103,11 +103,6 @@
       document.getElementById("player-setup").classList.add("hidden");
       document.getElementById("card-output").classList.remove("hidden");
     }
-    function flipCard(container) {
-  const card = container.querySelector('.card');
-  card.classList.toggle('is-flipped');
-}
-
   </script>
 </body>
 </html>
