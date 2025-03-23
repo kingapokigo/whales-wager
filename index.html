@@ -29,8 +29,16 @@
     <button onclick="startWhaling()">Start Whaling!</button>
     <button onclick="showRules()">How to Play</button>
   </div>
-
-  <div id="card-output" class="card-box hidden"></div>
+<div id="card-output" class="card-container hidden" onclick="flipCard(this)">
+  <div class="card" id="game-card">
+    <div class="card-front whale">
+      🐋 Impersonate Jake giving a TED Talk on why the Knicks are winning it all
+    </div>
+    <div class="card-back">
+      🌀 Whale's Wager
+    </div>
+  </div>
+</div>
 
   <div id="how-to-play" class="rules-box hidden" style="color: white;">
     <h2>How to Play</h2>
