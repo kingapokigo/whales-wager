@@ -103,6 +103,11 @@
       document.getElementById("player-setup").classList.add("hidden");
       document.getElementById("card-output").classList.remove("hidden");
     }
+    function flipCard(container) {
+  const card = container.querySelector('.card');
+  card.classList.toggle('is-flipped');
+}
+
   </script>
 </body>
 </html>
