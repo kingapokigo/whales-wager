@@ -119,13 +119,13 @@ input[type="text"] {
 }
 /* 🐋 Whale Mascot Styling */
 .mascot {
-  width: 140px;
+  width: 160px;
   height: auto;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 10;
+  display: block;
+  margin: 0 auto;
+  margin-top: 30px;
   animation: floaty 3s ease-in-out infinite;
+}
 }
 
 /* 🫧 Floating animation */
