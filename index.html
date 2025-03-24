@@ -30,16 +30,7 @@
     <button onclick="showRules()">How to Play</button>
   </div>
 
-  <div id="card-output" class="card-container hidden" onclick="flipCard(this)">
-    <div class="card" id="game-card">
-      <div class="card-front whale">
-        🐋 Impersonate Jake giving a TED Talk on why the Knicks are winning it all
-      </div>
-      <div class="card-back">
-        🌀 Whale's Wager
-      </div>
-    </div>
-  </div>
+  <div id="card-output" class="card-box hidden"></div>
 
   <div id="how-to-play" class="rules-box hidden" style="color: white;">
     <h2>How to Play</h2>
@@ -67,6 +58,37 @@
     <button style="margin-top: 10px;" onclick="startGame()">Swim to Start ➤</button>
   </div>
 
+  <!-- Game Board Layout -->
+  <div id="game-board" class="hidden">
+    <h2 style="color: white;">🏁 Whale Track</h2>
+    <div class="board-track">
+      <div class="space" id="space-0">Start</div>
+      <div class="space" id="space-1"></div>
+      <div class="space" id="space-2"></div>
+      <div class="space" id="space-3"></div>
+      <div class="space" id="space-4"></div>
+      <div class="space" id="space-5"></div>
+      <div class="space" id="space-6"></div>
+      <div class="space" id="space-7"></div>
+      <div class="space" id="space-8"></div>
+      <div class="space" id="space-9"></div>
+      <div class="space" id="space-10"></div>
+      <div class="space" id="space-11"></div>
+      <div class="space" id="space-12"></div>
+      <div class="space" id="space-13"></div>
+      <div class="space" id="space-14"></div>
+      <div class="space" id="space-15"></div>
+      <div class="space" id="space-16"></div>
+      <div class="space" id="space-17"></div>
+      <div class="space" id="space-18"></div>
+      <div class="space" id="space-19"></div>
+      <div class="space finish" id="space-20">Finish 🎉</div>
+    </div>
+    <div id="player-tokens">
+      <!-- Whale pieces will go here -->
+    </div>
+  </div>
+
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
   <script src="game-logic.js"></script>
@@ -75,33 +97,38 @@
       document.getElementById("draw-sound").play();
     }
 
-    function flipCard(container) {
-      const card = container.querySelector('.card');
-      card.classList.toggle('is-flipped');
-    }
+    const originalDrawCard = drawCard;
+    drawCard = function () {
+      playSound();
+      originalDrawCard();
+    };
 
     function showRules() {
       document.getElementById("how-to-play").classList.remove("hidden");
       document.getElementById("card-output").classList.add("hidden");
       document.getElementById("player-setup").classList.add("hidden");
+      document.getElementById("game-board").classList.add("hidden");
     }
 
     function startWhaling() {
       document.getElementById("how-to-play").classList.add("hidden");
       document.getElementById("card-output").classList.add("hidden");
       document.getElementById("player-setup").classList.remove("hidden");
+      document.getElementById("game-board").classList.add("hidden");
     }
 
     function showPlayerSetup() {
       document.getElementById("how-to-play").classList.add("hidden");
       document.getElementById("card-output").classList.add("hidden");
       document.getElementById("player-setup").classList.remove("hidden");
+      document.getElementById("game-board").classList.add("hidden");
     }
 
     function startGame() {
       document.getElementById("how-to-play").classList.add("hidden");
       document.getElementById("player-setup").classList.add("hidden");
       document.getElementById("card-output").classList.remove("hidden");
+      document.getElementById("game-board").classList.remove("hidden");
     }
   </script>
 </body>
