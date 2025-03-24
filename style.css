@@ -114,6 +114,26 @@ input[type="text"] {
   color: white;
   margin-top: 10px;
 }
+/* 🐋 Whale Mascot Styling */
+.mascot {
+  width: 140px;
+  height: auto;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  animation: floaty 3s ease-in-out infinite;
+}
+
+/* 🫧 Floating animation */
+@keyframes floaty {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
 
 #next-turn-btn {
   background-color: #ff4081;
