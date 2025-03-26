@@ -9,14 +9,29 @@ function createBoardSpaces() {
   boardTrack.innerHTML = "";
   boardSpaces = [];
 
+  // Generate 70 tiles
   for (let i = 0; i < boardSize; i++) {
     const space = document.createElement("div");
     space.classList.add("board-space");
     space.dataset.index = i;
-    space.textContent = `🐋 ${i + 1}`;
+    space.textContent = `${i + 1}`;
     boardSpaces.push(space);
   }
-  // Break into rows of 10 and alternate direction (Candy Land style)
+
+  // Add to boardTrack in snake layout (10 per row)
+  const rowSize = 10;
+  for (let i = 0; i < boardSpaces.length; i += rowSize) {
+    const row = boardSpaces.slice(i, i + rowSize);
+    const rowNumber = Math.floor(i / rowSize);
+
+    // Flip every other row
+    if (rowNumber % 2 !== 0) {
+      row.reverse();
+    }
+
+    row.forEach(tile => boardTrack.appendChild(tile));
+  }
+}
   for (let i = 0; i < boardSpaces.length; i += 10) {
     const row = boardSpaces.slice(i, i + 10);
     const isEvenRow = Math.floor(i / 10) % 2 === 1;
