@@ -1,86 +1,116 @@
+
 body {
+  margin: 0;
   font-family: 'Antonio', sans-serif;
   background-color: #002b36;
-  text-align: center;
-  margin: 0;
-  padding: 0;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, p {
-  color: white;
+  margin: 0.5em;
+  text-align: center;
 }
 
-.button-row button {
+button {
   background-color: #00bcd4;
   color: white;
   border: none;
   padding: 10px 20px;
-  margin: 10px;
-  font-size: 1.2em;
-  border-radius: 10px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.2s;
+  border-radius: 8px;
+  margin: 0.5em;
 }
 
-.button-row button:hover {
-  transform: scale(1.1);
+button:hover {
+  background-color: #0097a7;
 }
 
-.board-track {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 20px auto;
-  width: 80%;
-  max-width: 600px;
-  border: 3px solid #00bcd4;
-  border-radius: 10px;
-  padding: 10px;
-  background-color: #011f26;
+.bubbles-background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: -2;
 }
 
-.space {
+.bubble {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: rise 20s infinite ease-in;
+}
+
+.b1 { width: 20px; height: 20px; left: 20%; animation-delay: 0s; }
+.b2 { width: 25px; height: 25px; left: 40%; animation-delay: 5s; }
+.b3 { width: 15px; height: 15px; left: 60%; animation-delay: 10s; }
+.b4 { width: 18px; height: 18px; left: 75%; animation-delay: 3s; }
+.b5 { width: 22px; height: 22px; left: 85%; animation-delay: 7s; }
+
+@keyframes rise {
+  from { bottom: -100px; }
+  to { bottom: 100%; }
+}
+
+/* Sea creature animations */
+.sea-creatures {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.sea-creatures img {
+  position: absolute;
   width: 60px;
-  height: 60px;
-  margin: 5px;
-  border-radius: 5px;
-  background-color: #003b46;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.8em;
-  border: 1px solid #00bcd4;
+  height: auto;
+  opacity: 0.8;
 }
 
-.finish {
-  background-color: #00796b;
-  font-weight: bold;
+.fish1 { top: 20%; left: -100px; animation: swimRight 60s linear infinite; }
+.whale1 { top: 30%; left: 100%; animation: swimLeft 70s linear infinite; }
+.whale2 { top: 60%; left: -120px; animation: swimRight 90s linear infinite; }
+.octopus { top: 75%; left: 50%; animation: floatUp 30s ease-in-out infinite alternate; }
+.turtle { top: 45%; left: 90%; animation: swimLeft 100s linear infinite; }
+
+@keyframes swimLeft {
+  0% { left: 100%; }
+  100% { left: -100px; }
 }
 
-.hidden {
-  display: none;
+@keyframes swimRight {
+  0% { left: -100px; }
+  100% { left: 100%; }
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-40px); }
 }
 
 .card-container {
-  perspective: 1000px;
-  margin: 20px auto;
-  width: 300px;
-  height: 200px;
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
 }
 
 .card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  border-radius: 15px;
+  width: 300px;
+  height: 200px;
+  perspective: 1000px;
 }
 
-.card-container:hover .card-inner {
+.card-inner:hover .card-front {
   transform: rotateY(180deg);
+}
+
+.card-inner:hover .card-back {
+  transform: rotateY(0);
 }
 
 .card-front, .card-back {
@@ -88,120 +118,86 @@ h1, h2, h3, p {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background-color: #00bcd4;
-  border-radius: 15px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
+  justify-content: center;
+  background: #00bcd4;
   color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.6s ease;
 }
 
 .card-back {
+  background: #004d40;
   transform: rotateY(180deg);
 }
 
-/* Whale preview with name inputs */
-.player-input {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px auto;
-  gap: 10px;
+.card-box.hidden {
+  display: none;
 }
 
-.whale-preview {
-  width: 40px;
-  height: auto;
+.rules-box, #player-setup, #game-board {
+  margin: 2em auto;
+  max-width: 700px;
+  padding: 1em;
 }
 
 input[type="text"] {
-  padding: 8px;
-  border-radius: 5px;
+  padding: 0.5em;
+  margin: 0.25em;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  font-size: 1em;
+  font-size: 1rem;
 }
 
-/* Bubble animation for background */
-.bubbles-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
+.board-track {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  background-color: #001f2d;
+  padding: 10px;
+  border: 3px solid #00bcd4;
+  border-radius: 10px;
 }
 
-.bubble {
-  position: absolute;
-  bottom: -100px;
-  width: 20px;
-  height: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  animation: rise 10s infinite ease-in;
+.space {
+  background-color: #002f3f;
+  color: white;
+  border-radius: 6px;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
 }
 
-.b1 { left: 10%; animation-delay: 0s; }
-.b2 { left: 30%; animation-delay: 2s; }
-.b3 { left: 50%; animation-delay: 4s; }
-.b4 { left: 70%; animation-delay: 6s; }
-.b5 { left: 90%; animation-delay: 8s; }
-
-@keyframes rise {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-1200px); }
+.space.finish {
+  background-color: #00897b;
 }
 
-.mascot {
-  width: 100px;
-  margin-top: 20px;
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Extra styling for sea creature animations */
-.sea-creatures img {
-  position: absolute;
-  width: 80px;
+#player-tokens img {
+  width: 30px;
   height: auto;
-  opacity: 0.8;
 }
 
-.swim-left {
-  animation: swimLeft 12s linear infinite;
+.preview-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.swim-right {
-  animation: swimRight 14s linear infinite;
+.preview-container .player-preview {
+  text-align: center;
+  color: white;
+  font-size: 0.9em;
 }
 
-.float-up {
-  animation: floatUp 8s ease-in-out infinite;
-}
-
-.swim-slow {
-  animation: swimRight 20s linear infinite;
-}
-
-@keyframes swimLeft {
-  0% { left: 100%; top: 30%; }
-  100% { left: -100px; top: 30%; }
-}
-
-@keyframes swimRight {
-  0% { left: -100px; top: 50%; }
-  100% { left: 100%; top: 50%; }
-}
-
-@keyframes floatUp {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0); }
+.preview-container .player-preview img {
+  width: 40px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
 }
