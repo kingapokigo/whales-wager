@@ -285,3 +285,9 @@ input[type="text"] {
   margin: 0 5px;
   transition: transform 0.3s ease;
 }
+#dice {
+  transition: transform 0.3s ease;
+}
+#dice:active {
+  transform: rotate(360deg) scale(1.1);
+}
