@@ -9,6 +9,7 @@
 </head>
 <body>
   <img src="images/happy-whale-transparent.png" alt="Happy Whale Mascot" class="mascot">
+
   <div class="bubbles-background">
     <div class="bubble b1"></div>
     <div class="bubble b2"></div>
@@ -26,12 +27,13 @@
   </div>
 
   <h1 style="color: white;">Welcome to Whale's Wager!</h1>
+
   <div class="button-row">
     <button onclick="startWhaling()">Start Whaling!</button>
     <button onclick="showRules()">How to Play</button>
   </div>
 
-  <!-- 🃏 3D Flip Card -->
+  <!-- 🃏 Flip Card -->
   <div id="card-output" class="card-box hidden">
     <div class="card-container">
       <div class="card-inner">
@@ -47,7 +49,13 @@
     </div>
   </div>
 
-  <!-- 🧠 How to Play -->
+  <!-- 🎲 Dice Area -->
+  <div id="dice-area" class="hidden">
+    <button onclick="rollDice()" class="dice-button">🎲 Roll the Dice</button>
+    <div id="dice-result" class="dice-output"></div>
+  </div>
+
+  <!-- 📜 Game Rules -->
   <div id="how-to-play" class="rules-box hidden" style="color: white;">
     <h2>How to Play</h2>
     <p><strong>Objective:</strong> Be the first whale to swim across the board by completing challenges and avoiding toxic traps!</p>
@@ -62,7 +70,7 @@
     <button onclick="showPlayerSetup()">Let's Wager!</button>
   </div>
 
-  <!-- 🐋 Player Setup -->
+  <!-- 🧍 Player Setup -->
   <div id="player-setup" class="hidden" style="text-align: center; color: white;">
     <h2>Name Your Whales</h2>
     <p>Choose up to 6 players:</p>
@@ -102,18 +110,16 @@
       <div class="space finish" id="space-20">Finish 🎉</div>
     </div>
     <div id="player-tokens">
-      <!-- Whale pieces will go here -->
+      <div id="player1-token" class="whale-token">🐳</div>
     </div>
   </div>
-<div id="dice-area" class="hidden">
-  <button onclick="rollDice()" class="dice-button">🎲 Roll the Dice</button>
-  <div id="dice-result" class="dice-output"></div>
-</div>
 
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
-  <script src="game-logic.js"></script>
+  <!-- 🧠 GAME SCRIPT -->
   <script>
+    let playerPosition = 0;
+
     function playSound() {
       document.getElementById("draw-sound").play();
     }
@@ -151,7 +157,26 @@
       document.getElementById("card-output").classList.remove("hidden");
       document.getElementById("game-board").classList.remove("hidden");
       document.getElementById("dice-area").classList.remove("hidden");
+    }
 
+    function rollDice() {
+      const roll = Math.floor(Math.random() * 6) + 1;
+      document.getElementById("dice-result").textContent = `You rolled a ${roll}!`;
+      movePlayer(roll);
+    }
+
+    function movePlayer(spaces) {
+      playerPosition += spaces;
+      if (playerPosition > 20) playerPosition = 20;
+
+      const space = document.getElementById(`space-${playerPosition}`);
+      const token = document.getElementById("player1-token");
+      const boardRect = document.querySelector('.board-track').getBoundingClientRect();
+      const spaceRect = space.getBoundingClientRect();
+
+      token.style.position = "absolute";
+      token.style.left = (spaceRect.left - boardRect.left + 10) + "px";
+      token.style.top = (spaceRect.top - boardRect.top + 10) + "px";
     }
   </script>
 </body>
