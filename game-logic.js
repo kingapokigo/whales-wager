@@ -75,10 +75,28 @@ function createPlayerTokens() {
 }
 
 function rollDice() {
+  if (playerPositions.length === 0) return;
+
   const roll = Math.floor(Math.random() * 6) + 1;
+
+  // Update dice image
+  const diceImg = document.getElementById("dice");
+  diceImg.src = `images/dice-${roll}.png`;
+
+  // Display text result
   document.getElementById("dice-result").innerText = `You rolled a ${roll}!`;
+
+  // Move whale
   movePlayer(currentPlayerIndex, roll);
+
+  // Update player turn
   currentPlayerIndex = (currentPlayerIndex + 1) % playerPositions.length;
+
+  // Optional: update whose turn it is
+  const nextPlayer = document.querySelector(`.whale-token[data-player-index='${currentPlayerIndex}']`);
+  if (nextPlayer) {
+    document.getElementById("current-player").innerText = `It's ${nextPlayer.alt}'s turn!`;
+  }
 }
 
 function movePlayer(index, steps) {
