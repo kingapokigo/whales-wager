@@ -129,12 +129,18 @@ document.getElementById("current-player").innerText = `It's ${token.alt}'s turn!
 let gameOver = false;
 
 function rollDice() {
-  if (gameOver) return;
   const roll = Math.floor(Math.random() * 6) + 1;
+  const diceImg = document.getElementById("dice-image");
+
+  diceImg.src = `images/dice-${roll}.png`;
+  diceImg.style.transform = "rotate(" + (Math.random() * 360) + "deg)";
+
   document.getElementById("dice-result").innerText = `You rolled a ${roll}!`;
+
   movePlayer(currentPlayerIndex, roll);
   currentPlayerIndex = (currentPlayerIndex + 1) % playerPositions.length;
 }
+
 
 function movePlayer(index, steps) {
   // ...existing code...
