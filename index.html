@@ -155,22 +155,21 @@
       document.getElementById("game-board").classList.add("hidden");
       document.getElementById("background-decorations").classList.remove("hidden");
     }
-
-    function showPlayerSetup() {
-      document.getElementById("how-to-play").classList.add("hidden");
-      document.getElementById("card-output").classList.add("hidden");
-      document.getElementById("player-setup").classList.remove("hidden");
-      document.getElementById("game-board").classList.add("hidden");
-      document.getElementById("background-decorations").classList.add("hidden"); // hides floating sea creatures
+function showPlayerSetup() {
+  document.getElementById("how-to-play").classList.add("hidden");
+  document.getElementById("card-output").classList.add("hidden");
+  document.getElementById("player-setup").classList.remove("hidden");
+  document.getElementById("game-board").classList.add("hidden");
+  document.getElementById("background-decorations").classList.add("hidden"); // 👈 hides whales + bubbles
     }
 
-    function startGame() {
-      document.getElementById("how-to-play").classList.add("hidden");
-      document.getElementById("player-setup").classList.add("hidden");
-      document.getElementById("card-output").classList.remove("hidden");
-      document.getElementById("game-board").classList.remove("hidden");
-      document.getElementById("background-decorations").classList.remove("hidden"); // shows them again
-    }
+   function startGame() {
+  document.getElementById("how-to-play").classList.add("hidden");
+  document.getElementById("player-setup").classList.add("hidden");
+  document.getElementById("card-output").classList.remove("hidden");
+  document.getElementById("game-board").classList.remove("hidden");
+  document.getElementById("background-decorations").classList.remove("hidden"); // 👈 show again!
+}
   </script>
 </body>
 </html>
