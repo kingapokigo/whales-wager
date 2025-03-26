@@ -57,8 +57,32 @@
   <div id="player-setup" class="hidden" style="text-align: center; color: white;">
     <h2>Name Your Whales</h2>
     <p>Choose up to 6 players:</p>
-    <div class="player-selection">
-      <!-- 6 players setup unchanged -->
+   <div class="player-selection">
+  <div class="player-input">
+    <img src="images/black-whale.png" alt="Black Whale">
+    <input type="text" placeholder="Player 1 Name">
+  </div>
+  <div class="player-input">
+    <img src="images/green-whale.png" alt="Green Whale">
+    <input type="text" placeholder="Player 2 Name">
+  </div>
+  <div class="player-input">
+    <img src="images/blue-whale.png" alt="Blue Whale">
+    <input type="text" placeholder="Player 3 Name">
+  </div>
+  <div class="player-input">
+    <img src="images/purple-whale.png" alt="Purple Whale">
+    <input type="text" placeholder="Player 4 Name">
+  </div>
+  <div class="player-input">
+    <img src="images/teal-whale.png" alt="Teal Whale">
+    <input type="text" placeholder="Player 5 Name">
+  </div>
+  <div class="player-input">
+    <img src="images/pink-whale.png" alt="Pink Whale">
+    <input type="text" placeholder="Player 6 Name">
+  </div>
+</div>
     </div>
     <button style="margin-top: 10px;" onclick="startGame()">Swim to Start ➤</button>
   </div>
@@ -71,7 +95,6 @@
 
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
-  <script src="game-logic.js"></script>
   <script>
     function playSound() {
       document.getElementById("draw-sound").play();
@@ -111,5 +134,6 @@
       decorations.classList.toggle("hidden", !creaturesVisible);
     }
   </script>
+ <script src="game-logic.js"></script>
 </body>
 </html>
