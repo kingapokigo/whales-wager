@@ -239,3 +239,31 @@ input[type="text"] {
   width: 200px;
   text-align: center;
 }
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+@keyframes float-sway {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+.floating-creature {
+  animation: float 4s ease-in-out infinite;
+  width: 50%; 
+  max-width: 150px; 
+  height: auto;
+  position: absolute;
+  z-index: 1;
+  pointer-events: none; 
+}
+.creature1 { top: 10%; left: 5%; animation-delay: 0s; }
+.creature2 { top: 15%; left: 20%; animation-delay: 1s; }
+.creature3 { top: 25%; left: 70%; animation-delay: 2s; }
+.creature4 { top: 60%; left: 10%; animation-delay: 0.5s; }
+.creature5 { top: 50%; left: 80%; animation-delay: 1.5s; }
+.creature6 { bottom: 5%; left: 40%; animation: float-sway 5s ease-in-out infinite; }
+.creature7 { bottom: 10%; right: 20%; animation-delay: 0.7s; }
+.creature8 { top: 70%; right: 5%; animation-delay: 1.2s; }
+}
