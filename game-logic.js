@@ -108,3 +108,20 @@ if (trapSpaces.includes(newPos)) {
   newPos = Math.max(newPos - 4, 0);
 }
 document.getElementById("current-player").innerText = `It's ${token.alt}'s turn!`;
+let gameOver = false;
+
+function rollDice() {
+  if (gameOver) return;
+  const roll = Math.floor(Math.random() * 6) + 1;
+  document.getElementById("dice-result").innerText = `You rolled a ${roll}!`;
+  movePlayer(currentPlayerIndex, roll);
+  currentPlayerIndex = (currentPlayerIndex + 1) % playerPositions.length;
+}
+
+function movePlayer(index, steps) {
+  // ...existing code...
+  if (newPos === boardSize - 1) {
+    alert(`🎉 ${token.alt} wins the game! 🎉`);
+    gameOver = true;
+  }
+}
