@@ -267,3 +267,11 @@ input[type="text"] {
   width: 200px;
   text-align: center;
 }
+.player-input img {
+  width: 60px;
+  height: auto;
+  border-radius: 8px;
+  border: 2px solid #00c2d1;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
