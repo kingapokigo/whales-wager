@@ -93,11 +93,14 @@
     <div class="board-track" id="dynamic-board-track"></div>
     <div id="player-tokens"></div>
   </div>
-  <div id="dice-container">
-  <img id="dice-image" src="images/dice-1.png" alt="Dice roll" />
-  <button onclick="rollDice()">🎲 Roll the Dice</button>
+ <div id="dice-container" style="text-align: center; margin-top: 20px;">
+  <h3 id="current-player" style="color: white; font-size: 22px;">🎯 Ready to roll!</h3>
+  <img id="dice-image" src="images/dice-1.png" alt="Dice roll" style="width: 80px; margin-top: 10px;" />
+  <div style="margin-top: 10px;">
+    <button onclick="rollDice()">🎲 Roll the Dice</button>
+  </div>
 </div>
-<p id="dice-result"></p>
+<p id="dice-result" style="color: white; text-align: center;"></p>
 
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
