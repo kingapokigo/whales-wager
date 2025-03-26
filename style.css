@@ -123,14 +123,13 @@ button:hover {
   padding: 10px;
 }
 .board-track {
-  display: flex;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
   gap: 10px;
-  overflow-x: auto;
-  padding: 10px 20px;
+  max-width: 1000px;
   margin: 0 auto;
-  max-width: 95vw;
-  scroll-snap-type: x mandatory;
+  flex-wrap: wrap;
+  position: relative;
 }
 
 .board-space {
