@@ -122,26 +122,33 @@ button:hover {
   margin-top: 30px;
   padding: 10px;
 }
-
 .board-track {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  display: flex;
+  flex-wrap: nowrap;
   gap: 10px;
+  overflow-x: auto;
+  padding: 10px 20px;
   margin: 0 auto;
-  max-width: 90%;
+  max-width: 95vw;
+  scroll-snap-type: x mandatory;
 }
 
 .board-space {
+  flex: 0 0 auto;
+  width: 80px;
+  height: 80px;
   background-color: #003344;
   color: white;
   border: 2px solid #00bcd4;
-  padding: 15px;
-  text-align: center;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
+  scroll-snap-align: start;
   position: relative;
-  min-height: 70px;
 }
+
 
 /* === Player Tokens === */
 #player-tokens {
