@@ -19,25 +19,36 @@ function drawCard() {
 }
 
 function createPlayerTokens() {
-  const playerSetupDiv = document.querySelectorAll(".player-input");
-  const playerTokensDiv = document.getElementById("player-tokens");
-  playerTokensDiv.innerHTML = ""; // Clear previous tokens if any
+  const playerInputs = document.querySelectorAll('.player-selection .player-input input');
+  const tokenContainer = document.getElementById("player-tokens");
 
-  playerSetupDiv.forEach((div, index) => {
-    const input = div.querySelector("input");
+  tokenContainer.innerHTML = ''; // clear old tokens
+
+  const positions = [
+    { top: '2px', left: '2px' },
+    { top: '2px', left: '35px' },
+    { top: '30px', left: '2px' },
+    { top: '30px', left: '35px' },
+    { top: '16px', left: '18px' },
+    { top: '16px', left: '50px' }
+  ];
+
+  playerInputs.forEach((input, index) => {
     const name = input.value.trim();
-    if (name !== "") {
-      const img = div.querySelector("img").getAttribute("src");
-      const token = document.createElement("img");
-      token.src = img;
-      token.alt = name + "'s whale";
-      token.classList.add("whale-token");
-      token.dataset.playerIndex = index;
-      token.dataset.position = "0"; // Starting space
+    if (name !== '') {
+      const img = document.createElement('img');
+      img.src = input.previousElementSibling.src;
+      img.alt = name;
+      img.classList.add('player-token');
+      img.style.position = 'absolute';
+      img.style.width = '24px';
+      img.style.height = '24px';
+      img.style.borderRadius = '50%';
+      img.style.top = positions[index].top;
+      img.style.left = positions[index].left;
 
-      // Add the token to the Start space
       const startSpace = document.getElementById("space-0");
-      startSpace.appendChild(token);
+      startSpace.appendChild(img);
     }
   });
 }
