@@ -275,3 +275,9 @@ input[type="text"] {
   background: white;
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
+.whale-token {
+  width: 40px;
+  height: auto;
+  margin: 0 5px;
+  transition: transform 0.3s ease;
+}
