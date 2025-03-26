@@ -1,4 +1,4 @@
-const boardSize = 70;
+const boardSize = 72;
 let players = [];
 let currentPlayerIndex = 0;
 let currentRoll = 0;
@@ -9,7 +9,7 @@ function createBoardSpaces() {
   boardTrack.innerHTML = "";
   boardSpaces = [];
 
-  // Generate 70 tiles
+  // Generate 72 tiles
   for (let i = 0; i < boardSize; i++) {
     const space = document.createElement("div");
     space.classList.add("board-space");
