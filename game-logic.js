@@ -17,3 +17,27 @@ function drawCard() {
 
   document.getElementById("card-output").innerText = card;
 }
+
+function createPlayerTokens() {
+  const playerSetupDiv = document.querySelectorAll(".player-input");
+  const playerTokensDiv = document.getElementById("player-tokens");
+  playerTokensDiv.innerHTML = ""; // Clear previous tokens if any
+
+  playerSetupDiv.forEach((div, index) => {
+    const input = div.querySelector("input");
+    const name = input.value.trim();
+    if (name !== "") {
+      const img = div.querySelector("img").getAttribute("src");
+      const token = document.createElement("img");
+      token.src = img;
+      token.alt = name + "'s whale";
+      token.classList.add("whale-token");
+      token.dataset.playerIndex = index;
+      token.dataset.position = "0"; // Starting space
+
+      // Add the token to the Start space
+      const startSpace = document.getElementById("space-0");
+      startSpace.appendChild(token);
+    }
+  });
+}
