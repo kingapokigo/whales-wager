@@ -1,4 +1,4 @@
-const boardSize = 20;
+const boardSize = 70;
 let players = [];
 let currentPlayerIndex = 0;
 let currentRoll = 0;
