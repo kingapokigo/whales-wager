@@ -160,8 +160,9 @@ button:hover {
 }
 
 .whale-token img {
-  width: 40px;
-  transition: transform 0.3s ease;
+  width: 35px;
+  position: absolute;
+  top: -20px;
 }
 
 .whale-token:hover img {
