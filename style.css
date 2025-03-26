@@ -1,116 +1,94 @@
 
 body {
-  margin: 0;
   font-family: 'Antonio', sans-serif;
-  background-color: #002b36;
+  background-color: #012D3A;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
 }
 
-h1, h2, h3, p {
-  margin: 0.5em;
-  text-align: center;
+h1, h2, h3, p, button {
+  font-family: 'Antonio', sans-serif;
+}
+
+.mascot {
+  width: 120px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
 button {
-  background-color: #00bcd4;
+  background-color: #00CFFF;
   color: white;
   border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
+  padding: 12px 24px;
+  font-size: 18px;
   border-radius: 8px;
-  margin: 0.5em;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
 }
 
 button:hover {
-  background-color: #0097a7;
+  background-color: #00b5dd;
 }
 
-.bubbles-background {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  z-index: -2;
+.button-row {
+  text-align: center;
+  margin-top: 10px;
 }
 
-.bubble {
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  animation: rise 20s infinite ease-in;
+.hidden {
+  display: none;
 }
 
-.b1 { width: 20px; height: 20px; left: 20%; animation-delay: 0s; }
-.b2 { width: 25px; height: 25px; left: 40%; animation-delay: 5s; }
-.b3 { width: 15px; height: 15px; left: 60%; animation-delay: 10s; }
-.b4 { width: 18px; height: 18px; left: 75%; animation-delay: 3s; }
-.b5 { width: 22px; height: 22px; left: 85%; animation-delay: 7s; }
-
-@keyframes rise {
-  from { bottom: -100px; }
-  to { bottom: 100%; }
+.rules-box, .card-box {
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  max-width: 700px;
+  color: white;
+  text-align: left;
 }
 
-/* Sea creature animations */
-.sea-creatures {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
+#player-setup input {
+  margin: 5px;
+  padding: 8px;
+  width: 200px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
 }
 
-.sea-creatures img {
-  position: absolute;
-  width: 60px;
-  height: auto;
-  opacity: 0.8;
-}
-
-.fish1 { top: 20%; left: -100px; animation: swimRight 60s linear infinite; }
-.whale1 { top: 30%; left: 100%; animation: swimLeft 70s linear infinite; }
-.whale2 { top: 60%; left: -120px; animation: swimRight 90s linear infinite; }
-.octopus { top: 75%; left: 50%; animation: floatUp 30s ease-in-out infinite alternate; }
-.turtle { top: 45%; left: 90%; animation: swimLeft 100s linear infinite; }
-
-@keyframes swimLeft {
-  0% { left: 100%; }
-  100% { left: -100px; }
-}
-
-@keyframes swimRight {
-  0% { left: -100px; }
-  100% { left: 100%; }
-}
-
-@keyframes floatUp {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-40px); }
+#card-output {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .card-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 1em;
+  perspective: 1000px;
 }
 
 .card-inner {
   width: 300px;
   height: 200px;
-  perspective: 1000px;
+  text-align: center;
+  background-color: #00CFFF;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+  padding: 20px;
+  margin: 0 auto;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
 }
 
-.card-inner:hover .card-front {
+.card-inner:hover {
   transform: rotateY(180deg);
-}
-
-.card-inner:hover .card-back {
-  transform: rotateY(0);
 }
 
 .card-front, .card-back {
@@ -118,61 +96,44 @@ button:hover {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #00bcd4;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  transition: transform 0.6s ease;
 }
 
 .card-back {
-  background: #004d40;
   transform: rotateY(180deg);
 }
 
-.card-box.hidden {
-  display: none;
-}
-
-.rules-box, #player-setup, #game-board {
-  margin: 2em auto;
-  max-width: 700px;
-  padding: 1em;
-}
-
-input[type="text"] {
-  padding: 0.5em;
-  margin: 0.25em;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+#game-board {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  text-align: center;
+  padding: 20px;
 }
 
 .board-track {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-  background-color: #001f2d;
+  gap: 10px;
+  justify-items: center;
   padding: 10px;
-  border: 3px solid #00bcd4;
-  border-radius: 10px;
 }
 
 .space {
-  background-color: #002f3f;
-  color: white;
+  width: 60px;
+  height: 60px;
+  border: 2px solid #00CFFF;
   border-radius: 6px;
-  padding: 10px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
+  font-size: 14px;
+  color: white;
 }
 
 .space.finish {
-  background-color: #00897b;
+  background-color: #00CFFF;
+  color: white;
 }
 
 #player-tokens img {
@@ -180,24 +141,125 @@ input[type="text"] {
   height: auto;
 }
 
-.preview-container {
+.bubbles-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  overflow: hidden;
+  background-color: #012D3A;
+}
+
+.sea-creatures img {
+  position: absolute;
+  width: 80px;
+  height: auto;
+  z-index: -1;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  opacity: 0.8;
+}
+
+.float-up {
+  animation-name: floatUp;
+}
+
+.swim-left {
+  animation-name: swimLeft;
+}
+
+.swim-right {
+  animation-name: swimRight;
+}
+
+.swirl {
+  animation-name: swirl;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh); }
+  100% { transform: translateY(-200px); }
+}
+
+@keyframes swimLeft {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-200px); }
+}
+
+@keyframes swimRight {
+  0% { transform: translateX(-200px); }
+  100% { transform: translateX(100vw); }
+}
+
+@keyframes swirl {
+  0% { transform: translate(0,0) rotate(0deg); }
+  25% { transform: translate(50px, -30px) rotate(90deg); }
+  50% { transform: translate(100px, 0) rotate(180deg); }
+  75% { transform: translate(50px, 30px) rotate(270deg); }
+  100% { transform: translate(0,0) rotate(360deg); }
+}
+
+/* Specific creature placement */
+img[src*="cute-whale1"] {
+  top: 20%;
+  left: 5%;
+  animation-name: swimRight;
+}
+
+img[src*="cute-whale2"] {
+  top: 30%;
+  left: 80%;
+  animation-name: swimLeft;
+}
+
+img[src*="cute-whale3"] {
+  top: 60%;
+  left: 10%;
+  animation-name: swirl;
+}
+
+img[src*="cute-turtle"] {
+  top: 75%;
+  left: 70%;
+  animation-name: swimLeft;
+}
+
+img[src*="cute-turtle2"] {
+  top: 15%;
+  left: 50%;
+  animation-name: floatUp;
+}
+
+img[src*="cute-octopus"] {
+  top: 40%;
+  left: 30%;
+  animation-name: swirl;
+}
+
+img[src*="cute-crab"] {
+  top: 85%;
+  left: 20%;
+  animation-name: swimRight;
+}
+
+img[src*="cute-starfish"] {
+  top: 10%;
+  left: 60%;
+  animation-name: floatUp;
+}
+
+/* Name input + whale preview */
+.player-input {
   display: flex;
+  align-items: center;
+  margin: 10px auto;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
 }
 
-.preview-container .player-preview {
-  text-align: center;
-  color: white;
-  font-size: 0.9em;
-}
-
-.preview-container .player-preview img {
+.player-input img {
   width: 40px;
   height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 8px;
 }
