@@ -9,20 +9,17 @@
 </head>
 <body>
   <img src="images/happy-whale-transparent.png" alt="Happy Whale Mascot" class="mascot">
-  <div class="bubbles-background">
-    <div class="bubble b1"></div>
-    <div class="bubble b2"></div>
-    <div class="bubble b3"></div>
-    <div class="bubble b4"></div>
-    <div class="bubble b5"></div>
-  </div>
 
-  <div class="sea-creatures">
-    <img src="/images/whale1.svg" class="whale swim-left whale1" alt="whale">
-    <img src="/images/whale2.svg" class="whale swim-right whale2" alt="whale">
-    <img src="/images/fish1.svg" class="fish swim-left fish1" alt="fish">
-    <img src="/images/octopus.svg" class="octopus float-up" alt="octopus">
-    <img src="/images/turtle.svg" class="turtle swim-slow" alt="turtle">
+  <!-- Floating Sea Creatures -->
+  <div class="floating-creatures">
+    <img src="images/cute-whale1.png" class="floating float1" alt="cute whale 1">
+    <img src="images/cute-whale2.png" class="floating float2" alt="cute whale 2">
+    <img src="images/cute-whale3.png" class="floating float3" alt="cute whale 3">
+    <img src="images/cute-turtle.png" class="floating float4" alt="cute turtle">
+    <img src="images/cute-turtle2.png" class="floating float5" alt="cute turtle 2">
+    <img src="images/cute-octopus.png" class="floating float6" alt="cute octopus">
+    <img src="images/cute-crab.png" class="floating float7" alt="cute crab">
+    <img src="images/cute-starfish.png" class="floating float8" alt="cute starfish">
   </div>
 
   <h1 style="color: white;">Welcome to Whale's Wager!</h1>
@@ -32,7 +29,8 @@
   </div>
 
   <div id="card-output" class="card-box hidden"></div>
-  <div class="card-container hidden" id="card-container">
+
+  <div class="card-container">
     <div class="card-inner">
       <div class="card-front">
         <h2>🐋 Whale Card</h2>
@@ -62,37 +60,20 @@
   <div id="player-setup" class="hidden" style="text-align: center; color: white;">
     <h2>Name Your Whales</h2>
     <p>Choose up to 6 players:</p>
-
-    <div class="player-input">
-      <img src="images/black-whale.png" class="whale-preview" alt="Black Whale" />
-      <input type="text" placeholder="Player 1 Name" id="player1" />
+    <div class="player-inputs">
+      <div><img src="images/pink-whale.png" class="mini-icon"> <input type="text" placeholder="Player 1 Name" /></div>
+      <div><img src="images/teal-whale.png" class="mini-icon"> <input type="text" placeholder="Player 2 Name" /></div>
+      <div><img src="images/purple-whale.png" class="mini-icon"> <input type="text" placeholder="Player 3 Name" /></div>
+      <div><img src="images/blue-whale.png" class="mini-icon"> <input type="text" placeholder="Player 4 Name" /></div>
+      <div><img src="images/green-whale.png" class="mini-icon"> <input type="text" placeholder="Player 5 Name" /></div>
+      <div><img src="images/black-whale.png" class="mini-icon"> <input type="text" placeholder="Player 6 Name" /></div>
     </div>
-    <div class="player-input">
-      <img src="images/green-whale.png" class="whale-preview" alt="Green Whale" />
-      <input type="text" placeholder="Player 2 Name" id="player2" />
-    </div>
-    <div class="player-input">
-      <img src="images/blue-whale.png" class="whale-preview" alt="Blue Whale" />
-      <input type="text" placeholder="Player 3 Name" id="player3" />
-    </div>
-    <div class="player-input">
-      <img src="images/purple-whale.png" class="whale-preview" alt="Purple Whale" />
-      <input type="text" placeholder="Player 4 Name" id="player4" />
-    </div>
-    <div class="player-input">
-      <img src="images/teal-whale.png" class="whale-preview" alt="Teal Whale" />
-      <input type="text" placeholder="Player 5 Name" id="player5" />
-    </div>
-    <div class="player-input">
-      <img src="images/pink-whale.png" class="whale-preview" alt="Pink Whale" />
-      <input type="text" placeholder="Player 6 Name" id="player6" />
-    </div>
-
-    <button style="margin-top: 10px;" onclick="startGame()">Swim to Start ➔</button>
+    <button style="margin-top: 10px;" onclick="startGame()">Swim to Start ➤</button>
   </div>
 
+  <!-- Game Board Layout -->
   <div id="game-board" class="hidden">
-    <h2 style="color: white;">🏎️ Whale Track</h2>
+    <h2 style="color: white;">🏁 Whale Track</h2>
     <div class="board-track">
       <div class="space" id="space-0">Start</div>
       <div class="space" id="space-1"></div>
@@ -117,7 +98,7 @@
       <div class="space finish" id="space-20">Finish 🎉</div>
     </div>
     <div id="player-tokens">
-      <!-- Whale tokens will go here -->
+      <!-- Whale pieces will go here -->
     </div>
   </div>
 
@@ -160,7 +141,6 @@
       document.getElementById("how-to-play").classList.add("hidden");
       document.getElementById("player-setup").classList.add("hidden");
       document.getElementById("card-output").classList.remove("hidden");
-      document.getElementById("card-container").classList.remove("hidden");
       document.getElementById("game-board").classList.remove("hidden");
     }
   </script>
