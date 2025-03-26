@@ -51,19 +51,26 @@ function createBoardSpaces() {
 }
 
 function createPlayerTokens() {
-  const names = getPlayerNames();
+  const playerInputs = document.querySelectorAll(".player-selection .player-input");
   const tokensContainer = document.getElementById("player-tokens");
   tokensContainer.innerHTML = "";
   playerPositions = [];
 
-  names.forEach((name, index) => {
-    const img = document.createElement("img");
-    img.src = document.querySelectorAll(".player-input img")[index].src;
-    img.alt = name;
-    img.classList.add("whale-token");
-    img.dataset.playerIndex = index;
-    playerPositions.push(0);
-    document.getElementById("space-0").appendChild(img);
+  playerInputs.forEach((inputBlock, index) => {
+    const input = inputBlock.querySelector("input");
+    const name = input.value.trim();
+
+    if (name !== "") {
+      const imgElement = inputBlock.querySelector("img");
+      const img = document.createElement("img");
+      img.src = imgElement.src;
+      img.alt = name;
+      img.classList.add("whale-token");
+      img.dataset.playerIndex = playerPositions.length;
+
+      playerPositions.push(0); // Start at space-0
+      document.getElementById("space-0").appendChild(img);
+    }
   });
 }
 
