@@ -52,3 +52,62 @@ function createPlayerTokens() {
     }
   });
 }
+// === WHALE MOVEMENT: BOARD GAME MECHANICS === //
+
+const boardSize = 21; // 0 to 20
+let currentPlayerIndex = 0;
+let playerPositions = [];
+
+function getPlayerNames() {
+  const inputs = document.querySelectorAll(".player-input input");
+  return Array.from(inputs)
+    .map((input) => input.value.trim())
+    .filter((name) => name !== "");
+}
+
+function createPlayerTokens() {
+  const names = getPlayerNames();
+  const tokensContainer = document.getElementById("player-tokens");
+  tokensContainer.innerHTML = "";
+  playerPositions = []; // Reset positions
+
+  names.forEach((name, index) => {
+    const img = document.createElement("img");
+    img.src = document.querySelectorAll(".player-input img")[index].src;
+    img.alt = name;
+    img.classList.add("whale-token");
+    img.dataset.playerIndex = index;
+    tokensContainer.appendChild(img);
+    playerPositions.push(0); // All whales start at space-0
+
+    const startSpace = document.getElementById("space-0");
+    startSpace.appendChild(img);
+  });
+}
+
+function rollDice() {
+  const roll = Math.floor(Math.random() * 6) + 1;
+  document.getElementById("dice-result").innerText = `You rolled a ${roll}!`;
+
+  movePlayer(currentPlayerIndex, roll);
+  currentPlayerIndex = (currentPlayerIndex + 1) % playerPositions.length;
+}
+
+function movePlayer(index, steps) {
+  const currentPos = playerPositions[index];
+  let newPos = currentPos + steps;
+  if (newPos > 20) newPos = 20;
+
+  playerPositions[index] = newPos;
+
+  const space = document.getElementById(`space-${newPos}`);
+  const token = document.querySelector(
+    `.whale-token[data-player-index='${index}']`
+  );
+
+  space.appendChild(token);
+
+  if (newPos === 20) {
+    alert(`🎉 ${token.alt} wins the game! 🎉`);
+  }
+}
