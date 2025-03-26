@@ -14,7 +14,6 @@ function drawCard() {
 
   const randomIndex = Math.floor(Math.random() * cards.length);
   const card = cards[randomIndex];
-
   document.getElementById("card-output").innerText = card;
 }
 
@@ -27,6 +26,7 @@ function getPlayerNames() {
 
 let currentPlayerIndex = 0;
 let playerPositions = [];
+let gameOver = false;
 const boardSize = 50;
 const trapSpaces = [13, 37];
 
@@ -68,69 +68,27 @@ function createPlayerTokens() {
       img.classList.add("whale-token");
       img.dataset.playerIndex = playerPositions.length;
 
-      playerPositions.push(0); // Start at space-0
+      playerPositions.push(0);
       document.getElementById("space-0").appendChild(img);
     }
   });
+
+  const playerNames = getPlayerNames();
+  if (playerNames.length > 0) {
+    document.getElementById("current-player").innerText = `🎯 ${playerNames[0]}'s Turn!`;
+  }
 }
 
 function rollDice() {
-  if (playerPositions.length === 0) return;
+  if (gameOver || playerPositions.length === 0) return;
 
   const roll = Math.floor(Math.random() * 6) + 1;
+  document.getElementById("dice-result").innerText = `You rolled a ${roll}!`;
 
-  // Update dice image
   const diceImg = document.getElementById("dice");
-  diceImg.src = `images/dice-${roll}.png`;
-
-  // Display text result
-  document.getElementById("dice-result").innerText = `You rolled a ${roll}!`;
-
-  // Move whale
-  movePlayer(currentPlayerIndex, roll);
-
-  // Update player turn
-  currentPlayerIndex = (currentPlayerIndex + 1) % playerPositions.length;
-
-  // Optional: update whose turn it is
-  const nextPlayer = document.querySelector(`.whale-token[data-player-index='${currentPlayerIndex}']`);
-  if (nextPlayer) {
-    document.getElementById("current-player").innerText = `It's ${nextPlayer.alt}'s turn!`;
+  if (diceImg) {
+    diceImg.src = `images/dice-${roll}.png`;
   }
-}
-
-function movePlayer(index, steps) {
-  let currentPos = playerPositions[index];
-  let newPos = currentPos + steps;
-  if (newPos >= boardSize) newPos = boardSize - 1;
-
-  if (trapSpaces.includes(newPos)) {
-    newPos = Math.max(newPos - 4, 0);
-  }
-
-  playerPositions[index] = newPos;
-  const space = document.getElementById(`space-${newPos}`);
-  const token = document.querySelector(`.whale-token[data-player-index='${index}']`);
-  space.appendChild(token);
-
-  if (newPos === boardSize - 1) {
-    alert(`🎉 ${token.alt} wins the game! 🎉`);
-  }
-}
-
-window.onload = () => {
-  createBoardSpaces();
-};
-if (trapSpaces.includes(newPos)) {
-  alert(`${token.alt} hit a 🍄 toxic mushroom and moves back 4 spaces!`);
-  newPos = Math.max(newPos - 4, 0);
-}
-document.getElementById("current-player").innerText = `It's ${token.alt}'s turn!`;
-let gameOver = false;
-
-function rollDice() {
-  const roll = Math.floor(Math.random() * 6) + 1;
-  document.getElementById("dice-result").innerText = `You rolled a ${roll}!`;
 
   movePlayer(currentPlayerIndex, roll);
 
@@ -141,10 +99,28 @@ function rollDice() {
 
   currentPlayerIndex = nextIndex;
 }
+
 function movePlayer(index, steps) {
-  // ...existing code...
+  let currentPos = playerPositions[index];
+  let newPos = currentPos + steps;
+  if (newPos >= boardSize) newPos = boardSize - 1;
+
+  if (trapSpaces.includes(newPos)) {
+    alert(`${getPlayerNames()[index]} hit a 🍄 toxic mushroom and moves back 4 spaces!`);
+    newPos = Math.max(newPos - 4, 0);
+  }
+
+  playerPositions[index] = newPos;
+  const space = document.getElementById(`space-${newPos}`);
+  const token = document.querySelector(`.whale-token[data-player-index='${index}']`);
+  space.appendChild(token);
+
   if (newPos === boardSize - 1) {
     alert(`🎉 ${token.alt} wins the game! 🎉`);
     gameOver = true;
   }
 }
+
+window.onload = () => {
+  createBoardSpaces();
+};
