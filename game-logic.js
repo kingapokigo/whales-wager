@@ -6,15 +6,22 @@ let boardSpaces = [];
 
 function createBoardSpaces() {
   const boardTrack = document.getElementById("dynamic-board-track");
-  boardTrack.innerHTML = ""; // Clear any existing spaces
+  boardTrack.innerHTML = "";
   boardSpaces = [];
 
   for (let i = 0; i < boardSize; i++) {
     const space = document.createElement("div");
     space.classList.add("board-space");
-    space.textContent = `🌊 ${i + 1}`;
+    space.dataset.index = i;
+    space.textContent = `🐋 ${i + 1}`;
     boardSpaces.push(space);
-    boardTrack.appendChild(space);
+  }
+  // Break into rows of 10 and alternate direction (Candy Land style)
+  for (let i = 0; i < boardSpaces.length; i += 10) {
+    const row = boardSpaces.slice(i, i + 10);
+    const isEvenRow = Math.floor(i / 10) % 2 === 1;
+    const rowTiles = isEvenRow ? row.reverse() : row;
+    rowTiles.forEach(tile => boardTrack.appendChild(tile));
   }
 }
 
