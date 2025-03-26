@@ -9,27 +9,27 @@
 </head>
 <body>
   <div id="background-decorations">
-  <div class="bubbles-background">
-    <div class="bubble b1"></div>
-    <div class="bubble b2"></div>
-    <div class="bubble b3"></div>
-    <div class="bubble b4"></div>
-    <div class="bubble b5"></div>
-    <div class="bubble b6"></div>
-    <div class="bubble b7"></div>
-    <div class="bubble b8"></div>
+    <div class="bubbles-background">
+      <div class="bubble b1"></div>
+      <div class="bubble b2"></div>
+      <div class="bubble b3"></div>
+      <div class="bubble b4"></div>
+      <div class="bubble b5"></div>
+      <div class="bubble b6"></div>
+      <div class="bubble b7"></div>
+      <div class="bubble b8"></div>
+    </div>
+
+    <!-- Floating Creatures -->
+    <img src="images/cute-whale1.png" class="floating-creature creature1" alt="floating whale">
+    <img src="images/cute-whale2.png" class="floating-creature creature2" alt="floating whale">
+    <img src="images/cute-whale3.png" class="floating-creature creature3" alt="floating whale">
+    <img src="images/cute-turtle.png" class="floating-creature creature4" alt="floating turtle">
+    <img src="images/cute-turtle2.png" class="floating-creature creature5" alt="floating turtle">
+    <img src="images/cute-octopus.png" class="floating-creature creature6" alt="floating octopus">
+    <img src="images/cute-crab.png" class="floating-creature creature7" alt="floating crab">
+    <img src="images/cute-starfish.png" class="floating-creature creature8" alt="floating starfish">
   </div>
-
-  <img src="images/cute-whale1.png" class="floating-creature creature1" alt="floating whale">
-  <img src="images/cute-whale2.png" class="floating-creature creature2" alt="floating whale">
-  <img src="images/cute-whale3.png" class="floating-creature creature3" alt="floating whale">
-  <img src="images/cute-turtle.png" class="floating-creature creature4" alt="floating turtle">
-  <img src="images/cute-turtle2.png" class="floating-creature creature5" alt="floating turtle">
-  <img src="images/cute-octopus.png" class="floating-creature creature6" alt="floating octopus">
-  <img src="images/cute-crab.png" class="floating-creature creature7" alt="floating crab">
-  <img src="images/cute-starfish.png" class="floating-creature creature8" alt="floating starfish">
-</div>
-
 
   <h1 style="color: white; text-align: center;">Welcome to Whale's Wager!</h1>
   <div class="button-row">
@@ -145,6 +145,7 @@
       document.getElementById("card-output").classList.add("hidden");
       document.getElementById("player-setup").classList.add("hidden");
       document.getElementById("game-board").classList.add("hidden");
+      document.getElementById("background-decorations").classList.remove("hidden");
     }
 
     function startWhaling() {
@@ -152,16 +153,15 @@
       document.getElementById("card-output").classList.add("hidden");
       document.getElementById("player-setup").classList.remove("hidden");
       document.getElementById("game-board").classList.add("hidden");
+      document.getElementById("background-decorations").classList.remove("hidden");
     }
 
     function showPlayerSetup() {
-  document.getElementById("how-to-play").classList.add("hidden");
-  document.getElementById("card-output").classList.add("hidden");
-  document.getElementById("player-setup").classList.remove("hidden");
-  document.getElementById("game-board").classList.add("hidden");
-  document.getElementById("background-decorations").classList.add("hidden");
-}
-
+      document.getElementById("how-to-play").classList.add("hidden");
+      document.getElementById("card-output").classList.add("hidden");
+      document.getElementById("player-setup").classList.remove("hidden");
+      document.getElementById("game-board").classList.add("hidden");
+      document.getElementById("background-decorations").classList.add("hidden"); // hides floating sea creatures
     }
 
     function startGame() {
@@ -169,7 +169,7 @@
       document.getElementById("player-setup").classList.add("hidden");
       document.getElementById("card-output").classList.remove("hidden");
       document.getElementById("game-board").classList.remove("hidden");
-      document.getElementById("background-decorations").classList.remove("hidden");
+      document.getElementById("background-decorations").classList.remove("hidden"); // shows them again
     }
   </script>
 </body>
