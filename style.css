@@ -159,15 +159,15 @@ button:hover {
   z-index: 0;
   pointer-events: none;
 }
-
 .floating-creature {
   animation: float-sway 4s ease-in-out infinite;
-  width: 12vw;
-  max-width: 100px;
+  width: 7vw;
+  max-width: 60px;
   height: auto;
   position: absolute;
   z-index: 0;
   pointer-events: none;
+  opacity: 0.8;
 }
 .creature1 { top: 10vh; left: 5%; animation-delay: 0s; }
 .creature2 { top: 15vh; left: 20%; animation-delay: 1s; }
