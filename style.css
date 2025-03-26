@@ -264,3 +264,17 @@ button:hover {
   margin-top: 20px;
   text-shadow: 2px 2px #000;
 }
+@media screen and (max-width: 480px) {
+  .board-track {
+    gap: 6px;
+  }
+
+  .board-space {
+    font-size: 11px;
+  }
+
+  .whale-token img {
+    width: 24px;
+    top: -12px;
+  }
+}
