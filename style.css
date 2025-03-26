@@ -161,13 +161,13 @@ button:hover {
 }
 
 .floating-creature {
-  position: absolute;
-  width: 50%;
-  max-width: 150px;
-  height: auto;
-  pointer-events: none;
   animation: float-sway 4s ease-in-out infinite;
+  width: 12vw;
+  max-width: 100px;
+  height: auto;
+  position: absolute;
   z-index: 0;
+  pointer-events: none;
 }
 .creature1 { top: 10vh; left: 5%; animation-delay: 0s; }
 .creature2 { top: 15vh; left: 20%; animation-delay: 1s; }
