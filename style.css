@@ -291,3 +291,17 @@ input[type="text"] {
 #dice:active {
   transform: rotate(360deg) scale(1.1);
 }
+#dice-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#dice-image {
+  width: 80px;
+  height: 80px;
+  transition: transform 0.3s ease;
+}
+
+#dice-container button {
+  margin-top: 10px;
+}
