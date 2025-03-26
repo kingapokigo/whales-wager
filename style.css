@@ -278,3 +278,7 @@ button:hover {
     top: -12px;
   }
 }
+.board-space {
+  font-weight: bold;
+  font-family: 'Antonio', sans-serif;
+}
