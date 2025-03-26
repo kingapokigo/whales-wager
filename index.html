@@ -128,8 +128,6 @@
 
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
-  let creaturesVisible = true;
-
   <script src="game-logic.js"></script>
   <script>
     function playSound() {
@@ -150,20 +148,28 @@
       document.getElementById("background-decorations").classList.remove("hidden");
     }
 
-    function startWhaling() {
-      document.getElementById("how-to-play").classList.add("hidden");
-      document.getElementById("card-output").classList.add("hidden");
-      document.getElementById("player-setup").classList.remove("hidden");
-      document.getElementById("game-board").classList.add("hidden");
-      document.getElementById("background-decorations").classList.remove("hidden");
-    }
+   function startWhaling() {
+  document.getElementById("how-to-play").classList.add("hidden");
+  document.getElementById("card-output").classList.add("hidden");
+  document.getElementById("player-setup").classList.remove("hidden");
+  document.getElementById("game-board").classList.add("hidden");
+
+  if (!creaturesVisible) {
+    document.getElementById("background-decorations").classList.add("hidden");
+  }
+}
+
 function showPlayerSetup() {
   document.getElementById("how-to-play").classList.add("hidden");
   document.getElementById("card-output").classList.add("hidden");
   document.getElementById("player-setup").classList.remove("hidden");
   document.getElementById("game-board").classList.add("hidden");
-  document.getElementById("background-decorations").classList.add("hidden"); // 👈 hides whales + bubbles
-    }
+
+  if (!creaturesVisible) {
+    document.getElementById("background-decorations").classList.add("hidden");
+  }
+}
+
 
    function startGame() {
   document.getElementById("how-to-play").classList.add("hidden");
@@ -172,6 +178,19 @@ function showPlayerSetup() {
   document.getElementById("game-board").classList.remove("hidden");
   document.getElementById("background-decorations").classList.remove("hidden"); // 👈 show again!
 }
+    let creaturesVisible = true;
+
+function toggleSeaCreatures() {
+  const decorations = document.getElementById("background-decorations");
+  creaturesVisible = !creaturesVisible;
+
+  if (creaturesVisible) {
+    decorations.classList.remove("hidden");
+  } else {
+    decorations.classList.add("hidden");
+  }
+}
+
   </script>
 </body>
 </html>
