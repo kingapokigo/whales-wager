@@ -63,17 +63,18 @@ button:hover {
 }
 
 .board-track {
-  display: flex;
-  flex-wrap: wrap;
-  width: 600px; /* wider board */
-  height: 600px; /* added height */
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* 10 columns */
+  grid-auto-rows: 60px;
+  gap: 10px;
+  width: max-content;
+  max-width: 90vw;
   margin: 20px auto;
   border: 3px solid #00c2d1;
   padding: 15px;
   border-radius: 10px;
   background-color: #011f2a;
   position: relative;
-}
 
 }
 
