@@ -18,46 +18,6 @@ function drawCard() {
   document.getElementById("card-output").innerText = card;
 }
 
-function createPlayerTokens() {
-  const playerInputs = document.querySelectorAll('.player-selection .player-input input');
-  const tokenContainer = document.getElementById("player-tokens");
-
-  tokenContainer.innerHTML = ''; // clear old tokens
-
-  const positions = [
-    { top: '2px', left: '2px' },
-    { top: '2px', left: '35px' },
-    { top: '30px', left: '2px' },
-    { top: '30px', left: '35px' },
-    { top: '16px', left: '18px' },
-    { top: '16px', left: '50px' }
-  ];
-
-  playerInputs.forEach((input, index) => {
-    const name = input.value.trim();
-    if (name !== '') {
-      const img = document.createElement('img');
-      img.src = input.previousElementSibling.src;
-      img.alt = name;
-      img.classList.add('player-token');
-      img.style.position = 'absolute';
-      img.style.width = '24px';
-      img.style.height = '24px';
-      img.style.borderRadius = '50%';
-      img.style.top = positions[index].top;
-      img.style.left = positions[index].left;
-
-      const startSpace = document.getElementById("space-0");
-      startSpace.appendChild(img);
-    }
-  });
-}
-// === WHALE MOVEMENT: BOARD GAME MECHANICS === //
-
-const boardSize = 21; // 0 to 20
-let currentPlayerIndex = 0;
-let playerPositions = [];
-
 function getPlayerNames() {
   const inputs = document.querySelectorAll(".player-input input");
   return Array.from(inputs)
@@ -65,11 +25,36 @@ function getPlayerNames() {
     .filter((name) => name !== "");
 }
 
+let currentPlayerIndex = 0;
+let playerPositions = [];
+const boardSize = 50;
+const trapSpaces = [13, 37];
+
+function createBoardSpaces() {
+  const boardTrack = document.querySelector(".board-track");
+  boardTrack.innerHTML = "";
+
+  for (let i = 0; i < boardSize; i++) {
+    const space = document.createElement("div");
+    space.classList.add("space");
+    space.id = `space-${i}`;
+    if (i === 0) space.innerText = "Start";
+    else if (i === boardSize - 1) {
+      space.innerText = "Finish 🎉";
+      space.classList.add("finish");
+    } else if (trapSpaces.includes(i)) {
+      space.innerText = "🍄";
+      space.classList.add("trap");
+    }
+    boardTrack.appendChild(space);
+  }
+}
+
 function createPlayerTokens() {
   const names = getPlayerNames();
   const tokensContainer = document.getElementById("player-tokens");
   tokensContainer.innerHTML = "";
-  playerPositions = []; // Reset positions
+  playerPositions = [];
 
   names.forEach((name, index) => {
     const img = document.createElement("img");
@@ -77,60 +62,37 @@ function createPlayerTokens() {
     img.alt = name;
     img.classList.add("whale-token");
     img.dataset.playerIndex = index;
-    tokensContainer.appendChild(img);
-    playerPositions.push(0); // All whales start at space-0
-
-    const startSpace = document.getElementById("space-0");
-    startSpace.appendChild(img);
+    playerPositions.push(0);
+    document.getElementById("space-0").appendChild(img);
   });
 }
 
 function rollDice() {
   const roll = Math.floor(Math.random() * 6) + 1;
   document.getElementById("dice-result").innerText = `You rolled a ${roll}!`;
-
   movePlayer(currentPlayerIndex, roll);
   currentPlayerIndex = (currentPlayerIndex + 1) % playerPositions.length;
 }
 
 function movePlayer(index, steps) {
-  const currentPos = playerPositions[index];
+  let currentPos = playerPositions[index];
   let newPos = currentPos + steps;
-  if (newPos > 20) newPos = 20;
+  if (newPos >= boardSize) newPos = boardSize - 1;
+
+  if (trapSpaces.includes(newPos)) {
+    newPos = Math.max(newPos - 4, 0);
+  }
 
   playerPositions[index] = newPos;
-
   const space = document.getElementById(`space-${newPos}`);
-  const token = document.querySelector(
-    `.whale-token[data-player-index='${index}']`
-  );
-
+  const token = document.querySelector(`.whale-token[data-player-index='${index}']`);
   space.appendChild(token);
 
-  if (newPos === 20) {
+  if (newPos === boardSize - 1) {
     alert(`🎉 ${token.alt} wins the game! 🎉`);
   }
 }
-function createBoardSpaces() {
-  const boardTrack = document.querySelector('.board-track');
-  boardTrack.innerHTML = ''; // Clear old spaces
 
-  const trapSpaces = [13, 37]; // 🧠 You can randomize later if you want
-
-  for (let i = 0; i <= 49; i++) {
-    const space = document.createElement('div');
-    space.classList.add('space');
-    space.setAttribute('id', `space-${i}`);
-
-    if (i === 0) space.innerText = 'Start';
-    else if (i === 49) {
-      space.innerText = 'Finish 🎉';
-      space.classList.add('finish');
-    } else if (trapSpaces.includes(i)) {
-      space.innerText = '🍄';
-      space.classList.add('trap');
-    }
-
-    boardTrack.appendChild(space);
-  }
-}
+window.onload = () => {
+  createBoardSpaces();
+};
