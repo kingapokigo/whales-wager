@@ -172,6 +172,111 @@
   </div>
 
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
+// Creating the Whale's Wager game board and mechanics
+// We'll expand this gradually in HTML/CSS/JS to make it playable
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whale's Wager Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🐋 Whale's Wager – Board Game</h1>
+
+  <div id="board-container">
+    <div class="board-track">
+      <!-- Dynamically populated spaces -->
+    </div>
+    <div id="player-tokens">
+      <!-- Whale pieces inserted here -->
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="drawCard()">Draw a Card</button>
+    <button onclick="rollDice()">Roll Dice</button>
+    <div id="card-output"></div>
+    <div id="dice-result"></div>
+  </div>
+
+  <script>
+    const boardTrack = document.querySelector('.board-track');
+    const cardOutput = document.getElementById('card-output');
+    const diceResult = document.getElementById('dice-result');
+
+    // Create board spaces
+    for (let i = 0; i <= 20; i++) {
+      const space = document.createElement('div');
+      space.classList.add('space');
+      if (i === 0) space.innerText = 'Start';
+      else if (i === 20) space.innerText = 'Finish 🎉';
+      boardTrack.appendChild(space);
+    }
+
+    function drawCard() {
+      const cards = [
+        '🐋 Do 10 pushups or drink 3 sips.',
+        '🐋 Trivia! What’s the biggest animal in the ocean?',
+        '🍄 Oh no! Skip your next turn.',
+        '🍄 Swim backwards 2 spaces!',
+      ];
+      const card = cards[Math.floor(Math.random() * cards.length)];
+      cardOutput.innerText = `Card: ${card}`;
+    }
+
+    function rollDice() {
+      const roll = Math.floor(Math.random() * 6) + 1;
+      diceResult.innerText = `You rolled a ${roll}!`;
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #011f2a;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .board-track {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 400px;
+      margin: 0 auto;
+      border: 2px solid #00c2d1;
+      padding: 10px;
+      border-radius: 12px;
+    }
+    .space {
+      width: 60px;
+      height: 60px;
+      margin: 5px;
+      border: 2px solid #00c2d1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+      background-color: #033649;
+    }
+    .controls {
+      margin-top: 30px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #00c2d1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 5px;
+    }
+  </style>
+</body>
+</html>
 
   <script src="game-logic.js"></script>
   <script>
