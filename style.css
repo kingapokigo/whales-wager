@@ -294,6 +294,10 @@ input[type="text"] {
 .b3 { left: 50%; width: 8px; height: 8px; animation-delay: 4s; }
 .b4 { left: 70%; width: 14px; height: 14px; animation-delay: 1s; }
 .b5 { left: 85%; width: 9px; height: 9px; animation-delay: 3s; }
+.b6 { left: 30%; width: 16px; height: 16px; animation-delay: 1.7s; }
+.b7 { left: 60%; width: 7px; height: 7px; animation-delay: 2.4s; }
+.b8 { left: 75%; width: 10px; height: 10px; animation-delay: 0.6s; }
+
 
 @keyframes rise {
   0% {
