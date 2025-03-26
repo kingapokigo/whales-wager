@@ -151,13 +151,13 @@ button:hover {
 
 /* ===== Floating Creatures ===== */
 #background-decorations {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  height: 100vh; /* 👈 full screen height */
   z-index: 0;
+  pointer-events: none;
 }
 
 .floating-creature {
@@ -169,15 +169,15 @@ button:hover {
   animation: float-sway 4s ease-in-out infinite;
   z-index: 0;
 }
+.creature1 { top: 10vh; left: 5%; animation-delay: 0s; }
+.creature2 { top: 25vh; left: 20%; animation-delay: 1s; }
+.creature3 { top: 50vh; left: 70%; animation-delay: 2s; }
+.creature4 { top: 65vh; left: 10%; animation-delay: 0.5s; }
+.creature5 { top: 80vh; left: 80%; animation-delay: 1.5s; }
+.creature6 { top: 75vh; left: 40%; animation: float-sway 5s ease-in-out infinite; }
+.creature7 { top: 60vh; right: 20%; animation-delay: 0.7s; }
+.creature8 { top: 85vh; right: 5%; animation-delay: 1.2s; }
 
-.creature1 { top: 10%; left: 5%; animation-delay: 0s; }
-.creature2 { top: 15%; left: 20%; animation-delay: 1s; }
-.creature3 { top: 25%; left: 70%; animation-delay: 2s; }
-.creature4 { top: 60%; left: 10%; animation-delay: 0.5s; }
-.creature5 { top: 50%; left: 80%; animation-delay: 1.5s; }
-.creature6 { bottom: 5%; left: 40%; animation: float-sway 5s ease-in-out infinite; }
-.creature7 { bottom: 10%; right: 20%; animation-delay: 0.7s; }
-.creature8 { top: 70%; right: 5%; animation-delay: 1.2s; }
 
 @keyframes float-sway {
   0% { transform: translateY(0) rotate(0deg); }
