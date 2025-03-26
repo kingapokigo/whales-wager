@@ -171,7 +171,7 @@ button:hover {
 }
 .creature1 { top: 10vh; left: 5%; animation-delay: 0s; }
 .creature2 { top: 15vh; left: 20%; animation-delay: 1s; }
-.creature3 { top: 50vh; left: 70%; animation-delay: 2s; }
+.creature3 { top: 38vh; left: 70%; animation-delay: 2s; }
 .creature4 { top: 65vh; left: 10%; animation-delay: 0.5s; }
 .creature5 { top: 78vh; left: 88%; animation-delay: 1.5s; }   /* Turtle 2 */
 .creature6 { top: 75vh; left: 40%; animation: float-sway 5s ease-in-out infinite; }
