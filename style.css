@@ -1,307 +1,138 @@
-/* ===== General Reset ===== */
+/* style.css */
+
 body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: linear-gradient(to bottom, #c2f0ff, #ffffff);
+  color: #00334e;
+  text-align: center;
   margin: 0;
-  font-family: 'Antonio', sans-serif;
-  background-color: #022b3a;
-  overflow-x: hidden;
-  position: relative;
-  color: white;
+  padding: 0;
 }
 
-h1, h2, h3 {
-  font-weight: 600;
-  text-align: center;
+header {
+  background-color: #006994;
+  color: white;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+#setup, #game-board {
+  padding: 20px;
+}
+
+#player-setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.player-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.player-name {
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid #00bcd4;
+}
+
+.whale-icon {
+  height: 40px;
+}
+
+#add-player {
+  color: #0077aa;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 button {
-  background-color: #00c2d1;
-  color: white;
-  border: none;
   padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  margin: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #00bcd4;
+  color: white;
   cursor: pointer;
-  font-family: 'Antonio', sans-serif;
-  box-shadow: 0 4px 0 #0095a8;
-  transition: transform 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 button:hover {
-  transform: scale(1.05);
+  background-color: #008ba3;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.tile {
+  border: 2px dashed #0077aa;
+  padding: 20px;
+  border-radius: 12px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0faff;
+  position: relative;
+}
+
+.whale-icon-tiny {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+#card-display {
+  margin: 20px auto;
+  padding: 20px;
+  width: 60%;
+  background-color: #ffefc2;
+  border: 2px solid #ffaa00;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-style: italic;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#player-info {
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  text-align: center;
 }
 
 .hidden {
-  display: none !important;
-}
-
-.button-row {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.mascot {
-  display: block;
-  margin: 20px auto;
-  width: 150px;
-  height: auto;
-}
-
-#dice-roll {
-  text-align: center;
-  margin-top: 20px;
-}
-
-#dice-result {
-  font-size: 24px;
-  margin-top: 10px;
-}
-
-#game-board {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.board-track {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr); /* 10 columns */
-  grid-auto-rows: 60px;
-  gap: 10px;
-  width: max-content;
-  max-width: 90vw;
-  margin: 20px auto;
-  border: 3px solid #00c2d1;
-  padding: 15px;
-  border-radius: 10px;
-  background-color: #011f2a;
-  position: relative;
-
-}
-
-.space {
-  width: 60px;
-  height: 60px;
-  border: 2px solid #00c2d1;
-  border-radius: 10px;
-  margin: 5px;
-  line-height: 60px;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-  font-size: 14px;
-}
-
-.finish {
-  background-color: #008f8c;
-  color: white;
-}
-
-#player-tokens {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.card-container {
-  perspective: 1000px;
-  width: 300px;
-  height: 200px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  border-radius: 10px;
-  background: #00c2d1;
-}
-
-.card-container:hover .card-inner {
-  transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  font-size: 18px;
-}
-
-.card-front {
-  color: white;
-}
-
-.card-back {
-  transform: rotateY(180deg);
-  background: #007d8c;
-  color: white;
-}
-.player-input img {
-  width: 60px;
-  height: auto;
-  border-radius: 10px;
-  border: 2px solid #00c2d1;
-  background: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-/* ===== Floating Creatures ===== */
-#background-decorations {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh; /* 👈 full screen height */
-  z-index: 0;
-  pointer-events: none;
-}
-.floating-creature {
-  animation: float-sway 4s ease-in-out infinite;
-  width: 7vw;
-  max-width: 60px;
-  height: auto;
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.8;
-}
-.creature1 { top: 10vh; left: 5%; animation-delay: 0s; }
-.creature2 { top: 15vh; left: 20%; animation-delay: 1s; }
-.creature3 { top: 38vh; left: 70%; animation-delay: 2s; }
-.creature4 { top: 65vh; left: 10%; animation-delay: 0.5s; }
-.creature5 { top: 78vh; left: 88%; animation-delay: 1.5s; }   /* Turtle 2 */
-.creature6 { top: 75vh; left: 30%; animation: float-sway 5s ease-in-out infinite; }
-.creature7 { top: 83vh; left: 65%; animation-delay: 0.7s; }   /* Crab */
-.creature8 { top: 14vh; right: 5%; animation-delay: 1.2s; }   /* Starfish */
-
-
-@keyframes float-sway {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
-  100% { transform: translateY(0) rotate(0deg); }
-}
-
-/* ===== Bubbles ===== */
-.bubbles-background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.bubble {
-  position: absolute;
-  bottom: -100px;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(173, 216, 230, 0.2));
-  border-radius: 50%;
-  opacity: 0.7;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(2px);
-  animation: rise 10s infinite ease-in;
-}
-
-.b1 { left: 10%; width: 10px; height: 10px; animation-delay: 0s; }
-.b2 { left: 25%; width: 12px; height: 12px; animation-delay: 2s; }
-.b3 { left: 50%; width: 8px; height: 8px; animation-delay: 4s; }
-.b4 { left: 70%; width: 14px; height: 14px; animation-delay: 1s; }
-.b5 { left: 85%; width: 9px; height: 9px; animation-delay: 3s; }
-.b6 { left: 30%; width: 16px; height: 16px; animation-delay: 1.7s; }
-.b7 { left: 60%; width: 7px; height: 7px; animation-delay: 2.4s; }
-.b8 { left: 75%; width: 10px; height: 10px; animation-delay: 0.6s; }
-
-@keyframes rise {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(-300px) scale(1.1);
-  }
-  100% {
-    transform: translateY(-600px) scale(0.9);
-    opacity: 0;
-  }
-}
-
-/* ===== Whale Preview Inputs ===== */
-.whale-preview {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 5px 0;
-  justify-content: center;
-}
-
-.whale-preview img {
-  width: 40px;
-  height: auto;
-  border-radius: 8px;
-  border: 2px solid #00c2d1;
-  background: white;
-}
-
-input[type="text"] {
-  font-family: 'Antonio', sans-serif;
-  margin: 5px;
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-  font-size: 16px;
-  width: 200px;
-  text-align: center;
-}
-.player-input img {
-  width: 60px;
-  height: auto;
-  border-radius: 8px;
-  border: 2px solid #00c2d1;
-  background: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-}
-.whale-token {
-  width: 40px;
-  height: auto;
-  margin: 0 5px;
-  transition: transform 0.3s ease;
-}
-#dice {
-  transition: transform 0.3s ease;
-}
-#dice:active {
-  transform: rotate(360deg) scale(1.1);
-}
-#dice-container {
-  text-align: center;
-  margin-top: 20px;
-}
-
-#dice-image {
-  width: 80px;
-  height: 80px;
-  transition: transform 0.3s ease;
-}
-
-#dice-container button {
-  margin-top: 10px;
+  display: none;
 }
