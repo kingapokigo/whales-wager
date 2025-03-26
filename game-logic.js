@@ -111,3 +111,26 @@ function movePlayer(index, steps) {
     alert(`🎉 ${token.alt} wins the game! 🎉`);
   }
 }
+function createBoardSpaces() {
+  const boardTrack = document.querySelector('.board-track');
+  boardTrack.innerHTML = ''; // Clear old spaces
+
+  const trapSpaces = [13, 37]; // 🧠 You can randomize later if you want
+
+  for (let i = 0; i <= 49; i++) {
+    const space = document.createElement('div');
+    space.classList.add('space');
+    space.setAttribute('id', `space-${i}`);
+
+    if (i === 0) space.innerText = 'Start';
+    else if (i === 49) {
+      space.innerText = 'Finish 🎉';
+      space.classList.add('finish');
+    } else if (trapSpaces.includes(i)) {
+      space.innerText = '🍄';
+      space.classList.add('trap');
+    }
+
+    boardTrack.appendChild(space);
+  }
+}
