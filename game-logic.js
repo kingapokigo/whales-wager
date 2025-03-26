@@ -130,18 +130,17 @@ let gameOver = false;
 
 function rollDice() {
   const roll = Math.floor(Math.random() * 6) + 1;
-  const diceImg = document.getElementById("dice-image");
-
-  diceImg.src = `images/dice-${roll}.png`;
-  diceImg.style.transform = "rotate(" + (Math.random() * 360) + "deg)";
-
   document.getElementById("dice-result").innerText = `You rolled a ${roll}!`;
 
   movePlayer(currentPlayerIndex, roll);
-  currentPlayerIndex = (currentPlayerIndex + 1) % playerPositions.length;
+
+  const playerNames = getPlayerNames();
+  const nextIndex = (currentPlayerIndex + 1) % playerPositions.length;
+  const nextPlayer = playerNames[nextIndex];
+  document.getElementById("current-player").innerText = `🎯 ${nextPlayer}'s Turn!`;
+
+  currentPlayerIndex = nextIndex;
 }
-
-
 function movePlayer(index, steps) {
   // ...existing code...
   if (newPos === boardSize - 1) {
