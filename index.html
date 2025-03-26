@@ -19,8 +19,6 @@
       <div class="bubble b7"></div>
       <div class="bubble b8"></div>
     </div>
-
-    <!-- Floating Creatures -->
     <img src="images/cute-whale1.png" class="floating-creature creature1" alt="floating whale">
     <img src="images/cute-whale2.png" class="floating-creature creature2" alt="floating whale">
     <img src="images/cute-whale3.png" class="floating-creature creature3" alt="floating whale">
@@ -53,8 +51,8 @@
   </div>
 
   <div id="how-to-play" class="hidden" style="text-align: center; max-width: 700px; margin: 0 auto; padding: 20px;">
-    <!-- All the rules content stays here as-is -->
-    <!-- (not repeating for brevity, but this block is good) -->
+    <h2>🐋 Whale's Wager – The Official Gameplay</h2>
+    <!-- Gameplay instructions here -->
   </div>
 
   <div id="player-setup" class="hidden" style="text-align: center; color: white;">
@@ -70,106 +68,4 @@
         <input type="text" placeholder="Player 2 Name">
       </div>
       <div class="player-input">
-        <img src="images/blue-whale.png" alt="Blue Whale">
-        <input type="text" placeholder="Player 3 Name">
-      </div>
-      <div class="player-input">
-        <img src="images/purple-whale.png" alt="Purple Whale">
-        <input type="text" placeholder="Player 4 Name">
-      </div>
-      <div class="player-input">
-        <img src="images/teal-whale.png" alt="Teal Whale">
-        <input type="text" placeholder="Player 5 Name">
-      </div>
-      <div class="player-input">
-        <img src="images/pink-whale.png" alt="Pink Whale">
-        <input type="text" placeholder="Player 6 Name">
-      </div>
-    </div>
-    <button style="margin-top: 10px;" onclick="startGame()">Swim to Start ➤</button>
-  </div>
-
-  <div id="game-board" class="hidden">
-    <h2 style="color: white;">🏁 Whale Track</h2>
-    <div class="board-track">
-      <div class="space" id="space-0">Start</div>
-      <div class="space" id="space-1"></div>
-      <div class="space" id="space-2"></div>
-      <div class="space" id="space-3"></div>
-      <div class="space" id="space-4"></div>
-      <div class="space" id="space-5"></div>
-      <div class="space" id="space-6"></div>
-      <div class="space" id="space-7"></div>
-      <div class="space" id="space-8"></div>
-      <div class="space" id="space-9"></div>
-      <div class="space" id="space-10"></div>
-      <div class="space" id="space-11"></div>
-      <div class="space" id="space-12"></div>
-      <div class="space" id="space-13"></div>
-      <div class="space" id="space-14"></div>
-      <div class="space" id="space-15"></div>
-      <div class="space" id="space-16"></div>
-      <div class="space" id="space-17"></div>
-      <div class="space" id="space-18"></div>
-      <div class="space" id="space-19"></div>
-      <div class="space finish" id="space-20">Finish 🎉</div>
-    </div>
-    <div id="player-tokens"></div>
-  </div>
-
-  <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
-  <script src="game-logic.js"></script>
-  <script>
-    function playSound() {
-      document.getElementById("draw-sound").play();
-    }
-
-    const originalDrawCard = drawCard;
-    drawCard = function () {
-      playSound();
-      originalDrawCard();
-    };
-
-    function showRules() {
-      document.getElementById("how-to-play").classList.remove("hidden");
-      document.getElementById("card-output").classList.add("hidden");
-      document.getElementById("player-setup").classList.add("hidden");
-      document.getElementById("game-board").classList.add("hidden");
-      document.getElementById("background-decorations").classList.remove("hidden");
-    }
-
-    function startWhaling() {
-      document.getElementById("how-to-play").classList.add("hidden");
-      document.getElementById("card-output").classList.add("hidden");
-      document.getElementById("player-setup").classList.remove("hidden");
-      document.getElementById("game-board").classList.add("hidden");
-
-      if (!creaturesVisible) {
-        document.getElementById("background-decorations").classList.add("hidden");
-      }
-    }
-
-    function startGame() {
-      document.getElementById("how-to-play").classList.add("hidden");
-      document.getElementById("player-setup").classList.add("hidden");
-      document.getElementById("card-output").classList.remove("hidden");
-      document.getElementById("game-board").classList.remove("hidden");
-      document.getElementById("background-decorations").classList.remove("hidden");
-      createPlayerTokens();
-    }
-
-    let creaturesVisible = true;
-
-    function toggleSeaCreatures() {
-      const decorations = document.getElementById("background-decorations");
-      creaturesVisible = !creaturesVisible;
-
-      if (creaturesVisible) {
-        decorations.classList.remove("hidden");
-      } else {
-        decorations.classList.add("hidden");
-      }
-    }
-  </script>
-</body>
-</html>
+        <img src="
