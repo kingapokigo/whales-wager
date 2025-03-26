@@ -65,13 +65,16 @@ button:hover {
 .board-track {
   display: flex;
   flex-wrap: wrap;
-  width: 500px;
+  width: 600px; /* wider board */
+  height: 600px; /* added height */
   margin: 20px auto;
   border: 3px solid #00c2d1;
   padding: 15px;
   border-radius: 10px;
   background-color: #011f2a;
   position: relative;
+}
+
 }
 
 .space {
