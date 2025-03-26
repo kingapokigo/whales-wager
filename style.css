@@ -148,6 +148,14 @@ button:hover {
   background: #007d8c;
   color: white;
 }
+.player-input img {
+  width: 60px;
+  height: auto;
+  border-radius: 10px;
+  border: 2px solid #00c2d1;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
 
 /* ===== Floating Creatures ===== */
 #background-decorations {
