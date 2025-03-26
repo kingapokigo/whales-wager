@@ -13,7 +13,6 @@ function createBoardSpaces() {
   for (let i = 0; i < boardSize; i++) {
     const space = document.createElement("div");
     space.classList.add("board-space");
-    space.dataset.index = i;
     space.textContent = `${i + 1}`;
     boardSpaces.push(space);
   }
