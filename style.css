@@ -173,10 +173,10 @@ button:hover {
 .creature2 { top: 25vh; left: 20%; animation-delay: 1s; }
 .creature3 { top: 50vh; left: 70%; animation-delay: 2s; }
 .creature4 { top: 65vh; left: 10%; animation-delay: 0.5s; }
-.creature5 { top: 80vh; left: 80%; animation-delay: 1.5s; }
+.creature5 { top: 78vh; left: 78%; animation-delay: 1.5s; }   /* Turtle 2 */
 .creature6 { top: 75vh; left: 40%; animation: float-sway 5s ease-in-out infinite; }
-.creature7 { top: 60vh; right: 20%; animation-delay: 0.7s; }
-.creature8 { top: 85vh; right: 5%; animation-delay: 1.2s; }
+.creature7 { top: 83vh; left: 65%; animation-delay: 0.7s; }   /* Crab */
+.creature8 { top: 87vh; right: 5%; animation-delay: 1.2s; }   /* Starfish */
 
 
 @keyframes float-sway {
