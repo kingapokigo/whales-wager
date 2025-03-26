@@ -103,3 +103,8 @@ function movePlayer(index, steps) {
 window.onload = () => {
   createBoardSpaces();
 };
+if (trapSpaces.includes(newPos)) {
+  alert(`${token.alt} hit a 🍄 toxic mushroom and moves back 4 spaces!`);
+  newPos = Math.max(newPos - 4, 0);
+}
+document.getElementById("current-player").innerText = `It's ${token.alt}'s turn!`;
