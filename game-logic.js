@@ -31,13 +31,6 @@ function createBoardSpaces() {
     row.forEach(tile => boardTrack.appendChild(tile));
   }
 }
-  for (let i = 0; i < boardSpaces.length; i += 10) {
-    const row = boardSpaces.slice(i, i + 10);
-    const isEvenRow = Math.floor(i / 10) % 2 === 1;
-    const rowTiles = isEvenRow ? row.reverse() : row;
-    rowTiles.forEach(tile => boardTrack.appendChild(tile));
-  }
-}
 
 function createPlayerTokens() {
   const tokenContainer = document.getElementById("player-tokens");
@@ -164,22 +157,6 @@ function handleToxicEffect(player, consequence) {
 
 function getRandomWhaleChallenge() {
   const challenges = [
-    "Do 10 push-ups or drink 3 sips!",
-    "Compliment the player to your left!",
-    "Tell a funny memory or lose a turn.",
-    "Trade places with the player furthest behind!",
-    "Make a whale sound for 10 seconds 🐋🎤",
-    "Invent a sea creature dance or do 15 jumping jacks!",
-    "Sing part of your favorite guilty pleasure song!",
-    "Tell everyone your most irrational fear!",
-    "Play rock-paper-scissors with someone. Loser takes a sip!",
-    "Make a rule everyone must follow for the rest of the game!"
-  ];
-  return challenges[Math.floor(Math.random() * challenges.length)];
-}
-
-function getRandomWhaleChallenge() {
-  const challenges = [
     "Chug a beer 🍺",
     "Impersonate Jake giving a TED Talk on why the Knicks are winning it all 🎤",
     "Name 5 Mets players 🧢 (no repeats!)",
@@ -192,6 +169,22 @@ function getRandomWhaleChallenge() {
     "Swap seats with someone 🔄"
   ];
   return challenges[Math.floor(Math.random() * challenges.length)];
+}
+
+function getRandomToxicChallenge() {
+  const consequences = [
+    "Move back 3 spaces!",
+    "Skip your next turn.",
+    "Swap spots with a player of your choice. 😈",
+    "Return to START and rethink your life choices.",
+    "Answer a truth... or move back 2 spaces!",
+    "Lose your next dice roll. Roll a 1 no matter what!",
+    "Everyone but you gets to move forward 1 space.",
+    "You’re poisoned! Do 15 squats or go back 4 spaces!",
+    "Yikes! You have to repeat your last challenge again.",
+    "Hold your breath for 15 seconds or skip your next turn!"
+  ];
+  return consequences[Math.floor(Math.random() * consequences.length)];
 }
 
 function nextPlayer() {
