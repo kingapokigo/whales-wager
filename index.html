@@ -9,7 +9,6 @@
 </head>
 <body>
   <img src="images/happy-whale-transparent.png" alt="Happy Whale Mascot" class="mascot">
-
   <div class="bubbles-background">
     <div class="bubble b1"></div>
     <div class="bubble b2"></div>
@@ -27,35 +26,25 @@
   </div>
 
   <h1 style="color: white;">Welcome to Whale's Wager!</h1>
-
   <div class="button-row">
     <button onclick="startWhaling()">Start Whaling!</button>
     <button onclick="showRules()">How to Play</button>
   </div>
 
-  <!-- 🃏 Flip Card -->
-  <div id="card-output" class="card-box hidden">
-    <div class="card-container">
-      <div class="card-inner">
-        <div class="card-front">
-          <h2>🐋 Whale Card</h2>
-          <p>Click to flip!</p>
-        </div>
-        <div class="card-back">
-          <h3>Challenge:</h3>
-          <p>Do 10 push-ups or drink 3 sips!</p>
-        </div>
+  <div id="card-output" class="card-box hidden"></div>
+  <div class="card-container hidden" id="card-container">
+    <div class="card-inner">
+      <div class="card-front">
+        <h2>🐋 Whale Card</h2>
+        <p>Click to flip!</p>
+      </div>
+      <div class="card-back">
+        <h3>Challenge:</h3>
+        <p>Do 10 push-ups or drink 3 sips!</p>
       </div>
     </div>
   </div>
 
-  <!-- 🎲 Dice Area -->
-  <div id="dice-area" class="hidden">
-    <button onclick="rollDice()" class="dice-button">🎲 Roll the Dice</button>
-    <div id="dice-result" class="dice-output"></div>
-  </div>
-
-  <!-- 📜 Game Rules -->
   <div id="how-to-play" class="rules-box hidden" style="color: white;">
     <h2>How to Play</h2>
     <p><strong>Objective:</strong> Be the first whale to swim across the board by completing challenges and avoiding toxic traps!</p>
@@ -70,22 +59,40 @@
     <button onclick="showPlayerSetup()">Let's Wager!</button>
   </div>
 
-  <!-- 🧍 Player Setup -->
   <div id="player-setup" class="hidden" style="text-align: center; color: white;">
     <h2>Name Your Whales</h2>
     <p>Choose up to 6 players:</p>
-    <input type="text" placeholder="Player 1 Name" /><br />
-    <input type="text" placeholder="Player 2 Name" /><br />
-    <input type="text" placeholder="Player 3 Name" /><br />
-    <input type="text" placeholder="Player 4 Name" /><br />
-    <input type="text" placeholder="Player 5 Name" /><br />
-    <input type="text" placeholder="Player 6 Name" /><br />
-    <button style="margin-top: 10px;" onclick="startGame()">Swim to Start ➤</button>
+
+    <div class="player-input">
+      <img src="images/black-whale.png" class="whale-preview" alt="Black Whale" />
+      <input type="text" placeholder="Player 1 Name" id="player1" />
+    </div>
+    <div class="player-input">
+      <img src="images/green-whale.png" class="whale-preview" alt="Green Whale" />
+      <input type="text" placeholder="Player 2 Name" id="player2" />
+    </div>
+    <div class="player-input">
+      <img src="images/blue-whale.png" class="whale-preview" alt="Blue Whale" />
+      <input type="text" placeholder="Player 3 Name" id="player3" />
+    </div>
+    <div class="player-input">
+      <img src="images/purple-whale.png" class="whale-preview" alt="Purple Whale" />
+      <input type="text" placeholder="Player 4 Name" id="player4" />
+    </div>
+    <div class="player-input">
+      <img src="images/teal-whale.png" class="whale-preview" alt="Teal Whale" />
+      <input type="text" placeholder="Player 5 Name" id="player5" />
+    </div>
+    <div class="player-input">
+      <img src="images/pink-whale.png" class="whale-preview" alt="Pink Whale" />
+      <input type="text" placeholder="Player 6 Name" id="player6" />
+    </div>
+
+    <button style="margin-top: 10px;" onclick="startGame()">Swim to Start ➔</button>
   </div>
 
-  <!-- 🎯 Game Board -->
   <div id="game-board" class="hidden">
-    <h2 style="color: white;">🏁 Whale Track</h2>
+    <h2 style="color: white;">🏎️ Whale Track</h2>
     <div class="board-track">
       <div class="space" id="space-0">Start</div>
       <div class="space" id="space-1"></div>
@@ -110,16 +117,14 @@
       <div class="space finish" id="space-20">Finish 🎉</div>
     </div>
     <div id="player-tokens">
-      <div id="player1-token" class="whale-token">🐳</div>
+      <!-- Whale tokens will go here -->
     </div>
   </div>
 
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
-  <!-- 🧠 GAME SCRIPT -->
+  <script src="game-logic.js"></script>
   <script>
-    let playerPosition = 0;
-
     function playSound() {
       document.getElementById("draw-sound").play();
     }
@@ -155,28 +160,8 @@
       document.getElementById("how-to-play").classList.add("hidden");
       document.getElementById("player-setup").classList.add("hidden");
       document.getElementById("card-output").classList.remove("hidden");
+      document.getElementById("card-container").classList.remove("hidden");
       document.getElementById("game-board").classList.remove("hidden");
-      document.getElementById("dice-area").classList.remove("hidden");
-    }
-
-    function rollDice() {
-      const roll = Math.floor(Math.random() * 6) + 1;
-      document.getElementById("dice-result").textContent = `You rolled a ${roll}!`;
-      movePlayer(roll);
-    }
-
-    function movePlayer(spaces) {
-      playerPosition += spaces;
-      if (playerPosition > 20) playerPosition = 20;
-
-      const space = document.getElementById(`space-${playerPosition}`);
-      const token = document.getElementById("player1-token");
-      const boardRect = document.querySelector('.board-track').getBoundingClientRect();
-      const spaceRect = space.getBoundingClientRect();
-
-      token.style.position = "absolute";
-      token.style.left = (spaceRect.left - boardRect.left + 10) + "px";
-      token.style.top = (spaceRect.top - boardRect.top + 10) + "px";
     }
   </script>
 </body>
