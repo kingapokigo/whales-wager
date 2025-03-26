@@ -1,126 +1,176 @@
-function drawCard() {
-  const cards = [
-    "Chug a beer 🍺",
-    "Impersonate Jake giving a TED Talk on why the Knicks are winning it all 🎤",
-    "Name 5 Mets players 🧢 (no repeats!)",
-    "Trivia time! What’s Jake’s favorite team of all time?",
-    "Challenge: 30-second pushup contest with the person to your left. Loser sips 🍻",
-    "Make your best whale mating call. Loud. 🐋🔊",
-    "Create a fake ESPN headline about someone in the room 📰",
-    "Whale’s Choice: He picks someone to finish their drink 🐋🥂",
-    "Take a sip of your drink 🥂",
-    "Swap seats with someone 🔄"
-  ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whale's Wager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <header>
+      <h1>🐋 Whale's Wager 🐋</h1>
+    </header>
 
-  const randomIndex = Math.floor(Math.random() * cards.length);
-  const card = cards[randomIndex];
-  document.getElementById("card-output").innerText = card;
-}
+    <!-- Player Setup -->
+    <section id="setup">
+      <h2>Name Your Whales</h2>
+      <div id="player-setup">
+        <div class="player-entry">
+          <input type="text" placeholder="Player 1 Name" class="player-name">
+          <img src="/images/whale1.png" class="whale-icon">
+        </div>
+        <div class="player-entry">
+          <input type="text" placeholder="Player 2 Name" class="player-name">
+          <img src="/images/whale2.png" class="whale-icon">
+        </div>
+        <div id="add-player">+ Add Player</div>
+        <button id="start-game">Start Game</button>
+      </div>
+    </section>
 
-function getPlayerNames() {
-  const inputs = document.querySelectorAll(".player-input input");
-  return Array.from(inputs)
-    .map((input) => input.value.trim())
-    .filter((name) => name !== "");
-}
+    <!-- Main Game Board -->
+    <section id="game-board" class="hidden">
+      <div id="board"></div>
 
-let currentPlayerIndex = 0;
-let playerPositions = [];
-let gameOver = false;
-const boardSize = 50;
-const trapSpaces = [13, 37];
+      <div id="game-controls">
+        <button id="roll-dice">🎲 Roll Dice</button>
+        <div id="dice-result"></div>
+        <button id="draw-card">🃏 Draw Card</button>
+        <button id="draw-mushroom">🍄 Draw Toxic Mushroom</button>
+      </div>
 
-function createBoardSpaces() {
-  const boardTrack = document.querySelector(".board-track");
-  boardTrack.innerHTML = "";
+      <div id="card-display" class="card"></div>
 
-  for (let i = 0; i < boardSize; i++) {
-    const space = document.createElement("div");
-    space.classList.add("space");
-    space.id = `space-${i}`;
-    if (i === 0) space.innerText = "Start";
-    else if (i === boardSize - 1) {
-      space.innerText = "Finish 🎉";
-      space.classList.add("finish");
-    } else if (trapSpaces.includes(i)) {
-      space.innerText = "🍄";
-      space.classList.add("trap");
+      <!-- Player Info -->
+      <div id="player-info"></div>
+    </section>
+
+    <!-- End Game Modal -->
+    <div id="end-game" class="modal hidden">
+      <div class="modal-content">
+        <h2>Game Over!</h2>
+        <p id="winner-announcement"></p>
+        <button onclick="location.reload()">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let players = [];
+    let currentPlayerIndex = 0;
+    const boardSize = 20; // Total board positions
+
+    const cards = [
+      "Sing a sea shanty for 15 seconds.",
+      "Swap whales with another player.",
+      "Tell a fishy joke.",
+      "Do 10 pushups or move back 2 spaces.",
+      "Name 5 sea creatures in 10 seconds.",
+      "Compliment every player.",
+      "Walk like a crab for the next turn.",
+      "Imitate a whale sound. Loudly.",
+      "Do the worm or take a mushroom card.",
+      "Declare your allegiance to Whale Nation!"
+    ];
+
+    const mushroomCards = [
+      "Lose a turn.",
+      "Go back 3 spaces.",
+      "Trade places with last-place player.",
+      "Let others vote who moves you back 4 spaces.",
+      "Spin around 10 times before your next move.",
+      "Make a whale pun or move back 2 spaces.",
+      "Give your best evil villain laugh. Or skip next turn.",
+      "Hold a plank until your next turn starts.",
+      "Whale Jail! Miss 1 turn.",
+      "You now speak only in whale noises for 1 round."
+    ];
+
+    function startGame() {
+      const playerNames = document.querySelectorAll('.player-name');
+      players = [];
+      playerNames.forEach((input, index) => {
+        if (input.value.trim()) {
+          players.push({
+            name: input.value.trim(),
+            position: 0,
+            icon: `/images/whale${index + 1}.png`
+          });
+        }
+      });
+      if (players.length < 2) {
+        alert("At least 2 whales must join the wager!");
+        return;
+      }
+      document.getElementById("setup").classList.add("hidden");
+      document.getElementById("game-board").classList.remove("hidden");
+      renderBoard();
+      updatePlayerInfo();
     }
-    boardTrack.appendChild(space);
-  }
-}
 
-function createPlayerTokens() {
-  const playerInputs = document.querySelectorAll(".player-selection .player-input");
-  const tokensContainer = document.getElementById("player-tokens");
-  tokensContainer.innerHTML = "";
-  playerPositions = [];
-
-  playerInputs.forEach((inputBlock, index) => {
-    const input = inputBlock.querySelector("input");
-    const name = input.value.trim();
-
-    if (name !== "") {
-      const imgElement = inputBlock.querySelector("img");
-      const img = document.createElement("img");
-      img.src = imgElement.src;
-      img.alt = name;
-      img.classList.add("whale-token");
-      img.dataset.playerIndex = playerPositions.length;
-
-      playerPositions.push(0);
-      document.getElementById("space-0").appendChild(img);
+    function rollDice() {
+      const roll = Math.floor(Math.random() * 6) + 1;
+      document.getElementById("dice-result").textContent = `Rolled: ${roll}`;
+      const player = players[currentPlayerIndex];
+      player.position = (player.position + roll) % boardSize;
+      renderBoard();
+      checkWin();
+      nextPlayer();
     }
-  });
 
-  const playerNames = getPlayerNames();
-  if (playerNames.length > 0) {
-    document.getElementById("current-player").innerText = `🎯 ${playerNames[0]}'s Turn!`;
-  }
-}
+    function drawCard() {
+      const cardText = cards[Math.floor(Math.random() * cards.length)];
+      document.getElementById("card-display").textContent = cardText;
+    }
 
-function rollDice() {
-  if (gameOver || playerPositions.length === 0) return;
+    function drawMushroom() {
+      const cardText = mushroomCards[Math.floor(Math.random() * mushroomCards.length)];
+      document.getElementById("card-display").textContent = cardText;
+    }
 
-  const roll = Math.floor(Math.random() * 6) + 1;
-  document.getElementById("dice-result").innerText = `You rolled a ${roll}!`;
+    function nextPlayer() {
+      currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+      updatePlayerInfo();
+    }
 
-  const diceImg = document.getElementById("dice");
-  if (diceImg) {
-    diceImg.src = `images/dice-${roll}.png`;
-  }
+    function checkWin() {
+      const player = players[currentPlayerIndex];
+      if (player.position >= boardSize - 1) {
+        document.getElementById("winner-announcement").textContent = `${player.name} wins the wager!`;
+        document.getElementById("end-game").classList.remove("hidden");
+      }
+    }
 
-  movePlayer(currentPlayerIndex, roll);
+    function renderBoard() {
+      const board = document.getElementById("board");
+      board.innerHTML = "";
+      for (let i = 0; i < boardSize; i++) {
+        const tile = document.createElement("div");
+        tile.className = "tile";
+        tile.textContent = i;
+        players.forEach(player => {
+          if (player.position === i) {
+            const img = document.createElement("img");
+            img.src = player.icon;
+            img.alt = player.name;
+            img.className = "whale-icon-tiny";
+            tile.appendChild(img);
+          }
+        });
+        board.appendChild(tile);
+      }
+    }
 
-  const playerNames = getPlayerNames();
-  const nextIndex = (currentPlayerIndex + 1) % playerPositions.length;
-  const nextPlayer = playerNames[nextIndex];
-  document.getElementById("current-player").innerText = `🎯 ${nextPlayer}'s Turn!`;
+    function updatePlayerInfo() {
+      const info = document.getElementById("player-info");
+      info.innerHTML = players.map((p, i) => `<p>${i === currentPlayerIndex ? '▶️' : ''} ${p.name} - Space ${p.position}</p>`).join("");
+    }
 
-  currentPlayerIndex = nextIndex;
-}
-
-function movePlayer(index, steps) {
-  let currentPos = playerPositions[index];
-  let newPos = currentPos + steps;
-  if (newPos >= boardSize) newPos = boardSize - 1;
-
-  if (trapSpaces.includes(newPos)) {
-    alert(`${getPlayerNames()[index]} hit a 🍄 toxic mushroom and moves back 4 spaces!`);
-    newPos = Math.max(newPos - 4, 0);
-  }
-
-  playerPositions[index] = newPos;
-  const space = document.getElementById(`space-${newPos}`);
-  const token = document.querySelector(`.whale-token[data-player-index='${index}']`);
-  space.appendChild(token);
-
-  if (newPos === boardSize - 1) {
-    alert(`🎉 ${token.alt} wins the game! 🎉`);
-    gameOver = true;
-  }
-}
-
-window.onload = () => {
-  createBoardSpaces();
-};
+    document.getElementById("start-game").addEventListener("click", startGame);
+    document.getElementById("roll-dice").addEventListener("click", rollDice);
+    document.getElementById("draw-card").addEventListener("click", drawCard);
+    document.getElementById("draw-mushroom").addEventListener("click", drawMushroom);
+  </script>
+</body>
+</html>
