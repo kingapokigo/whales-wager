@@ -151,11 +151,10 @@ button:hover {
   margin-top: 15px;
   gap: 10px;
 }
-
 .whale-token img {
-  width: 35px;
+  width: 28px;
   position: absolute;
-  top: -20px;
+  top: -15px;
 }
 
 .whale-token:hover img {
