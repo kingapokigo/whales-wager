@@ -330,8 +330,11 @@ button:hover {
   .board-space {
     font-size: 2.4vw;
   }
+
 }
-.board-space.bonus-zone {
-  background-color: #00695c;
-  border: 2px dashed #00e5ff;
+.board-space.final-tile {
+  background-color: #ff69b4; /* Hot pink, or whatever vibe you want */
+  color: #000;
+  font-weight: bold;
+  box-shadow: 0 0 10px 3px gold;
 }
