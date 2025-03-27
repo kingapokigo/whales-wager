@@ -10,14 +10,16 @@ function createBoardSpaces() {
   boardTrack.innerHTML = "";
   boardSpaces = [];
 
-  // Generate 72 tiles
+
   for (let i = 0; i < boardSize; i++) {
     const space = document.createElement("div");
     space.classList.add("board-space");
     space.textContent = `${i + 1}`;
+// Add vibrant class to ONLY tile 80
+if (i === 79) {
+  space.classList.add("final-tile");
+}
 
-    if (i >= 72 && i < 79) {
-  space.classList.add("bonus-zone");
 }
 
     boardSpaces.push(space);
