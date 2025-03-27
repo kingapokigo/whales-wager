@@ -9,30 +9,37 @@ function createBoardSpaces() {
   const boardTrack = document.getElementById("dynamic-board-track");
   boardTrack.innerHTML = "";
   boardSpaces = [];
-console.log("Tiles created:", boardSpaces.length);
-  if (i === 71) space.style.backgroundColor = "#ff69b4"; // hot pink party
 
   // Generate 72 tiles
   for (let i = 0; i < boardSize; i++) {
     const space = document.createElement("div");
     space.classList.add("board-space");
     space.textContent = `${i + 1}`;
+
+    // 🔥 Add debug color for tile 72 (index 71)
+    if (i === 71) {
+      space.style.backgroundColor = "#ff69b4"; // hot pink for testing
+    }
+
     boardSpaces.push(space);
   }
 
-  // Add to boardTrack in snake layout (10 per row)
   const rowSize = 10;
   for (let i = 0; i < boardSpaces.length; i += rowSize) {
-    const row = boardSpaces.slice(i, i + rowSize);
+    let row = boardSpaces.slice(i, i + rowSize);
     const rowNumber = Math.floor(i / rowSize);
 
-    // Flip every other row
+    // Snake style: reverse every other row
     if (rowNumber % 2 !== 0) {
       row.reverse();
     }
 
-    row.forEach(tile => boardTrack.appendChild(tile));
+    row.forEach(tile => {
+      boardTrack.appendChild(tile);
+    });
   }
+
+  console.log("✅ Total tiles rendered:", boardSpaces.length); // should be 72
 }
 
 function createPlayerTokens() {
