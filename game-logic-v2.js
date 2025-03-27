@@ -10,20 +10,18 @@ function createBoardSpaces() {
   boardTrack.innerHTML = "";
   boardSpaces = [];
 
+for (let i = 0; i < boardSize; i++) {
+  const space = document.createElement("div");
+  space.classList.add("board-space");
+  space.textContent = `${i + 1}`;
 
-  for (let i = 0; i < boardSize; i++) {
-    const space = document.createElement("div");
-    space.classList.add("board-space");
-    space.textContent = `${i + 1}`;
-// Add vibrant class to ONLY tile 80
-if (i === 79) {
-  space.classList.add("final-tile");
-}
-
-}
-
-    boardSpaces.push(space);
+  // Add vibrant class to ONLY tile 80
+  if (i === 79) {
+    space.classList.add("final-tile");
   }
+
+  boardSpaces.push(space); // ✅ Put this inside the loop
+}
 
   const rowSize = 10;
   for (let i = 0; i < boardSpaces.length; i += rowSize) {
