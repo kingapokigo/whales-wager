@@ -290,7 +290,7 @@ button:hover {
 #game-board {
   max-height: 90vh;
   overflow-y: auto;
-  padding-bottom: 20px; /* gives breathing room at the bottom */
+  padding-bottom: 40px; 
 }
 .board-space:last-child {
   background-color: #ffcc00;
