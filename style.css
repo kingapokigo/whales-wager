@@ -125,24 +125,26 @@ button:hover {
 .board-track {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 10px;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 10px;
-  min-height: calc(8 * 70px); /* 👈 force 8 rows to show */
+  gap: 6px;
+  height: 80vh; /* Shrinks board to fit mobile */
+  width: 90vw;
+  padding: 0;
 }
 .board-space {
   background-color: #003344;
   color: white;
   border: 2px solid #00bcd4;
   border-radius: 10px;
-  font-size: 12px;
+  font-size: 2.8vw; /* Use viewport units for responsive text */
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  font-weight: bold;
+  font-family: 'Antonio', sans-serif;
 }
+
 .board-space:last-child {
   background-color: #ffcc00;
   color: #000;
@@ -298,12 +300,7 @@ button:hover {
   font-weight: bold;
   font-family: 'Antonio', sans-serif;
 }
-#game-board {
-  margin-top: 30px;
-  padding: 10px 10px 60px; /* MORE padding to give room for tile 72 */
-  max-height: 90vh;
-  overflow-y: auto;
-}
+
 .board-space:last-child {
   background-color: #ffcc00;
   color: #000;
@@ -311,3 +308,21 @@ button:hover {
   box-shadow: 0 0 10px 2px gold;
 }
 
+#game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent scrolling */
+  padding: 0;
+}
+@media screen and (max-width: 480px) {
+  .board-track {
+    gap: 4px;
+    height: 82vh;
+  }
+
+  .board-space {
+    font-size: 2.4vw;
+  }
+}
