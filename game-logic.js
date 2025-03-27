@@ -8,6 +8,7 @@ function createBoardSpaces() {
   const boardTrack = document.getElementById("dynamic-board-track");
   boardTrack.innerHTML = "";
   boardSpaces = [];
+console.log("Tiles created:", boardSpaces.length);
 
   // Generate 72 tiles
   for (let i = 0; i < boardSize; i++) {
