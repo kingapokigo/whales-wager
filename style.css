@@ -299,7 +299,7 @@ button:hover {
 }
 #game-board {
   margin-top: 30px;
-  padding: 10px 10px 40px;
+  padding: 10px 10px 60px; /* MORE padding to give room for tile 72 */
   max-height: 90vh;
   overflow-y: auto;
 }
