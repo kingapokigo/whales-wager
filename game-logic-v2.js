@@ -16,10 +16,9 @@ function createBoardSpaces() {
     space.classList.add("board-space");
     space.textContent = `${i + 1}`;
 
-    // 🔥 Add debug color for tile 72 (index 71)
-    if (i === 71) {
-      space.style.backgroundColor = "#ff69b4"; // hot pink for testing
-    }
+    if (i >= 72 && i < 79) {
+  space.classList.add("bonus-zone");
+}
 
     boardSpaces.push(space);
   }
