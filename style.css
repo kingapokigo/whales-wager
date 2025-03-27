@@ -124,11 +124,12 @@ button:hover {
 }
 .board-track {
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* still 10 across */
+  grid-template-columns: repeat(10, 1fr);
   gap: 10px;
   max-width: 1000px;
   margin: 0 auto;
   padding: 10px;
+  min-height: calc(8 * 70px); /* 👈 force 8 rows to show */
 }
 .board-space {
   background-color: #003344;
