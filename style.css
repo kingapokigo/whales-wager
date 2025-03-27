@@ -333,7 +333,7 @@ button:hover {
 
 }
 .board-space.final-tile {
-  background-color: #ff69b4; /* Hot pink, or whatever vibe you want */
+  background-color: #ff69b4;
   color: #000;
   font-weight: bold;
   box-shadow: 0 0 10px 3px gold;
