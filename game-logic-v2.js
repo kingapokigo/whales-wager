@@ -1,5 +1,5 @@
 console.log("🐳 Whale’s Wager JS v2.1 Loaded");
-const boardSize = 72;
+const boardSize = 80;
 let players = [];
 let currentPlayerIndex = 0;
 let currentRoll = 0;
