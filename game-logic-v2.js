@@ -10,6 +10,7 @@ function createBoardSpaces() {
   boardTrack.innerHTML = "";
   boardSpaces = [];
 console.log("Tiles created:", boardSpaces.length);
+  if (i === 71) space.style.backgroundColor = "#ff69b4"; // hot pink party
 
   // Generate 72 tiles
   for (let i = 0; i < boardSize; i++) {
