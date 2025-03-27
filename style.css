@@ -331,3 +331,7 @@ button:hover {
     font-size: 2.4vw;
   }
 }
+.board-space.bonus-zone {
+  background-color: #00695c;
+  border: 2px dashed #00e5ff;
+}
