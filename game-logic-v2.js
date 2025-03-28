@@ -30,7 +30,6 @@ function createBoardSpaces() {
 
   console.log("✅ Total tiles rendered:", boardSpaces.length);
 }
-
 function createPlayerTokens() {
   const tokenContainer = document.getElementById("player-tokens");
   tokenContainer.innerHTML = "";
@@ -44,10 +43,19 @@ function createPlayerTokens() {
       const token = document.createElement("div");
       token.classList.add("whale-token");
       token.setAttribute("data-position", "0");
-      token.innerHTML = `<img src="images/${getWhaleImage(index)}" alt="Player ${index + 1} Whale">`;
+      token.innerHTML = `<img src="${getWhaleImage(index)}" alt="Player ${index + 1} Whale">`;
 
-      players.push({ name, token, position: 0, skipsTurn: false });
-      boardSpaces[0].appendChild(token); // Show them at the start!
+      const player = {
+        name,
+        token,
+        position: 0,
+        skipsTurn: false,
+      };
+
+      players.push(player);
+
+      // 🧠 This is the key line: put the whale on tile 1 (index 0)
+      boardSpaces[0].appendChild(token);
     }
   });
 
