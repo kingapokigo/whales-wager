@@ -292,20 +292,19 @@ button:hover {
   }
 }
 .board-space {
-  background: url('https://www.transparenttextures.com/patterns/rocky-wall.png') center/cover no-repeat;
-  border: 2px solid #00bcd4;
-  border-radius: 12px;
+  background: url('images/stone-tile.png') center/contain no-repeat;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
   color: #fff;
-  font-size: 12px;
-  aspect-ratio: 1 / 1;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #000;
+  aspect-ratio: 1;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  font-weight: bold;
   font-family: 'Antonio', sans-serif;
-  text-shadow: 1px 1px 2px #000;
-  box-sizing: border-box;
 }
 
 .board-space:last-child {
