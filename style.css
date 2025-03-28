@@ -6,17 +6,16 @@ body {
   overflow-x: hidden;
 }
 
-/* === Header === */
+.hidden {
+  display: none;
+}
+
 h1, h2, h3 {
   text-align: center;
   color: white;
 }
 
-.hidden {
-  display: none;
-}
-
-/* === Button Styling === */
+/* === Buttons === */
 .button-row {
   text-align: center;
   margin-top: 20px;
@@ -39,7 +38,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* === Floating Sea Creatures === */
+/* === Bubbles & Background === */
 #background-decorations {
   position: fixed;
   top: 0;
@@ -56,22 +55,12 @@ button:hover {
   animation: float 12s infinite ease-in-out;
 }
 
-.creature1 { top: 20%; left: 10%; }
-.creature2 { top: 40%; left: 80%; animation-delay: 3s; }
-.creature3 { top: 10%; left: 50%; animation-delay: 1s; }
-.creature4 { top: 70%; left: 5%; animation-delay: 2s; }
-.creature5 { top: 60%; left: 90%; animation-delay: 4s; }
-.creature6 { top: 80%; left: 45%; animation-delay: 2s; }
-.creature7 { top: 30%; left: 70%; animation-delay: 1s; }
-.creature8 { top: 50%; left: 20%; animation-delay: 3s; }
-
 @keyframes float {
   0% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(5deg); }
   100% { transform: translateY(0px) rotate(0deg); }
 }
 
-/* === Bubbles Background === */
 .bubbles-background .bubble {
   position: absolute;
   background: rgba(255, 255, 255, 0.2);
@@ -91,7 +80,7 @@ button:hover {
   100% { transform: translateY(-100vh); opacity: 0; }
 }
 
-/* === Player Input Area === */
+/* === Player Setup === */
 .player-selection {
   display: flex;
   flex-wrap: wrap;
@@ -121,7 +110,11 @@ button:hover {
 #game-board {
   margin-top: 30px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .board-track {
   display: grid;
   grid-template-columns: repeat(10, minmax(0, 1fr));
@@ -134,29 +127,30 @@ button:hover {
 }
 
 .board-space {
-  background-color: #003344;
-  color: white;
-  border: 2px solid #00bcd4;
-  border-radius: 10px;
-  font-size: 12px;
-  width: 100%;
+  background: url('images/stone-tile.png') center/contain no-repeat;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: bold;
+  font-family: 'Antonio', sans-serif;
+  text-shadow: 1px 1px 2px #000;
   aspect-ratio: 1;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  font-weight: bold;
-  font-family: 'Antonio', sans-serif;
-  box-sizing: border-box;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  font-size: 14px;
 }
 
-.board-space:last-child {
-  background-color: #ffcc00;
+.board-space.final-tile {
+  background-color: #ff69b4;
   color: #000;
   font-weight: bold;
-  box-shadow: 0 0 10px 2px gold;
+  box-shadow: 0 0 10px 3px gold;
 }
-/* === Player Tokens === */
+
+/* === Tokens === */
 #player-tokens {
   display: flex;
   flex-wrap: wrap;
@@ -164,10 +158,12 @@ button:hover {
   margin-top: 15px;
   gap: 10px;
 }
+
 .whale-token img {
   width: 28px;
   position: absolute;
   top: -15px;
+  transition: transform 0.3s ease;
 }
 
 .whale-token:hover img {
@@ -187,6 +183,20 @@ button:hover {
 @keyframes bounce {
   0% { transform: translateY(0px); }
   100% { transform: translateY(-10px); }
+}
+
+#dice-result {
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+#current-player {
+  font-size: 26px;
+  color: #ffffff;
+  margin-top: 20px;
+  text-shadow: 2px 2px #000;
 }
 
 /* === Cards === */
@@ -249,7 +259,7 @@ button:hover {
   transform: rotateY(0deg);
 }
 
-/* === Whale & Toxic Cards Styling === */
+/* === Whale & Toxic Cards === */
 .whale-card, .toxic-card {
   background-color: white;
   color: #333;
@@ -270,72 +280,16 @@ button:hover {
   background-color: #ffebee;
 }
 
-/* === Victory === */
-#current-player {
-  font-size: 26px;
-  color: #ffffff;
-  margin-top: 20px;
-  text-shadow: 2px 2px #000;
-}
+/* === Responsive === */
 @media screen and (max-width: 480px) {
   .board-track {
-    gap: 6px;
+    gap: 4px;
   }
-
   .board-space {
-    font-size: 11px;
+    font-size: 2.4vw;
   }
-
   .whale-token img {
     width: 24px;
     top: -12px;
   }
-}
-.board-space {
-  background: url('images/stone-tile.png') center/contain no-repeat;
-  border: none;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-  color: #fff;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px #000;
-  aspect-ratio: 1;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Antonio', sans-serif;
-}
-
-.board-space:last-child {
-  background-color: #ffcc00;
-  color: #000;
-  font-weight: bold;
-  box-shadow: 0 0 10px 2px gold;
-}
-
-#game-board {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh; /* Full viewport height */
-  overflow: hidden; /* Prevent scrolling */
-  padding: 0;
-}
-@media screen and (max-width: 480px) {
-  .board-track {
-    gap: 4px;
-    height: 82vh;
-  }
-
-  .board-space {
-    font-size: 2.4vw;
-  }
-
-}
-.board-space.final-tile {
-  background-color: #ff69b4;
-  color: #000;
-  font-weight: bold;
-  box-shadow: 0 0 10px 3px gold;
 }
