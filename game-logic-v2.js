@@ -1,12 +1,14 @@
-console.log("🐳 Whale’s Wager JS v3.0 - Fully Functional Candy Land Mode");
+// 🧠 Whale's Wager Game Engine vFINAL - Fully Functional
+
+console.log("🐳 Whale’s Wager Game Engine vFINAL Loaded");
 
 const boardSize = 80;
 let players = [];
 let currentPlayerIndex = 0;
 let currentRoll = 0;
 let boardSpaces = [];
+let isAnimating = false;
 
-// === Setup the Game Board ===
 function createBoardSpaces() {
   const boardTrack = document.getElementById("dynamic-board-track");
   boardTrack.innerHTML = "";
@@ -28,11 +30,9 @@ function createBoardSpaces() {
   }
 }
 
-// === Player Token Setup ===
 function createPlayerTokens() {
   const tokenContainer = document.getElementById("player-tokens");
   tokenContainer.innerHTML = "";
-
   const inputs = document.querySelectorAll(".player-input input");
   players = [];
 
@@ -42,25 +42,16 @@ function createPlayerTokens() {
       const token = document.createElement("div");
       token.classList.add("whale-token");
       token.setAttribute("data-position", "0");
-      token.innerHTML = `<img src="${getWhaleImage(index)}" alt="Whale ${index + 1}">`;
-
-      players.push({
-        name,
-        token,
-        position: 0,
-        skipsTurn: false,
-      });
-
+      token.innerHTML = `<img src="images/${getWhaleColor(index)}" alt="Whale ${index + 1}">`;
+      players.push({ name, token, position: 0, skipsTurn: false });
       tokenContainer.appendChild(token);
       boardSpaces[0].appendChild(token);
     }
   });
-
   updateCurrentPlayerDisplay();
 }
 
-// === Whale Images ===
-function getWhaleImage(index) {
+function getWhaleColor(index) {
   const colors = [
     "black-whale.png",
     "green-whale.png",
@@ -69,11 +60,11 @@ function getWhaleImage(index) {
     "teal-whale.png",
     "pink-whale.png"
   ];
-  return `images/${colors[index % colors.length]}`;
+  return colors[index % colors.length];
 }
 
-// === Roll Dice and Move ===
 function rollDice() {
+  if (isAnimating) return;
   const player = players[currentPlayerIndex];
   if (player.skipsTurn) {
     alert(`${player.name} is skipping this turn! 🍄`);
@@ -85,113 +76,117 @@ function rollDice() {
   currentRoll = Math.floor(Math.random() * 6) + 1;
   document.getElementById("dice-image").src = `images/dice-${currentRoll}.png`;
   document.getElementById("dice-result").textContent = `${player.name} rolled a ${currentRoll}!`;
-
-  movePlayer(player, currentRoll);
+  animatePlayerMovement(player, currentRoll);
 }
 
-function movePlayer(player, steps) {
-  let newPosition = player.position + steps;
-
-  if (newPosition >= boardSize - 1) {
-    newPosition = boardSize - 1;
-    player.position = newPosition;
-    boardSpaces[newPosition].appendChild(player.token);
-    document.getElementById("current-player").textContent = `🎉 ${player.name} WINS WHALE'S WAGER!!! 🐳`;
-    alert(`🎉 ${player.name} made it to the final tile and wins the game!`);
-    return;
+function animatePlayerMovement(player, steps) {
+  isAnimating = true;
+  let target = Math.min(boardSize - 1, player.position + steps);
+  let path = [];
+  for (let i = player.position + 1; i <= target; i++) {
+    path.push(i);
   }
 
-  player.position = newPosition;
-  boardSpaces[newPosition].appendChild(player.token);
+  function stepMove(i) {
+    if (i >= path.length) {
+      player.position = target;
+      if (player.position === boardSize - 1) {
+        document.getElementById("current-player").textContent = `🎉 ${player.name} WINS WHALE'S WAGER!!! 🐳`;
+        alert(`🎉 ${player.name} made it to the final tile and wins the game!`);
+        isAnimating = false;
+        return;
+      }
+      setTimeout(() => drawCard(player), 400);
+      isAnimating = false;
+      return;
+    }
+    boardSpaces[path[i]].appendChild(player.token);
+    setTimeout(() => stepMove(i + 1), 300);
+  }
 
-  setTimeout(() => {
-    drawCard(player);
-  }, 600);
+  stepMove(0);
 }
 
-// === Card Drawing Logic ===
 function drawCard(player) {
   playSound();
   const card = document.getElementById("card-output");
   card.classList.remove("hidden");
-
   const isToxic = Math.random() < 0.4;
-  const message = isToxic ? getRandomToxicChallenge() : getRandomWhaleChallenge();
-  const type = isToxic ? "toxic-card" : "whale-card";
-  const title = isToxic ? "🍄 Toxic Mushroom Card" : "🐋 Whale Card";
-
+  const cardText = isToxic ? getToxicCard() : getWhaleCard();
   card.innerHTML = `
-    <div class="${type}">
-      <h2>${title}</h2>
-      <p>${message}</p>
+    <div class="${isToxic ? 'toxic-card' : 'whale-card'}">
+      <h2>${isToxic ? '🍄 Toxic Mushroom Card' : '🐋 Whale Card'}</h2>
+      <p>${cardText}</p>
     </div>
   `;
-
-  if (isToxic) handleToxicEffect(player, message);
-
+  if (isToxic) applyToxicEffect(player, cardText);
   setTimeout(() => {
     card.classList.add("hidden");
     nextPlayer();
   }, 4000);
 }
 
-// === Handle Effects of Toxic Cards ===
-function handleToxicEffect(player, consequence) {
-  if (consequence.includes("Skip your next turn")) {
+function getWhaleCard() {
+  const cards = [
+    "Make your best whale call! 🐋",
+    "Compliment another player.",
+    "Tell a sea-themed joke.",
+    "Trivia: What's Jake's favorite sport?",
+    "Spin around 5 times, then act like a dolphin!",
+    "Take a sip if you’ve been to the beach this year.",
+    "High-five every player!",
+    "Whale’s Choice: Pick someone to roll again.",
+    "Name 3 sea creatures in 5 seconds!",
+    "Sing one line from your favorite song 🎶"
+  ];
+  return cards[Math.floor(Math.random() * cards.length)];
+}
+
+function getToxicCard() {
+  const cards = [
+    "Move back 3 spaces!",
+    "Skip your next turn.",
+    "Swap spots with another player.",
+    "Return to START!",
+    "Do 15 jumping jacks or move back 4 spaces.",
+    "Roll a 1 next turn no matter what.",
+    "Everyone else moves forward 1 space.",
+    "Repeat your last challenge.",
+    "Hold your breath until your next turn!",
+    "Spin in a circle while saying 'I love whales!'"
+  ];
+  return cards[Math.floor(Math.random() * cards.length)];
+}
+
+function applyToxicEffect(player, text) {
+  if (text.includes("Skip")) {
     player.skipsTurn = true;
-  } else if (consequence.includes("Move back")) {
-    const match = consequence.match(/Move back (\\d+)/);
-    if (match) {
-      const stepsBack = parseInt(match[1]);
-      player.position = Math.max(0, player.position - stepsBack);
-      boardSpaces[player.position].appendChild(player.token);
-    }
-  } else if (consequence.includes("Return to START")) {
+  } else if (text.includes("Move back")) {
+    const steps = parseInt(text.match(/\d+/)[0]);
+    player.position = Math.max(0, player.position - steps);
+    boardSpaces[player.position].appendChild(player.token);
+  } else if (text.includes("Return to START")) {
     player.position = 0;
     boardSpaces[0].appendChild(player.token);
-  } else if (consequence.includes("Swap spots")) {
+  } else if (text.includes("Swap")) {
     const others = players.filter(p => p !== player);
-    const rand = others[Math.floor(Math.random() * others.length)];
-    [player.position, rand.position] = [rand.position, player.position];
+    if (others.length === 0) return;
+    const other = others[Math.floor(Math.random() * others.length)];
+    const temp = player.position;
+    player.position = other.position;
+    other.position = temp;
     boardSpaces[player.position].appendChild(player.token);
-    boardSpaces[rand.position].appendChild(rand.token);
+    boardSpaces[other.position].appendChild(other.token);
+  } else if (text.includes("Everyone else")) {
+    players.forEach(p => {
+      if (p !== player) {
+        p.position = Math.min(boardSize - 1, p.position + 1);
+        boardSpaces[p.position].appendChild(p.token);
+      }
+    });
   }
 }
 
-// === Random Whale & Toxic Challenges ===
-function getRandomWhaleChallenge() {
-  const challenges = [
-    "Do your best whale mating call 🐳🔊",
-    "Tell a sea-themed joke 🌊",
-    "Name 5 sea creatures in 10 seconds!",
-    "Make a toast about friendship 🍻",
-    "Compliment every player!",
-    "Dance like a jellyfish for 10 seconds 🕺",
-    "Act like a dolphin until your next turn 🐬",
-    "Sing a line from your favorite song 🎶",
-    "Trivia: What's Jake's favorite sport? 🧠",
-    "Whale’s Choice: Pick someone to drink 🐋🥂"
-  ];
-  return challenges[Math.floor(Math.random() * challenges.length)];
-}
-
-function getRandomToxicChallenge() {
-  const consequences = [
-    "Move back 3 spaces!",
-    "Skip your next turn.",
-    "Swap spots with a player of your choice. 😈",
-    "Return to START and rethink your life choices.",
-    "Answer a truth... or move back 2 spaces!",
-    "Lose your next dice roll. Roll a 1 no matter what!",
-    "Everyone but you gets to move forward 1 space.",
-    "You’re poisoned! Do 15 squats or go back 4 spaces!",
-    "Yikes! You have to repeat your last challenge again.",
-    "Hold your breath for 15 seconds or skip your next turn!"
-  ];
-  return consequences[Math.floor(Math.random() * consequences.length)];
-}
-
-// === Player Turn Control ===
 function nextPlayer() {
   currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
   updateCurrentPlayerDisplay();
