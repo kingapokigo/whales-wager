@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- 🐋 Background & Floating Sea Creatures -->
   <div id="background-decorations">
     <div class="bubbles-background">
       <div class="bubble b1"></div>
@@ -29,14 +30,17 @@
     <img src="images/cute-starfish.png" class="floating-creature creature8" alt="floating starfish">
   </div>
 
+  <!-- 🐳 Title & Buttons -->
   <h1 style="color: white; text-align: center;">Welcome to Whale's Wager!</h1>
   <div class="button-row">
     <button onclick="startWhaling()">Start Whaling!</button>
     <button onclick="showRules()">How to Play</button>
   </div>
 
+  <!-- 📜 Card Draw Result -->
   <div id="card-output" class="card-box hidden"></div>
 
+  <!-- 🧜 Flip Card Example -->
   <div class="card-container">
     <div class="card-inner" onclick="flipCard(this)">
       <div class="card-front">
@@ -50,6 +54,7 @@
     </div>
   </div>
 
+  <!-- 📘 Game Instructions -->
   <div id="how-to-play" class="hidden" style="text-align: center; max-width: 700px; margin: 0 auto; padding: 20px;">
     <h2>How to Play Whale's Wager</h2>
     <p>1. Name your whales and hit "Swim to Start".</p>
@@ -59,6 +64,7 @@
     <p>5. Be prepared for trivia, dares, physical challenges, and bets!</p>
   </div>
 
+  <!-- 🐋 Player Naming Area -->
   <div id="player-setup" class="hidden" style="text-align: center; color: white;">
     <h2>Name Your Whales</h2>
     <p>Choose up to 6 players:</p>
@@ -88,13 +94,13 @@
         <input type="text" placeholder="Player 6 Name">
       </div>
     </div>
-
     <div style="text-align: center; margin-top: 10px;">
       <button id="add-player-btn">➕ Add Another Player</button>
       <button onclick="startGame()">Swim to Start ➔</button>
     </div>
   </div>
 
+  <!-- 🎲 Game Board & Dice Area -->
   <div id="game-board" class="hidden">
     <h2 style="color: white;">🏎️ Whale Track</h2>
     <div class="board-track" id="dynamic-board-track"></div>
@@ -108,16 +114,14 @@
       <button onclick="rollDice()">🎲 Roll the Dice</button>
     </div>
   </div>
-
   <p id="dice-result" style="color: white; text-align: center;"></p>
-
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
+  <!-- 🎵 Core UI Logic -->
   <script>
     function playSound() {
       document.getElementById("draw-sound").play();
     }
-
     function showRules() {
       document.getElementById("how-to-play").classList.remove("hidden");
       document.getElementById("card-output").classList.add("hidden");
@@ -125,7 +129,6 @@
       document.getElementById("game-board").classList.add("hidden");
       document.getElementById("background-decorations").classList.remove("hidden");
     }
-
     function startWhaling() {
       document.getElementById("how-to-play").classList.add("hidden");
       document.getElementById("card-output").classList.add("hidden");
@@ -135,7 +138,6 @@
         document.getElementById("background-decorations").classList.add("hidden");
       }
     }
-
     function startGame() {
       document.getElementById("how-to-play").classList.add("hidden");
       document.getElementById("player-setup").classList.add("hidden");
@@ -145,24 +147,18 @@
       createBoardSpaces();
       createPlayerTokens();
     }
-
     let creaturesVisible = true;
     function toggleSeaCreatures() {
       const decorations = document.getElementById("background-decorations");
       creaturesVisible = !creaturesVisible;
       decorations.classList.toggle("hidden", !creaturesVisible);
     }
-  </script>
-
-  <script src="game-logic-v2.js"></script>
-  <script>
     let currentVisiblePlayers = 2;
     document.getElementById("add-player-btn").addEventListener("click", () => {
       const inputs = document.querySelectorAll(".player-input");
       if (currentVisiblePlayers < inputs.length) {
         inputs[currentVisiblePlayers].classList.remove("hidden");
         currentVisiblePlayers++;
-
         if (currentVisiblePlayers === inputs.length) {
           document.getElementById("add-player-btn").disabled = true;
           document.getElementById("add-player-btn").textContent = "Max Players Reached";
@@ -170,5 +166,8 @@
       }
     });
   </script>
+
+  <!-- 🧠 GAME ENGINE (v4) WILL BE INJECTED NEXT!!! -->
+  <script src="whales-wager-full.js"></script>
 </body>
 </html>
