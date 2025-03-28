@@ -59,39 +59,46 @@
     <p>5. Be prepared for trivia, dares, physical challenges, and bets!</p>
   </div>
 
-  <div id="player-setup" class="hidden" style="text-align: center; color: white;">
-    <h2>Name Your Whales</h2>
-    <p>Choose up to 6 players:</p>
-    <div class="player-selection">
-      <div class="player-input">
-        <img src="images/black-whale.png" alt="Black Whale">
-        <input type="text" placeholder="Player 1 Name">
-      </div>
-      <div class="player-input">
-        <img src="images/green-whale.png" alt="Green Whale">
-        <input type="text" placeholder="Player 2 Name">
-      </div>
-      <div class="player-input">
-        <img src="images/blue-whale.png" alt="Blue Whale">
-        <input type="text" placeholder="Player 3 Name">
-      </div>
-      <div class="player-input">
-        <img src="images/purple-whale.png" alt="Purple Whale">
-        <input type="text" placeholder="Player 4 Name">
-      </div>
-      <div class="player-input">
-        <img src="images/teal-whale.png" alt="Teal Whale">
-        <input type="text" placeholder="Player 5 Name">
-      </div>
-      <div class="player-input">
-        <img src="images/pink-whale.png" alt="Pink Whale">
-        <input type="text" placeholder="Player 6 Name">
-      </div>
+ <div id="player-setup" class="hidden" style="text-align: center; color: white;">
+  <h2>Name Your Whales</h2>
+  <p>Choose up to 6 players:</p>
+  <div class="player-selection" id="player-selection">
+    <!-- Player 1 (visible) -->
+    <div class="player-input">
+      <img src="images/black-whale.png" alt="Black Whale">
+      <input type="text" placeholder="Player 1 Name">
     </div>
-    <div style="text-align: center; margin-top: 10px;">
-      <button onclick="startGame()">Swim to Start ➔</button>
+
+    <!-- Player 2 (visible) -->
+    <div class="player-input">
+      <img src="images/green-whale.png" alt="Green Whale">
+      <input type="text" placeholder="Player 2 Name">
+    </div>
+
+    <!-- Player 3-6 (initially hidden) -->
+    <div class="player-input hidden">
+      <img src="images/blue-whale.png" alt="Blue Whale">
+      <input type="text" placeholder="Player 3 Name">
+    </div>
+    <div class="player-input hidden">
+      <img src="images/purple-whale.png" alt="Purple Whale">
+      <input type="text" placeholder="Player 4 Name">
+    </div>
+    <div class="player-input hidden">
+      <img src="images/teal-whale.png" alt="Teal Whale">
+      <input type="text" placeholder="Player 5 Name">
+    </div>
+    <div class="player-input hidden">
+      <img src="images/pink-whale.png" alt="Pink Whale">
+      <input type="text" placeholder="Player 6 Name">
     </div>
   </div>
+
+  <div style="text-align: center; margin-top: 10px;">
+    <button id="add-player-btn">➕ Add Another Player</button>
+    <button onclick="startGame()">Swim to Start ➔</button>
+  </div>
+</div>
 
   <div id="game-board" class="hidden">
     <h2 style="color: white;">🏎️ Whale Track</h2>
@@ -154,6 +161,22 @@
   </script>
 
 <script src="game-logic-v2.js"></script>
+<script>
+  let currentVisiblePlayers = 2;
+
+  document.getElementById("add-player-btn").addEventListener("click", () => {
+    const inputs = document.querySelectorAll(".player-input");
+    if (currentVisiblePlayers < inputs.length) {
+      inputs[currentVisiblePlayers].classList.remove("hidden");
+      currentVisiblePlayers++;
+
+      if (currentVisiblePlayers === inputs.length) {
+        document.getElementById("add-player-btn").disabled = true;
+        document.getElementById("add-player-btn").textContent = "Max Players Reached";
+      }
+    }
+  });
+</script>
 
 </body>
 </html>
