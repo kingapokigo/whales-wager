@@ -59,51 +59,44 @@
     <p>5. Be prepared for trivia, dares, physical challenges, and bets!</p>
   </div>
 
- <div id="player-setup" class="hidden" style="text-align: center; color: white;">
-  <h2>Name Your Whales</h2>
-  <p>Choose up to 6 players:</p>
-  <div class="player-selection" id="player-selection">
-    <!-- Player 1 (visible) -->
-    <div class="player-input">
-      <img src="images/black-whale.png" alt="Black Whale">
-      <input type="text" placeholder="Player 1 Name">
+  <div id="player-setup" class="hidden" style="text-align: center; color: white;">
+    <h2>Name Your Whales</h2>
+    <p>Choose up to 6 players:</p>
+    <div class="player-selection" id="player-selection">
+      <div class="player-input">
+        <img src="images/black-whale.png" alt="Black Whale">
+        <input type="text" placeholder="Player 1 Name">
+      </div>
+      <div class="player-input">
+        <img src="images/green-whale.png" alt="Green Whale">
+        <input type="text" placeholder="Player 2 Name">
+      </div>
+      <div class="player-input hidden">
+        <img src="images/blue-whale.png" alt="Blue Whale">
+        <input type="text" placeholder="Player 3 Name">
+      </div>
+      <div class="player-input hidden">
+        <img src="images/purple-whale.png" alt="Purple Whale">
+        <input type="text" placeholder="Player 4 Name">
+      </div>
+      <div class="player-input hidden">
+        <img src="images/teal-whale.png" alt="Teal Whale">
+        <input type="text" placeholder="Player 5 Name">
+      </div>
+      <div class="player-input hidden">
+        <img src="images/pink-whale.png" alt="Pink Whale">
+        <input type="text" placeholder="Player 6 Name">
+      </div>
     </div>
-
-    <!-- Player 2 (visible) -->
-    <div class="player-input">
-      <img src="images/green-whale.png" alt="Green Whale">
-      <input type="text" placeholder="Player 2 Name">
-    </div>
-
-    <!-- Player 3-6 (initially hidden) -->
-    <div class="player-input hidden">
-      <img src="images/blue-whale.png" alt="Blue Whale">
-      <input type="text" placeholder="Player 3 Name">
-    </div>
-    <div class="player-input hidden">
-      <img src="images/purple-whale.png" alt="Purple Whale">
-      <input type="text" placeholder="Player 4 Name">
-    </div>
-    <div class="player-input hidden">
-      <img src="images/teal-whale.png" alt="Teal Whale">
-      <input type="text" placeholder="Player 5 Name">
-    </div>
-    <div class="player-input hidden">
-      <img src="images/pink-whale.png" alt="Pink Whale">
-      <input type="text" placeholder="Player 6 Name">
+    <div style="text-align: center; margin-top: 10px;">
+      <button id="add-player-btn">➕ Add Another Player</button>
+      <button onclick="startGame()">Swim to Start ➔</button>
     </div>
   </div>
-
-  <div style="text-align: center; margin-top: 10px;">
-    <button id="add-player-btn">➕ Add Another Player</button>
-    <button onclick="startGame()">Swim to Start ➔</button>
-  </div>
-</div>
 
   <div id="game-board" class="hidden">
     <h2 style="color: white;">🏎️ Whale Track</h2>
     <div class="board-track" id="dynamic-board-track"></div>
- 
   </div>
 
   <div id="dice-container" style="text-align: center; margin-top: 20px;">
@@ -115,7 +108,6 @@
   </div>
 
   <p id="dice-result" style="color: white; text-align: center;"></p>
-
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
   <script>
@@ -141,17 +133,6 @@
       }
     }
 
-    function startGame() {
-      document.getElementById("how-to-play").classList.add("hidden");
-      document.getElementById("player-setup").classList.add("hidden");
-      document.getElementById("card-output").classList.remove("hidden");
-      document.getElementById("game-board").classList.remove("hidden");
-      document.getElementById("background-decorations").classList.remove("hidden");
-
-      createBoardSpaces();
-      createPlayerTokens();
-    }
-
     let creaturesVisible = true;
     function toggleSeaCreatures() {
       const decorations = document.getElementById("background-decorations");
@@ -160,23 +141,21 @@
     }
   </script>
 
-<script src="game-logic-v2.js"></script>
-<script>
-  let currentVisiblePlayers = 2;
+  <script src="game-logic-v2.js"></script>
 
-  document.getElementById("add-player-btn").addEventListener("click", () => {
-    const inputs = document.querySelectorAll(".player-input");
-    if (currentVisiblePlayers < inputs.length) {
-      inputs[currentVisiblePlayers].classList.remove("hidden");
-      currentVisiblePlayers++;
-
-      if (currentVisiblePlayers === inputs.length) {
-        document.getElementById("add-player-btn").disabled = true;
-        document.getElementById("add-player-btn").textContent = "Max Players Reached";
+  <script>
+    let currentVisiblePlayers = 2;
+    document.getElementById("add-player-btn").addEventListener("click", () => {
+      const inputs = document.querySelectorAll(".player-input");
+      if (currentVisiblePlayers < inputs.length) {
+        inputs[currentVisiblePlayers].classList.remove("hidden");
+        currentVisiblePlayers++;
+        if (currentVisiblePlayers === inputs.length) {
+          document.getElementById("add-player-btn").disabled = true;
+          document.getElementById("add-player-btn").textContent = "Max Players Reached";
+        }
       }
-    }
-  });
-</script>
-
+    });
+  </script>
 </body>
 </html>
