@@ -19,17 +19,9 @@
       <div class="bubble b7"></div>
       <div class="bubble b8"></div>
     </div>
-    <img src="images/cute-whale1.png" class="floating-creature creature1" alt="floating whale">
-    <img src="images/cute-whale2.png" class="floating-creature creature2" alt="floating whale">
-    <img src="images/cute-whale3.png" class="floating-creature creature3" alt="floating whale">
-    <img src="images/cute-turtle.png" class="floating-creature creature4" alt="floating turtle">
-    <img src="images/cute-turtle2.png" class="floating-creature creature5" alt="floating turtle">
-    <img src="images/cute-octopus.png" class="floating-creature creature6" alt="floating octopus">
-    <img src="images/cute-crab.png" class="floating-creature creature7" alt="floating crab">
-    <img src="images/cute-starfish.png" class="floating-creature creature8" alt="floating starfish">
   </div>
 
-  <h1 style="color: white; text-align: center;">Welcome to Whale's Wager!</h1>
+  <h1>Welcome to Whale's Wager!</h1>
   <div class="button-row">
     <button onclick="startWhaling()">Start Whaling!</button>
     <button onclick="showRules()">How to Play</button>
@@ -37,20 +29,7 @@
 
   <div id="card-output" class="card-box hidden"></div>
 
-  <div class="card-container">
-    <div class="card-inner" onclick="flipCard(this)">
-      <div class="card-front">
-        <h2>🐋 Whale Card</h2>
-        <p>Click to flip!</p>
-      </div>
-      <div class="card-back">
-        <h3>Challenge:</h3>
-        <p>Do 10 push-ups or drink 3 sips!</p>
-      </div>
-    </div>
-  </div>
-
-  <div id="how-to-play" class="hidden" style="text-align: center; max-width: 700px; margin: 0 auto; padding: 20px;">
+  <div id="how-to-play" class="hidden">
     <h2>How to Play Whale's Wager</h2>
     <p>1. Name your whales and hit "Swim to Start".</p>
     <p>2. Take turns rolling the dice and move your whale along the board.</p>
@@ -59,91 +38,51 @@
     <p>5. Be prepared for trivia, dares, physical challenges, and bets!</p>
   </div>
 
-  <div id="player-setup" class="hidden" style="text-align: center; color: white;">
+  <div id="player-setup" class="hidden">
     <h2>Name Your Whales</h2>
-    <p>Choose up to 6 players:</p>
-    <div class="player-selection" id="player-selection">
-      <div class="player-input">
-        <img src="images/black-whale.png" alt="Black Whale">
-        <input type="text" placeholder="Player 1 Name">
-      </div>
-      <div class="player-input">
-        <img src="images/green-whale.png" alt="Green Whale">
-        <input type="text" placeholder="Player 2 Name">
-      </div>
-      <div class="player-input hidden">
-        <img src="images/blue-whale.png" alt="Blue Whale">
-        <input type="text" placeholder="Player 3 Name">
-      </div>
-      <div class="player-input hidden">
-        <img src="images/purple-whale.png" alt="Purple Whale">
-        <input type="text" placeholder="Player 4 Name">
-      </div>
-      <div class="player-input hidden">
-        <img src="images/teal-whale.png" alt="Teal Whale">
-        <input type="text" placeholder="Player 5 Name">
-      </div>
-      <div class="player-input hidden">
-        <img src="images/pink-whale.png" alt="Pink Whale">
-        <input type="text" placeholder="Player 6 Name">
-      </div>
+    <div id="player-selection">
+      <div class="player-input"><img src="images/black-whale.png"><input type="text" placeholder="Player 1 Name"></div>
+      <div class="player-input"><img src="images/green-whale.png"><input type="text" placeholder="Player 2 Name"></div>
+      <div class="player-input hidden"><img src="images/blue-whale.png"><input type="text" placeholder="Player 3 Name"></div>
+      <div class="player-input hidden"><img src="images/purple-whale.png"><input type="text" placeholder="Player 4 Name"></div>
+      <div class="player-input hidden"><img src="images/teal-whale.png"><input type="text" placeholder="Player 5 Name"></div>
+      <div class="player-input hidden"><img src="images/pink-whale.png"><input type="text" placeholder="Player 6 Name"></div>
     </div>
-    <div style="text-align: center; margin-top: 10px;">
-      <button id="add-player-btn">➕ Add Another Player</button>
-      <button onclick="startGame()">Swim to Start ➔</button>
-    </div>
+    <button id="add-player-btn">➕ Add Another Player</button>
+    <button onclick="startGame()">Swim to Start ➔</button>
   </div>
 
   <div id="game-board" class="hidden">
-    <h2 style="color: white;">🏎️ Whale Track</h2>
-    <div class="board-track" id="dynamic-board-track"></div>
+    <div id="dynamic-board-track"></div>
   </div>
 
-  <div id="dice-container" style="text-align: center; margin-top: 20px;">
-    <h3 id="current-player" style="color: white; font-size: 22px;">🎯 Ready to roll!</h3>
-    <img id="dice-image" src="images/dice-1.png" alt="Dice roll" style="width: 80px; margin-top: 10px;" />
-    <div style="margin-top: 10px;">
-      <button onclick="rollDice()">🎲 Roll the Dice</button>
-    </div>
+  <div id="dice-container">
+    <h3 id="current-player">🎯 Ready to roll!</h3>
+    <img id="dice-image" src="images/dice-1.png" alt="Dice roll" />
+    <button onclick="rollDice()">🎲 Roll the Dice</button>
   </div>
-
-  <p id="dice-result" style="color: white; text-align: center;"></p>
-  <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
   <script>
-    function playSound() {
-      document.getElementById("draw-sound").play();
-    }
-
-    function showRules() {
-      document.getElementById("how-to-play").classList.remove("hidden");
-      document.getElementById("card-output").classList.add("hidden");
+    function startGame() {
       document.getElementById("player-setup").classList.add("hidden");
-      document.getElementById("game-board").classList.add("hidden");
-      document.getElementById("background-decorations").classList.remove("hidden");
+      document.getElementById("game-board").classList.remove("hidden");
+      document.getElementById("card-output").classList.remove("hidden");
+      createBoardSpaces();
+      createPlayerTokens();
     }
 
     function startWhaling() {
       document.getElementById("how-to-play").classList.add("hidden");
-      document.getElementById("card-output").classList.add("hidden");
       document.getElementById("player-setup").classList.remove("hidden");
       document.getElementById("game-board").classList.add("hidden");
-      if (!creaturesVisible) {
-        document.getElementById("background-decorations").classList.add("hidden");
-      }
     }
 
-    let creaturesVisible = true;
-    function toggleSeaCreatures() {
-      const decorations = document.getElementById("background-decorations");
-      creaturesVisible = !creaturesVisible;
-      decorations.classList.toggle("hidden", !creaturesVisible);
+    function showRules() {
+      document.getElementById("how-to-play").classList.remove("hidden");
+      document.getElementById("player-setup").classList.add("hidden");
+      document.getElementById("game-board").classList.add("hidden");
     }
-  </script>
 
-  <script src="game-logic-v2.js"></script>
-
-  <script>
     let currentVisiblePlayers = 2;
     document.getElementById("add-player-btn").addEventListener("click", () => {
       const inputs = document.querySelectorAll(".player-input");
@@ -157,5 +96,7 @@
       }
     });
   </script>
+
+  <script src="game-logic-v2.js"></script>
 </body>
 </html>
