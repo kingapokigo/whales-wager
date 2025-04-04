@@ -1,4 +1,4 @@
-console.log("🐳 Whale’s Wager JS v2.2 Loaded");
+console.log("🐳 Whale’s Wager JS v2.3 Loaded");
 const boardSize = 80;
 let players = [];
 let currentPlayerIndex = 0;
@@ -30,7 +30,11 @@ function createBoardSpaces() {
 
   console.log("✅ Total tiles rendered:", boardSpaces.length);
 }
+
 function createPlayerTokens() {
+  const tokenContainer = document.getElementById("player-tokens");
+  tokenContainer.innerHTML = "";
+
   const inputs = document.querySelectorAll(".player-input input");
   players = [];
 
@@ -40,7 +44,7 @@ function createPlayerTokens() {
       const token = document.createElement("div");
       token.classList.add("whale-token");
       token.setAttribute("data-position", "0");
-      token.innerHTML = `<img src="images/${getWhaleImage(index)}" alt="Player ${index + 1} Whale">`;
+      token.innerHTML = `<img src="${getWhaleImage(index)}" alt="Player ${index + 1} Whale">`;
 
       const player = {
         name,
@@ -51,7 +55,7 @@ function createPlayerTokens() {
 
       players.push(player);
 
-      // ✅ Place token directly on tile 0
+      // ✅ Place token directly on tile 1 (index 0)
       boardSpaces[0].appendChild(token);
     }
   });
@@ -68,7 +72,7 @@ function getWhaleImage(index) {
     "teal-whale.png",
     "pink-whale.png"
   ];
-  return colors[index % colors.length];
+  return `images/${colors[index % colors.length]}`;
 }
 
 function rollDice() {
