@@ -211,12 +211,11 @@ button:hover {
   max-width: 500px;
   text-align: center;
 }
-
 .card-container {
-  perspective: 1000px;
   display: flex;
   justify-content: center;
-  margin: 20px auto;
+  margin: 30px auto 10px;
+
 }
 
 .card-inner {
