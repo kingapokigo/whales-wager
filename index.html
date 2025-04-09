@@ -36,19 +36,18 @@
   </div>
 
   <div id="card-output" class="card-box hidden"></div>
-
-  <div class="card-container">
-    <div class="card-inner" onclick="flipCard(this)">
-      <div class="card-front">
-        <h2>🐋 Whale Card</h2>
-        <p>Click to flip!</p>
-      </div>
-      <div class="card-back">
-        <h3>Challenge:</h3>
-        <p>Do 10 push-ups or drink 3 sips!</p>
-      </div>
+<div class="card-container">
+  <div class="card-inner" id="game-card" onclick="flipCard(this)">
+    <div class="card-front">
+      <h2>🐋 Whale Card 🐋</h2>
+      <p>Click to flip!</p>
+    </div>
+    <div class="card-back">
+      <h2 id="card-title">🐋 Whale Card 🐋</h2>
+      <p id="card-challenge-text">Challenge goes here...</p>
     </div>
   </div>
+</div>
 
   <div id="how-to-play" class="hidden" style="text-align: center; max-width: 700px; margin: 0 auto; padding: 20px;">
     <h2>How to Play Whale's Wager</h2>
