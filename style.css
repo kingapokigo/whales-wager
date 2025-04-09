@@ -213,20 +213,23 @@ button:hover {
 }
 
 .card-container {
+  perspective: 1000px;
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  margin: 20px auto;
 }
 
 .card-inner {
   width: 220px;
   height: 300px;
-  perspective: 1000px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  position: relative;
   cursor: pointer;
 }
 
-.card-inner:hover {
-  transform: scale(1.05);
+.card-inner.flipped {
+  transform: rotateY(180deg);
 }
 
 .card-front, .card-back {
@@ -244,6 +247,9 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  font-size: 18px;
+  text-align: center;
 }
 
 .card-front {
@@ -252,19 +258,10 @@ button:hover {
 }
 
 .card-back {
-  background: #ffffff;
+  background: white;
   color: #333;
   transform: rotateY(180deg);
 }
-
-.card-inner.flipped .card-front {
-  transform: rotateY(180deg);
-}
-
-.card-inner.flipped .card-back {
-  transform: rotateY(0deg);
-}
-
 /* === Card Types === */
 .whale-card, .toxic-card {
   background-color: white;
