@@ -114,28 +114,30 @@ function movePlayer(player, steps) {
 
 // Draw card and display challenge
 function drawCard(player) {
-  const isToxic = Math.random() < 0.4;
-  const card = document.getElementById("card-output");
-  card.classList.remove("hidden");
+  playSound?.();
 
+  const card = document.getElementById("game-card");
+  const titleEl = document.getElementById("card-title");
+  const textEl = document.getElementById("card-challenge-text");
+
+  const isToxic = Math.random() < 0.4;
   if (isToxic) {
     const consequence = getRandomToxicChallenge();
-    card.innerHTML = `
-      <div class="toxic-card">
-        <h2>🍄 Toxic Mushroom Card</h2>
-        <p>${consequence}</p>
-      </div>`;
+    titleEl.innerHTML = "🍄 Toxic Mushroom Card";
+    textEl.textContent = consequence;
     handleToxicEffect(player, consequence);
   } else {
     const challenge = getRandomWhaleChallenge();
-    card.innerHTML = `
-      <div class="whale-card">
-        <h2>🐋 Whale Card</h2>
-        <p>${challenge}</p>
-      </div>`;
+    titleEl.innerHTML = "🐋 Whale Card";
+    textEl.textContent = challenge;
   }
 
-  setTimeout(() => nextPlayer(), 3000);
+  card.classList.add("flipped"); // Flip the card!
+
+  setTimeout(() => {
+    nextPlayer();
+    card.classList.remove("flipped"); // Unflip for next turn
+  }, 3000);
 }
 function flipCard(cardEl) {
   cardEl.classList.toggle("flipped");
