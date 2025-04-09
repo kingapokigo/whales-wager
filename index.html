@@ -100,7 +100,7 @@
   <p id="dice-result" style="color: white; text-align: center;"></p>
   <audio id="draw-sound" src="/sounds/pop.mp3" preload="auto"></audio>
 
-  <div class="card-container">
+  <div id="game-card" class="card-container hidden">
   <div class="card-inner" onclick="flipCard(this)">
     <div class="card-front">
       <h2>🐋 Whale Card</h2>
@@ -112,6 +112,7 @@
     </div>
   </div>
 </div>
+
 
   <script>
     function playSound() {
