@@ -93,8 +93,6 @@ function rollDice() {
 
   movePlayer(player, currentRoll);
 }
-
-// Move the whale
 function movePlayer(player, steps) {
   let newPosition = player.position + steps;
   if (newPosition >= boardSize) {
@@ -108,6 +106,10 @@ function movePlayer(player, steps) {
   space.appendChild(player.token);
 
   playLandingSound();
+
+  // 🎴 Make the card visible AFTER movement
+  const card = document.getElementById("game-card");
+  card.classList.remove("hidden");
 
   setTimeout(() => drawCard(player), 500);
 }
