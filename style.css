@@ -24,22 +24,24 @@ h1, h2, h3 {
   text-align: center;
   margin-top: 20px;
 }
-
 button {
-  background-color: #00bcd4;
-  border: none;
-  padding: 12px 20px;
-  margin: 8px;
-  color: white;
-  font-size: 18px;
-  border-radius: 10px;
+  background-color: #ffcf56;
+  border: 3px solid #ffb347;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #5a3100;
+  box-shadow: 0 4px 0 #c97a0e;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  font-family: 'Antonio', sans-serif;
 }
 
 button:hover {
-  background-color: #0097a7;
-  transform: scale(1.05);
+  background-color: #ffd36b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.2);
 }
 
 /* === Floating Sea Creatures === */
