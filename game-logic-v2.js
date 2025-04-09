@@ -137,6 +137,14 @@ function drawCard(player) {
 
   setTimeout(() => nextPlayer(), 3000);
 }
+function flipCard(cardEl) {
+  cardEl.classList.toggle("flipped");
+
+  // Optional: dynamically load a challenge
+  const challenge = getRandomWhaleChallenge(); // Use your actual challenge function!
+  const textEl = cardEl.querySelector("#card-challenge-text");
+  if (textEl) textEl.textContent = challenge;
+}
 
 // Toxic effects like skip turn or move back
 function handleToxicEffect(player, consequence) {
