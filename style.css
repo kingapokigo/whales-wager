@@ -196,15 +196,26 @@ button:hover {
   margin-top: 15px;
   gap: 10px;
 }
-
-.whale-token img {
-  width: 28px;
-  position: absolute;
-  top: -15px;
+.whale-token {
+  position: relative; /* ensures positioning works */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; /* ensures it’s above background */
 }
 
-.whale-token:hover img {
-  transform: scale(1.2);
+.whale-token img {
+  width: 32px;
+  height: auto;
+  position: absolute;
+  top: -20px; /* move up slightly so it floats above tile */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.board-space {
+  position: relative; /* important for absolute token positioning */
 }
 
 /* === Dice Area === */
