@@ -1,3 +1,4 @@
+console.log("✅ JS file loaded!");
 console.log("🐳 Whale’s Wager JS v2.3 Loaded");
 const boardSize = 80;
 let players = [];
