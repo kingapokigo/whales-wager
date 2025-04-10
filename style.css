@@ -54,21 +54,22 @@ button:hover {
   z-index: -2;
   overflow: hidden;
 }
-
 .floating-creature {
   position: absolute;
-  width: 80px;
+  width: 60px; /* smaller for mobile */
+  max-width: 15vw; /* responsive cap */
   animation: float 12s infinite ease-in-out;
+  z-index: -1;
 }
 
-.creature1 { top: 20%; left: 10%; }
-.creature2 { top: 40%; left: 80%; animation-delay: 3s; }
-.creature3 { top: 10%; left: 50%; animation-delay: 1s; }
-.creature4 { top: 70%; left: 5%; animation-delay: 2s; }
-.creature5 { top: 60%; left: 90%; animation-delay: 4s; }
-.creature6 { top: 80%; left: 45%; animation-delay: 2s; }
-.creature7 { top: 30%; left: 70%; animation-delay: 1s; }
-.creature8 { top: 50%; left: 20%; animation-delay: 3s; }
+.creature1 { top: 10%; left: 5%; }     /* Whale left */
+.creature2 { top: 25%; left: 12%; }    /* Whale mid-left */
+.creature3 { top: 18%; left: 70%; }    /* Crab closer in */
+.creature4 { top: 55%; left: 38%; }    /* Starfish center-ish */
+.creature5 { top: 70%; left: 6%; }     /* Turtle left edge */
+.creature6 { top: 74%; left: 72%; }    /* Turtle pulled in */
+.creature7 { top: 75%; left: 45%; }    /* Octopus center bottom */
+.creature8 { top: 36%; left: 65%; }    /* Whale/fish slightly inward */
 
 @keyframes float {
   0% { transform: translateY(0px) rotate(0deg); }
