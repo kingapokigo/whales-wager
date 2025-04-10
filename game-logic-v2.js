@@ -26,7 +26,6 @@ function createBoardSpaces() {
   }
 }
 
-// Place player tokens on the starting tile
 function createPlayerTokens() {
   const inputs = document.querySelectorAll(".player-input input");
   players = [];
@@ -36,18 +35,23 @@ function createPlayerTokens() {
     if (name) {
       const token = document.createElement("div");
       token.classList.add("whale-token");
-      token.setAttribute("data-position", "0");
-      token.innerHTML = <img src="images/${getWhaleImage(index)}" alt="Player ${index + 1} Whale">;
+      token.innerHTML = `<img src="images/${getWhaleImage(index)}" alt="Whale">`;
 
       const player = {
         name,
         token,
         position: 0,
-        skipsTurn: false,
+        skipsTurn: false
       };
 
       players.push(player);
-      boardSpaces[0].appendChild(token);
+
+      // 👇 Attach token to starting tile
+      if (boardSpaces[0]) {
+        boardSpaces[0].appendChild(token);
+      } else {
+        console.error("Board tile 0 missing!");
+      }
     }
   });
 
