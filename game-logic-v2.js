@@ -211,6 +211,7 @@ function startGame() {
   document.getElementById("player-setup").classList.add("hidden");
   document.getElementById("game-board").classList.remove("hidden");
   document.getElementById("card-output").classList.remove("hidden");
+  document.getElementById("whale-track-label").classList.remove("hidden");
 
   createBoardSpaces(); // render tiles first
   setTimeout(() => {
