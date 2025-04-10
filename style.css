@@ -281,6 +281,28 @@ button:hover {
   border-left: 8px solid #e53935;
   background-color: #ffebee;
 }
+.jellyfish-tile {
+  background-image: url('images/jellyfish-icon.png');
+  background-size: cover;
+  animation: pulseZap 2s infinite;
+}
+
+.whirlpool-tile {
+  background-image: url('images/whirlpool-icon.png');
+  background-size: cover;
+  animation: swirlWhirl 3s infinite linear;
+}
+
+@keyframes pulseZap {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); filter: brightness(1.4); }
+  100% { transform: scale(1); }
+}
+
+@keyframes swirlWhirl {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 /* === Current Player Display === */
 #current-player {
