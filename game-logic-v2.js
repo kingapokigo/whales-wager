@@ -205,9 +205,23 @@ function startGame() {
 }
 const jellyfishTiles = [7, 23, 48];   // Tile numbers where the zap happens
 const whirlpoolTiles = [15, 36, 66];  // Tile numbers for swap surprise
-if (jellyfishTiles.includes(i)) {
-  space.classList.add("jellyfish-tile");
+if (jellyfishTiles.includes(player.position)) {
+  alert("⚡ Zapped by a Jellyfish! Move back 3 spaces!");
+  player.position = Math.max(0, player.position - 3);
+  boardSpaces[player.position].appendChild(player.token);
 }
-if (whirlpoolTiles.includes(i)) {
-  space.classList.add("whirlpool-tile");
+
+if (whirlpoolTiles.includes(player.position)) {
+  const otherPlayer = players.find(p => p !== player && p.position < player.position);
+  if (otherPlayer) {
+    alert("🌀 Caught in a Whirlpool! Swapping places!");
+    let tempPos = player.position;
+    player.position = otherPlayer.position;
+    otherPlayer.position = tempPos;
+    boardSpaces[player.position].appendChild(player.token);
+    boardSpaces[otherPlayer.position].appendChild(otherPlayer.token);
+  } else {
+    alert("🌀 Whirlpool tried to swap you—but you're in last place! You lose your next turn.");
+    player.skipsTurn = true;
+  }
 }
