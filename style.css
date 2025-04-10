@@ -272,6 +272,7 @@ button:hover {
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   backface-visibility: hidden;
+  transform-style: preserve-3d;
   position: absolute;
   top: 0;
   left: 0;
@@ -285,6 +286,7 @@ button:hover {
 .card-front {
   background: #00bcd4;
   color: white;
+  transform: rotateY(0deg);
 }
 
 .card-back {
@@ -312,6 +314,24 @@ button:hover {
 .toxic-card {
   border-left: 8px solid #e53935;
   background-color: #ffebee;
+}
+#next-player-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: #ffcf56;
+  color: #5a3100;
+  border: 2px solid #ffb347;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #c97a0e;
+  transition: all 0.2s ease;
+}
+
+#next-player-btn:hover {
+  background-color: #ffd36b;
+  transform: translateY(-2px);
 }
 
 /* === Current Player Display === */
