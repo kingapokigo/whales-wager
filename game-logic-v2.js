@@ -197,11 +197,11 @@ function playLandingSound() {
   if (sound) sound.play();
 }
 
-// Start game!
 function startGame() {
   document.getElementById("player-setup").classList.add("hidden");
   document.getElementById("game-board").classList.remove("hidden");
   document.getElementById("card-output").classList.remove("hidden");
+
   createBoardSpaces();
   setTimeout(() => {
     createPlayerTokens();
