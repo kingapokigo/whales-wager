@@ -94,6 +94,19 @@ function rollDice() {
 
   movePlayer(player, currentRoll);
 }
+function showCard(type, text) {
+  const cardBox = document.getElementById('card-output');
+  cardBox.innerHTML = `
+    <div class="${type === 'whale' ? 'whale-card' : 'toxic-card'}">
+      ${text}
+    </div>
+  `;
+}
+if (tileType === "whale") {
+  showCard("whale", "🧠 Trivia Time: What's the capital of Iceland?");
+} else if (tileType === "toxic") {
+  showCard("toxic", "💀 Toxic Mushroom: Sing a song in a whale voice!");
+}
 
 // Move the whale
 function movePlayer(player, steps) {
