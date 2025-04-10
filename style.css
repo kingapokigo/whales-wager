@@ -249,16 +249,20 @@ button:hover {
   justify-content: center;
   margin: 20px 0;
 }
-
 .card-inner {
   width: 220px;
   height: 300px;
   perspective: 1000px;
   cursor: pointer;
+
+  /* ✅ ADD THESE TWO: */
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  position: relative;
 }
 
-.card-inner:hover {
-  transform: scale(1.05);
+.card-inner.flipped {
+  transform: rotateY(180deg);
 }
 
 .card-front, .card-back {
@@ -287,14 +291,6 @@ button:hover {
   background: #ffffff;
   color: #333;
   transform: rotateY(180deg);
-}
-
-.card-inner.flipped .card-front {
-  transform: rotateY(180deg);
-}
-
-.card-inner.flipped .card-back {
-  transform: rotateY(0deg);
 }
 
 /* === Card Types === */
