@@ -64,18 +64,13 @@
 
   <script>
     
-    function startGame() {
-  alert("🐋 startGame() triggered!");
-  ...
+function startGame() {
+  document.getElementById("player-setup").classList.add("hidden");
+  document.getElementById("game-board").classList.remove("hidden");
+  document.getElementById("card-output").classList.remove("hidden");
+  createBoardSpaces();
+  createPlayerTokens();
 }
-
-    function startGame() {
-      document.getElementById("player-setup").classList.add("hidden");
-      document.getElementById("game-board").classList.remove("hidden");
-      document.getElementById("card-output").classList.remove("hidden");
-      createBoardSpaces();
-      createPlayerTokens();
-    }
 
     function startWhaling() {
       document.getElementById("how-to-play").classList.add("hidden");
