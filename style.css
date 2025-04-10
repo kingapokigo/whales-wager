@@ -4,7 +4,7 @@ body {
   font-family: 'Antonio', sans-serif;
   background: linear-gradient(to bottom, #b6eaff 0%, #79d7f6 100%);
   overflow-x: hidden;
-  background-image: url('images/cartoon-ocean-bg.png'); /* optional! */
+  background-image: url('images/cartoon-ocean-bg.png');
   background-size: cover;
   background-position: center;
 }
@@ -37,14 +37,13 @@ button {
   transition: all 0.2s ease;
   font-family: 'Antonio', sans-serif;
 }
-
 button:hover {
   background-color: #ffd36b;
   transform: translateY(-2px);
   box-shadow: 0 6px 8px rgba(0,0,0,0.2);
 }
 
-/* === Floating Sea Creatures === */
+/* === Background Decorations === */
 #background-decorations {
   position: fixed;
   top: 0;
@@ -59,17 +58,8 @@ button:hover {
   position: absolute;
   width: 80px;
   animation: float 12s infinite ease-in-out;
+  pointer-events: none;
 }
-
-.creature1 { top: 20%; left: 10%; }
-.creature2 { top: 40%; left: 80%; animation-delay: 3s; }
-.creature3 { top: 10%; left: 50%; animation-delay: 1s; }
-.creature4 { top: 70%; left: 5%; animation-delay: 2s; }
-.creature5 { top: 60%; left: 90%; animation-delay: 4s; }
-.creature6 { top: 80%; left: 45%; animation-delay: 2s; }
-.creature7 { top: 30%; left: 70%; animation-delay: 1s; }
-.creature8 { top: 50%; left: 20%; animation-delay: 3s; }
-
 @keyframes float {
   0% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(5deg); }
@@ -83,20 +73,18 @@ button:hover {
   border-radius: 50%;
   animation: rise 10s infinite ease-in-out;
 }
-
 .b1, .b2, .b3, .b4, .b5, .b6, .b7, .b8 {
   width: 20px;
   height: 20px;
   bottom: 0;
   animation-duration: calc(6s + (2 * var(--i)));
 }
-
 @keyframes rise {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(-100vh); opacity: 0; }
 }
 
-/* === Player Input Area === */
+/* === Player Input === */
 .player-selection {
   display: flex;
   flex-wrap: wrap;
@@ -104,17 +92,14 @@ button:hover {
   gap: 16px;
   margin-top: 20px;
 }
-
 .player-input {
   text-align: center;
   color: white;
 }
-
 .player-input img {
   width: 60px;
   margin-bottom: 8px;
 }
-
 .player-input input {
   padding: 6px 10px;
   border-radius: 8px;
@@ -122,16 +107,15 @@ button:hover {
   font-size: 16px;
 }
 
-/* === Game Board Layout === */
+/* === Game Board === */
 #game-board {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   padding: 0;
 }
-
 .board-track {
   display: grid;
   grid-template-columns: repeat(10, minmax(0, 1fr));
@@ -141,9 +125,11 @@ button:hover {
   margin: 0 auto;
   padding: 10px;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
 }
 
-/* === Stone Tile Styling === */
+/* === Board Spaces === */
 .board-space {
   background: url('images/stone-tile.png') center/contain no-repeat;
   border: none;
@@ -153,71 +139,55 @@ button:hover {
   font-weight: bold;
   text-shadow: 1px 1px 2px #000;
   font-size: 12px;
-  font-family: 'Antonio', sans-serif;
   aspect-ratio: 1;
   width: 100%;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
 }
-
-/* === Final Victory Tile === */
 .board-space.final-tile {
   background-color: #ff69b4 !important;
   background-image: none !important;
   color: #000;
-  font-weight: bold;
   box-shadow: 0 0 10px 3px gold;
 }
 
-/* === Player Tokens === */
-#player-tokens {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 15px;
-  gap: 10px;
-}
-
-.whale-token img {
-  width: 28px;
+/* === Tokens === */
+.whale-token {
   position: absolute;
-  top: -15px;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  transform: translate(0%, 0%);
 }
-
+.whale-token img {
+  width: 24px;
+}
 .whale-token:hover img {
   transform: scale(1.2);
 }
 
-/* === Dice Area === */
+/* === Dice === */
 #dice-container {
   margin-top: 30px;
+  text-align: center;
 }
-
 #dice-image {
   width: 80px;
   animation: bounce 1s ease-in-out infinite alternate;
 }
-
 @keyframes bounce {
   0% { transform: translateY(0px); }
   100% { transform: translateY(-10px); }
 }
 
-/* === Card Styles === */
-.card-box {
-  margin: 20px auto;
-  max-width: 500px;
-  text-align: center;
-}
+/* === Card Area === */
 .card-container {
   display: flex;
   justify-content: center;
   margin: 30px auto 10px;
-
 }
-
 .card-inner {
   width: 220px;
   height: 300px;
@@ -226,11 +196,9 @@ button:hover {
   position: relative;
   cursor: pointer;
 }
-
 .card-inner.flipped {
   transform: rotateY(180deg);
 }
-
 .card-front, .card-back {
   width: 100%;
   height: 100%;
@@ -241,7 +209,6 @@ button:hover {
   position: absolute;
   top: 0;
   left: 0;
-  transition: transform 0.8s;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -250,81 +217,47 @@ button:hover {
   font-size: 18px;
   text-align: center;
 }
-
 .card-front {
   background: #00bcd4;
   color: white;
 }
-
 .card-back {
   background: white;
   color: #333;
   transform: rotateY(180deg);
 }
-/* === Card Types === */
-.whale-card, .toxic-card {
-  background-color: white;
-  color: #333;
-  padding: 20px;
-  margin: 20px auto;
-  border-radius: 12px;
-  max-width: 400px;
-  font-size: 18px;
-  box-shadow: 0 6px 10px rgba(0,0,0,0.3);
-}
 
-.whale-card {
-  border-left: 8px solid #00bcd4;
-}
-
-.toxic-card {
-  border-left: 8px solid #e53935;
-  background-color: #ffebee;
-}
+/* === Special Tiles === */
 .jellyfish-tile {
   background-image: url('images/jellyfish-icon.png');
   background-size: cover;
   animation: pulseZap 2s infinite;
 }
-
 .whirlpool-tile {
   background-image: url('images/whirlpool-icon.png');
   background-size: cover;
   animation: swirlWhirl 3s infinite linear;
 }
-
 @keyframes pulseZap {
   0% { transform: scale(1); }
   50% { transform: scale(1.1); filter: brightness(1.4); }
   100% { transform: scale(1); }
 }
-
 @keyframes swirlWhirl {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-/* === Current Player Display === */
-#current-player {
-  font-size: 26px;
-  color: #ffffff;
-  margin-top: 20px;
-  text-shadow: 2px 2px #000;
-}
-
-/* === Responsive Design === */
+/* === Responsive === */
 @media screen and (max-width: 480px) {
   .board-track {
     gap: 4px;
-    height: 82vh;
+    height: auto;
   }
-
   .board-space {
     font-size: 2.4vw;
   }
-
   .whale-token img {
-    width: 24px;
-    top: -12px;
+    width: 20px;
   }
 }
