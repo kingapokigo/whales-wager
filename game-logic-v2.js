@@ -203,3 +203,11 @@ function startGame() {
     createPlayerTokens();
   }, 0);
 }
+const jellyfishTiles = [7, 23, 48];   // Tile numbers where the zap happens
+const whirlpoolTiles = [15, 36, 66];  // Tile numbers for swap surprise
+if (jellyfishTiles.includes(i)) {
+  space.classList.add("jellyfish-tile");
+}
+if (whirlpoolTiles.includes(i)) {
+  space.classList.add("whirlpool-tile");
+}
