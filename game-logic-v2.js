@@ -62,10 +62,18 @@ function getWhaleImage(index) {
   ];
   return colors[index % colors.length];
 }
-
-// Dice roll logic
 function rollDice() {
   const player = players[currentPlayerIndex];
+  const card = document.getElementById("game-card");
+  const titleEl = document.getElementById("card-title");
+  const textEl = document.getElementById("card-challenge-text");
+
+  // 💡 Reset card UI to default front
+  card.classList.remove("flipped");
+  titleEl.innerHTML = "🐋 Whale Card";
+  textEl.textContent = "Click to flip!";
+  card.classList.add("hidden"); // Hide it until whale lands
+
   if (player.skipsTurn) {
     alert(`${player.name} skips this turn!`);
     player.skipsTurn = false;
