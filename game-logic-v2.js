@@ -126,30 +126,43 @@ function movePlayer(player, steps) {
   setTimeout(() => drawCard(player), 500);
 }
 
-// Draw card and display challenge
 function drawCard(player) {
   const isToxic = Math.random() < 0.4;
-  const card = document.getElementById("card-output");
-  card.classList.remove("hidden");
+  const cardBox = document.getElementById("card-output");
+  cardBox.classList.remove("hidden");
 
-  if (isToxic) {
-    const consequence = getRandomToxicChallenge();
-    card.innerHTML = `
-      <div class="toxic-card">
-        <h2>🍄 Toxic Mushroom Card</h2>
-        <p>${consequence}</p>
-      </div>`;
-    handleToxicEffect(player, consequence);
-  } else {
-    const challenge = getRandomWhaleChallenge();
-    card.innerHTML = `
-      <div class="whale-card">
-        <h2>🐋 Whale Card</h2>
-        <p>${challenge}</p>
-      </div>`;
+  const cardType = isToxic ? 'toxic' : 'whale';
+  const frontText = cardType === 'whale' ? "🐋 Whale Card" : "🍄 Toxic Mushroom";
+  const backText = cardType === 'whale' ? getRandomWhaleChallenge() : getRandomToxicChallenge();
+
+  // Store for use when flipping
+  cardBox.innerHTML = `
+    <div class="card-container">
+      <div class="card-inner" onclick="flipCard(this)">
+        <div class="card-front"><h2>${frontText}</h2></div>
+        <div class="card-back"><p>${backText}</p></div>
+      </div>
+    </div>
+    <button id="next-player-btn" class="hidden" onclick="nextPlayer()">Next Player ➡️</button>
+  `;
+
+  // Save consequence for toxic card effects
+  if (cardType === 'toxic') {
+    cardBox.dataset.toxicEffect = backText;
+    cardBox.dataset.playerName = player.name;
   }
+}
+function flipCard(cardElement) {
+  cardElement.classList.add("flipped");
+  document.getElementById("next-player-btn").classList.remove("hidden");
 
-  setTimeout(() => nextPlayer(), 3000);
+  // If it's a toxic card, apply the effect after flipping
+  const cardBox = document.getElementById("card-output");
+  if (cardBox.dataset.toxicEffect) {
+    const player = players.find(p => p.name === cardBox.dataset.playerName);
+    handleToxicEffect(player, cardBox.dataset.toxicEffect);
+    delete cardBox.dataset.toxicEffect;
+  }
 }
 
 // Toxic effects like skip turn or move back
@@ -205,6 +218,7 @@ function getRandomToxicChallenge() {
 function nextPlayer() {
   currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
   updateCurrentPlayerDisplay();
+  document.getElementById("card-output").innerHTML = ""; // clear old card
 }
 
 // Update current player's turn display
