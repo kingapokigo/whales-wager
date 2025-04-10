@@ -1,10 +1,12 @@
-console.log("🐳 Whale’s Wager JS v2.4 Loaded");
+console.log("🐳 Whale’s Wager JS v2.5 Loaded");
 const boardSize = 80;
 let players = [];
 let currentPlayerIndex = 0;
 let boardSpaces = [];
 
-// Build the game board tiles
+const jellyfishTiles = [7, 23, 48];
+const whirlpoolTiles = [15, 36, 66];
+
 function createBoardSpaces() {
   const boardTrack = document.getElementById("dynamic-board-track");
   boardTrack.innerHTML = "";
@@ -13,7 +15,9 @@ function createBoardSpaces() {
   for (let i = 0; i < boardSize; i++) {
     const space = document.createElement("div");
     space.classList.add("board-space");
-    space.textContent = ${i + 1};
+    space.textContent = `${i + 1}`;
+    if (jellyfishTiles.includes(i)) space.classList.add("jellyfish-tile");
+    if (whirlpoolTiles.includes(i)) space.classList.add("whirlpool-tile");
     if (i === boardSize - 1) space.classList.add("final-tile");
     boardSpaces.push(space);
   }
@@ -45,20 +49,13 @@ function createPlayerTokens() {
       };
 
       players.push(player);
-
-      // 👇 Attach token to starting tile
-      if (boardSpaces[0]) {
-        boardSpaces[0].appendChild(token);
-      } else {
-        console.error("Board tile 0 missing!");
-      }
+      boardSpaces[0].appendChild(token);
     }
   });
 
   updateCurrentPlayerDisplay();
 }
 
-// Get whale image
 function getWhaleImage(index) {
   const colors = [
     "black-whale.png", "green-whale.png", "blue-whale.png",
@@ -66,58 +63,78 @@ function getWhaleImage(index) {
   ];
   return colors[index % colors.length];
 }
+
 function rollDice() {
   const player = players[currentPlayerIndex];
   const card = document.getElementById("game-card");
   const titleEl = document.getElementById("card-title");
   const textEl = document.getElementById("card-challenge-text");
 
-  // 💡 Reset card UI to default front
+  // Reset card
   card.classList.remove("flipped");
   titleEl.innerHTML = "🐋 Whale Card";
   textEl.textContent = "Click to flip!";
-  card.classList.add("hidden"); // Hide it until whale lands
+  card.classList.add("hidden");
 
   if (player.skipsTurn) {
-    alert(${player.name} skips this turn!);
+    alert(`${player.name} skips this turn!`);
     player.skipsTurn = false;
     nextPlayer();
     return;
   }
 
   const roll = Math.floor(Math.random() * 6) + 1;
-  document.getElementById("dice-image").src = images/dice-${roll}.png;
-  document.getElementById("dice-result").textContent = ${player.name} rolled a ${roll}!;
+  document.getElementById("dice-image").src = `images/dice-${roll}.png`;
+  document.getElementById("dice-result").textContent = `${player.name} rolled a ${roll}!`;
+
   movePlayer(player, roll);
 }
 
-// Move the whale
 function movePlayer(player, steps) {
   let newPosition = player.position + steps;
   if (newPosition >= boardSize) {
-    alert(🎉 ${player.name} wins Whale's Wager!);
-    document.getElementById("current-player").textContent = ${player.name} WINS! 🎉;
+    alert(`🎉 ${player.name} wins Whale's Wager!`);
+    document.getElementById("current-player").textContent = `${player.name} WINS! 🎉`;
     return;
   }
 
   player.position = newPosition;
   boardSpaces[newPosition].appendChild(player.token);
-
   playLandingSound();
+
+  // Handle tile effects
+  if (jellyfishTiles.includes(player.position)) {
+    alert("⚡ Zapped by a Jellyfish! Move back 3 spaces!");
+    player.position = Math.max(0, player.position - 3);
+    boardSpaces[player.position].appendChild(player.token);
+  }
+
+  if (whirlpoolTiles.includes(player.position)) {
+    const otherPlayer = players.find(p => p !== player && p.position < player.position);
+    if (otherPlayer) {
+      alert("🌀 Caught in a Whirlpool! Swapping places!");
+      const temp = player.position;
+      player.position = otherPlayer.position;
+      otherPlayer.position = temp;
+      boardSpaces[player.position].appendChild(player.token);
+      boardSpaces[otherPlayer.position].appendChild(otherPlayer.token);
+    } else {
+      alert("🌀 Whirlpool tried to swap you—but you're in last place! You lose your next turn.");
+      player.skipsTurn = true;
+    }
+  }
 
   setTimeout(() => {
     drawCard(player);
   }, 500);
 }
 
-// Card draw logic
 function drawCard(player) {
   const card = document.getElementById("game-card");
   const titleEl = document.getElementById("card-title");
   const textEl = document.getElementById("card-challenge-text");
 
   const isToxic = Math.random() < 0.4;
-
   titleEl.innerHTML = isToxic ? "🍄 Toxic Mushroom Card" : "🐋 Whale Card";
   textEl.textContent = isToxic ? getRandomToxicChallenge() : getRandomWhaleChallenge();
 
@@ -133,7 +150,6 @@ function drawCard(player) {
   }, 3000);
 }
 
-// Handle toxic card effects
 function handleToxicEffect(player, consequence) {
   if (consequence.includes("Skip your next turn")) {
     player.skipsTurn = true;
@@ -147,7 +163,6 @@ function handleToxicEffect(player, consequence) {
   }
 }
 
-// Whale card challenges
 function getRandomWhaleChallenge() {
   const challenges = [
     "Chug a beer 🍺", "Name 5 Mets players 🧢",
@@ -159,73 +174,8 @@ function getRandomWhaleChallenge() {
   return challenges[Math.floor(Math.random() * challenges.length)];
 }
 
-// Toxic card challenges
 function getRandomToxicChallenge() {
   const consequences = [
     "Move back 3 spaces!", "Skip your next turn.",
-    "Swap spots with a player of your choice 😈",
-    "Return to START and rethink your life choices.",
-    "Answer a truth... or move back 2 spaces!",
-    "Lose your next dice roll. Roll a 1 no matter what!",
-    "Everyone but you moves forward 1 space.",
-    "Do 15 squats or go back 4 spaces!",
-    "Repeat your last challenge.", "Hold your breath for 15 seconds or skip your turn!"
-  ];
-  return consequences[Math.floor(Math.random() * consequences.length)];
-}
-
-// Flip card manually
-function flipCard(cardEl) {
-  cardEl.classList.toggle("flipped");
-}
-
-// Update current player display
-function updateCurrentPlayerDisplay() {
-  const player = players[currentPlayerIndex];
-  document.getElementById("current-player").textContent = ${player.name}'s turn!;
-}
-
-// Advance to next player
-function nextPlayer() {
-  currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-  updateCurrentPlayerDisplay();
-}
-
-// Sound on landing
-function playLandingSound() {
-  const sound = document.getElementById("draw-sound");
-  if (sound) sound.play();
-}
-
-function startGame() {
-  document.getElementById("player-setup").classList.add("hidden");
-  document.getElementById("game-board").classList.remove("hidden");
-  document.getElementById("card-output").classList.remove("hidden");
-
-  createBoardSpaces();
-  setTimeout(() => {
-    createPlayerTokens();
-  }, 0);
-}
-const jellyfishTiles = [7, 23, 48];   // Tile numbers where the zap happens
-const whirlpoolTiles = [15, 36, 66];  // Tile numbers for swap surprise
-if (jellyfishTiles.includes(player.position)) {
-  alert("⚡ Zapped by a Jellyfish! Move back 3 spaces!");
-  player.position = Math.max(0, player.position - 3);
-  boardSpaces[player.position].appendChild(player.token);
-}
-
-if (whirlpoolTiles.includes(player.position)) {
-  const otherPlayer = players.find(p => p !== player && p.position < player.position);
-  if (otherPlayer) {
-    alert("🌀 Caught in a Whirlpool! Swapping places!");
-    let tempPos = player.position;
-    player.position = otherPlayer.position;
-    otherPlayer.position = tempPos;
-    boardSpaces[player.position].appendChild(player.token);
-    boardSpaces[otherPlayer.position].appendChild(otherPlayer.token);
-  } else {
-    alert("🌀 Whirlpool tried to swap you—but you're in last place! You lose your next turn.");
-    player.skipsTurn = true;
-  }
-}
+    "Swap spots with a player of your choice 😈", "Return to START and rethink your life choices.",
+    "Answer a truth... or
