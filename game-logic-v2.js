@@ -130,10 +130,6 @@ function movePlayer(player, steps) {
   } else {
     console.error(`🚨 boardSpaces[${newPosition}] is missing!`);
   }
-  playLandingSound();
-  setTimeout(() => drawCard(player), 500);
-}
-
 }
 function drawCard(player) {
   const isToxic = Math.random() < 0.4;
