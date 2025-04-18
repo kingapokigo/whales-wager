@@ -8,29 +8,29 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- 🎨 Floating Background Decor -->
   <div id="background-decorations">
-<!-- Floating Sea Creatures (Decor Only) -->
-<img src="images/cute-whale1.png" class="floating-creature creature1">
-<img src="images/cute-whale2.png" class="floating-creature creature2">
-<img src="images/cute-crab.png" class="floating-creature creature3">
-<img src="images/cute-starfish.png" class="floating-creature creature4">
-<img src="images/cute-turtle.png" class="floating-creature creature5">
-<img src="images/cute-turtle2.png" class="floating-creature creature6">
-<img src="images/cute-octopus.png" class="floating-creature creature7">
-<img src="images/cute-whale3.png" class="floating-creature creature8">
-
+    <img src="images/cute-whale1.png" class="floating-creature creature1">
+    <img src="images/cute-whale2.png" class="floating-creature creature2">
+    <img src="images/cute-crab.png" class="floating-creature creature3">
+    <img src="images/cute-starfish.png" class="floating-creature creature4">
+    <img src="images/cute-turtle.png" class="floating-creature creature5">
+    <img src="images/cute-turtle2.png" class="floating-creature creature6">
+    <img src="images/cute-octopus.png" class="floating-creature creature7">
+    <img src="images/cute-whale3.png" class="floating-creature creature8">
   </div>
 
+  <!-- 🐳 Game Header -->
   <h1>Welcome to Whale's Wager!</h1>
   <div class="button-row">
     <button onclick="startWhaling()">Start Whaling!</button>
     <button onclick="showRules()">How to Play</button>
   </div>
 
-<h2 id="whale-track-label" style="color: #aaa69d;" class="hidden">🐋 Whale Track</h2>
-
+  <h2 id="whale-track-label" style="color: #aaa69d;" class="hidden">🐋 Whale Track</h2>
   <div id="card-output" class="card-box hidden"></div>
 
+  <!-- 📜 Instructions -->
   <div id="how-to-play" class="hidden">
     <h2>How to Play Whale's Wager</h2>
     <p>1. Name your whales and hit "Swim to Start".</p>
@@ -40,6 +40,7 @@
     <p>5. Be prepared for trivia, dares, physical challenges, and bets!</p>
   </div>
 
+  <!-- 🧜‍♀️ Player Setup -->
   <div id="player-setup" class="hidden">
     <h2>Name Your Whales</h2>
     <div id="player-selection">
@@ -54,26 +55,23 @@
     <button onclick="startGame()">Swim to Start ➔</button>
   </div>
 
+  <!-- 🎲 Game Board -->
   <div id="game-board" class="hidden">
-   <div id="dynamic-board-track" class="board-track"></div>
+    <div id="dynamic-board-track" class="board-track"></div>
   </div>
 
+  <!-- 🎯 Dice & Turn Display -->
   <div id="dice-container">
     <h3 id="current-player">🎯 Ready to roll!</h3>
     <img id="dice-image" src="images/dice-1.png" alt="Dice roll" />
     <button onclick="rollDice()">🎲 Roll the Dice</button>
   </div>
 
-  <script>
-    
-function startGame() {
-  document.getElementById("player-setup").classList.add("hidden");
-  document.getElementById("game-board").classList.remove("hidden");
-  document.getElementById("card-output").classList.remove("hidden");
-  createBoardSpaces();
-  createPlayerTokens();
-}
+  <!-- 🔊 Sound Effect (Optional) -->
+  <audio id="draw-sound" src="sounds/splash.mp3" preload="auto"></audio>
 
+  <!-- ⚙️ Script to Handle UI -->
+  <script>
     function startWhaling() {
       document.getElementById("how-to-play").classList.add("hidden");
       document.getElementById("player-setup").classList.remove("hidden");
@@ -100,6 +98,7 @@ function startGame() {
     });
   </script>
 
+  <!-- 🧠 Game Logic Lives Here -->
   <script src="game-logic-v2.js"></script>
 </body>
 </html>
