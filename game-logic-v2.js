@@ -145,15 +145,36 @@ function movePlayer(player, steps) {
 
   setTimeout(() => drawCard(player), 500);
 }
-
 function drawCard(player) {
   const isToxic = Math.random() < 0.4;
-  const cardBox = document.getElementById("card-output");
-  cardBox.classList.remove("hidden");
+  const card = document.getElementById("card-output");
+  card.classList.remove("hidden");
 
-  const cardType = isToxic ? 'toxic' : 'whale';
-  const frontText = cardType === 'whale' ? "🐋 Whale Card" : "🍄 Toxic Mushroom";
-  const backText = cardType === 'whale' ? getRandomWhaleChallenge() : getRandomToxicChallenge();
+  let cardType = isToxic ? "toxic" : "whale";
+  let text = isToxic ? getRandomToxicChallenge() : getRandomWhaleChallenge();
+
+  card.innerHTML = `
+    <div class="${cardType}-card card-inner" onclick="this.classList.toggle('flipped')">
+      <div class="card-front">
+        <h2>${cardType === "toxic" ? "🍄 Toxic Mushroom Card" : "🐋 Whale Card"}</h2>
+        <p>Tap to reveal your challenge!</p>
+      </div>
+      <div class="card-back">
+        <p>${text}</p>
+        <button id="next-player-btn">Next Player ➡️</button>
+      </div>
+    </div>
+  `;
+
+  // Let player move on manually
+  setTimeout(() => {
+    document.getElementById("next-player-btn").onclick = () => {
+      card.classList.add("hidden");
+      nextPlayer();
+    };
+  }, 100);
+}
+
 
   // Store for use when flipping
   cardBox.innerHTML = `
