@@ -255,3 +255,4 @@ function startGame() {
     createPlayerTokens(); // then place whales
   }, 0);
 }
+window.startGame = startGame;
