@@ -102,11 +102,6 @@ function showCard(type, text) {
     </div>
   `;
 }
-if (tileType === "whale") {
-  showCard("whale", "🧠 Trivia Time: What's the capital of Iceland?");
-} else if (tileType === "toxic") {
-  showCard("toxic", "💀 Toxic Mushroom: Sing a song in a whale voice!");
-}
 
 // Move the whale
 function movePlayer(player, steps) {
@@ -135,15 +130,10 @@ function movePlayer(player, steps) {
   } else {
     console.error(`🚨 boardSpaces[${newPosition}] is missing!`);
   }
-
   playLandingSound();
-  drawCard(player);
+  setTimeout(() => drawCard(player), 500);
 }
 
-
-  playLandingSound();
-
-  setTimeout(() => drawCard(player), 500);
 }
 function drawCard(player) {
   const isToxic = Math.random() < 0.4;
@@ -174,18 +164,6 @@ function drawCard(player) {
     };
   }, 100);
 }
-
-
-  // Store for use when flipping
-  cardBox.innerHTML = `
-    <div class="card-container">
-      <div class="card-inner" onclick="flipCard(this)">
-        <div class="card-front"><h2>${frontText}</h2></div>
-        <div class="card-back"><p>${backText}</p></div>
-      </div>
-    </div>
-    <button id="next-player-btn" class="hidden" onclick="nextPlayer()">Next Player ➡️</button>
-  `;
 
   // Save consequence for toxic card effects
   if (cardType === 'toxic') {
