@@ -161,11 +161,6 @@ function drawCard(player) {
   }, 100);
 }
 
-  // Save consequence for toxic card effects
-  if (cardType === 'toxic') {
-    cardBox.dataset.toxicEffect = backText;
-    cardBox.dataset.playerName = player.name;
-  }
 }
 function flipCard(cardElement) {
   cardElement.classList.add("flipped");
