@@ -111,15 +111,35 @@ if (tileType === "whale") {
 // Move the whale
 function movePlayer(player, steps) {
   let newPosition = player.position + steps;
+
   if (newPosition >= boardSize) {
+    newPosition = boardSize - 1;
     alert(`🎉 ${player.name} has reached the end and WON Whale's Wager!`);
     document.getElementById("current-player").textContent = `${player.name} WINS! 🎉`;
-    return;
   }
 
+  // Remove from old tile
+  const oldTile = boardSpaces[player.position];
+  if (oldTile && oldTile.contains(player.token)) {
+    oldTile.removeChild(player.token);
+  }
+
+  // Update player position
   player.position = newPosition;
-  const space = boardSpaces[newPosition];
-  space.appendChild(player.token);
+
+  // Add token to new tile
+  const newTile = boardSpaces[newPosition];
+  if (newTile) {
+    newTile.appendChild(player.token);
+    console.log(`🐋 ${player.name} moved to tile ${newPosition + 1}`);
+  } else {
+    console.error(`🚨 boardSpaces[${newPosition}] is missing!`);
+  }
+
+  playLandingSound();
+  drawCard(player);
+}
+
 
   playLandingSound();
 
