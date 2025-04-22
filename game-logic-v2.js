@@ -89,16 +89,21 @@ function movePlayer(player, steps) {
     oldTile.removeChild(player.token);
   }
 
-  player.position += steps;
-  if (player.position >= boardSize) {
-    player.position = boardSize - 1;
+  let newPosition = player.position + steps;
+  if (newPosition >= boardSize) {
+    newPosition = boardSize - 1;
+    player.position = newPosition;
+    boardSpaces[newPosition].appendChild(player.token);
     document.getElementById("current-player").textContent = `${player.name} WINS! 🎉`;
     alert(`🎉 ${player.name} reached the end and WINS!`);
     return;
   }
 
-  boardSpaces[player.position].appendChild(player.token);
+  player.position = newPosition;
+  boardSpaces[newPosition].appendChild(player.token);
   playLandingSound();
+
+  // 💥 Trigger the card draw here
   drawCard(player);
 }
 
