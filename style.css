@@ -176,6 +176,7 @@ button:hover {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  position: relative;
 }
 .board-space::before {
   content: "";
