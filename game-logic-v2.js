@@ -10,15 +10,30 @@ gameRef.on("value", (snapshot) => {
   const data = snapshot.val();
   if (!data) return;
 
-  players = data.players || [];
+  players = data.players.map((p, index) => {
+    const token = document.createElement("div");
+    token.classList.add("whale-token");
+    token.innerHTML = `<img src="${p.tokenImage}" alt="${p.name}'s Whale">`;
+
+    return {
+      name: p.name,
+      token,
+      position: p.position,
+      skipsTurn: false
+    };
+  });
+
   currentPlayerIndex = data.currentPlayerIndex || 0;
   updateCurrentPlayerDisplay();
 
-  // Move all player tokens visually
-  players.forEach((player, index) => {
-    const token = document.querySelectorAll(".whale-token")[index];
-    if (token && boardSpaces[player.position]) {
-      boardSpaces[player.position].appendChild(token);
+  // Clear and redraw board
+  boardSpaces.forEach(space => {
+    while (space.firstChild) space.removeChild(space.firstChild);
+  });
+
+  players.forEach(player => {
+    if (boardSpaces[player.position]) {
+      boardSpaces[player.position].appendChild(player.token);
     }
   });
 });
