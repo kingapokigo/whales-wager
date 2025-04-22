@@ -118,6 +118,27 @@
       }
     });
   </script>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-database.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBkdeGX_6c0pGwU8NvU-hYpRbtLp01Zn0",
+    authDomain: "whaleswager-8cd32.firebaseapp.com",
+    projectId: "whaleswager-8cd32",
+    storageBucket: "whaleswager-8cd32.appspot.com",
+    messagingSenderId: "211512398071",
+    appId: "1:211512398071:web:51aec1fa35e18c05bf43f2",
+    measurementId: "G-BWTQKR4G9R"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Set up Realtime Database
+  const db = firebase.database();
+</script>
 
   <!-- 🧠 Game Logic Lives Here -->
   <script src="game-logic-v2.js"></script>
