@@ -3,6 +3,25 @@ const boardSize = 80;
 let players = [];
 let currentPlayerIndex = 0;
 let boardSpaces = [];
+const gameRef = firebase.database().ref("gameState");
+
+// Listen for changes and update local game
+gameRef.on("value", (snapshot) => {
+  const data = snapshot.val();
+  if (!data) return;
+
+  players = data.players || [];
+  currentPlayerIndex = data.currentPlayerIndex || 0;
+  updateCurrentPlayerDisplay();
+
+  // Move all player tokens visually
+  players.forEach((player, index) => {
+    const token = document.querySelectorAll(".whale-token")[index];
+    if (token && boardSpaces[player.position]) {
+      boardSpaces[player.position].appendChild(token);
+    }
+  });
+});
 
 // 🧱 Create board tiles
 function createBoardSpaces() {
@@ -80,6 +99,15 @@ function rollDice() {
   const roll = Math.floor(Math.random() * 6) + 1;
   document.getElementById("dice-image").src = `images/dice-${roll}.png`;
   movePlayer(player, roll);
+// Save updated game state to Firebase
+gameRef.set({
+  players: players.map(p => ({
+    name: p.name,
+    position: p.position
+  })),
+  currentPlayerIndex: (currentPlayerIndex + 1) % players.length
+});
+
 }
 
 // 🐾 Move the player
