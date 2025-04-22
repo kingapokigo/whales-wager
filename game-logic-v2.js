@@ -99,12 +99,16 @@ function getWhaleImage(index) {
   ];
   return colors[index % colors.length];
 }
-
-// 🎲 Dice roll
 function rollDice() {
-  if (players.length === 0) return;
-
+  // Only allow current player to roll
+  const myName = document.querySelector(".player-input input").value.trim();
   const player = players[currentPlayerIndex];
+
+  if (player.name !== myName) {
+    alert("Not your turn yet!");
+    return;
+  }
+
   if (player.skipsTurn) {
     alert(`${player.name} is skipping this turn!`);
     player.skipsTurn = false;
@@ -114,6 +118,18 @@ function rollDice() {
   const roll = Math.floor(Math.random() * 6) + 1;
   document.getElementById("dice-image").src = `images/dice-${roll}.png`;
   movePlayer(player, roll);
+
+  // Save updated game state to Firebase
+  gameRef.set({
+    players: players.map(p => ({
+      name: p.name,
+      position: p.position,
+      tokenImage: p.token.querySelector("img").src
+    })),
+    currentPlayerIndex: (currentPlayerIndex + 1) % players.length
+  });
+}
+
 // Save updated game state to Firebase
 gameRef.set({
   players: players.map(p => ({
