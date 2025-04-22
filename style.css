@@ -336,10 +336,11 @@ button:hover {
 
 /* === Current Player Display === */
 #current-player {
-  font-size: 26px;
-  color: #ffffff;
-  margin-top: -20px;
-  text-shadow: 2px 2px #000;
+  font-size: 28px;
+  color: #000000; /* pure black for bold visibility */
+  margin-top: 20px;
+  text-shadow: none; /* remove the white/gray ghosting */
+  font-weight: 900;
 }
 
 #turn-zone {
