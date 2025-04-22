@@ -338,7 +338,7 @@ button:hover {
 #current-player {
   font-size: 26px;
   color: #ffffff;
-  margin-top: 20px;
+  margin-top: -20px;
   text-shadow: 2px 2px #000;
 }
 
