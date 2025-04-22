@@ -241,8 +241,20 @@ function startGame() {
   document.getElementById("whale-track-label").classList.remove("hidden");
 
   createBoardSpaces();
-  setTimeout(createPlayerTokens, 0);
-}
+ setTimeout(() => {
+  createPlayerTokens();
+
+  // Save to Firebase when the game starts
+  gameRef.set({
+    players: players.map(p => ({
+      name: p.name,
+      position: p.position,
+      tokenImage: p.token.querySelector("img").src
+    })),
+    currentPlayerIndex: currentPlayerIndex
+  });
+}, 0);
+
 
 window.startGame = startGame;
 window.rollDice = rollDice;
