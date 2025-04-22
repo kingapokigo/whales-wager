@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: 'Antonio', sans-serif;
-  background: linear-gradient(to bottom, #b6eaff 0%, #79d7f6 100%);
+  background: linear-gradient(to bottom, #007a99, #00b0b9);
   overflow-x: hidden;
   background-image: url('images/cartoon-ocean-bg.png'); /* optional! */
   background-size: cover;
