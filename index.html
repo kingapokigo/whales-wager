@@ -55,21 +55,24 @@
     <button onclick="startGame()">Swim to Start ➔</button>
   </div>
 
-  <!-- 🎲 Game Board -->
-  <div id="game-board" class="hidden">
-    <div id="dynamic-board-track" class="board-track"></div>
-  </div>
+<!-- 🎲 Game Board -->
+<div id="game-board" class="hidden">
+  <div id="dynamic-board-track" class="board-track"></div>
+</div>
 
-  <!-- 🎯 Dice & Turn Display -->
-  <div id="dice-container">
-    <h3 id="current-player">🎯 Ready to roll!</h3>
-    <p id="dice-result"></p>
-    <img id="dice-image" src="images/dice-1.png" alt="Dice roll" />
-    <button onclick="rollDice()">🎲 Roll the Dice</button>
-  </div>
+<!-- 🎯 Dice & Turn Display -->
+<div id="dice-container">
+  <h3 id="current-player">🎯 Ready to roll!</h3>
+  <p id="dice-result"></p>
+  <img id="dice-image" src="images/dice-1.png" alt="Dice roll" />
+  <button onclick="rollDice()">🎲 Roll the Dice</button>
+</div>
 
-  <!-- 🔊 Sound Effect (Optional) -->
-  <audio id="draw-sound" src="sounds/splash.mp3" preload="auto"></audio>
+<!-- 🃏 Card Output -->
+<div id="card-output" class="card-box hidden"></div>
+
+<!-- 🔊 Sound Effect (Optional) -->
+<audio id="draw-sound" src="sounds/splash.mp3" preload="auto"></audio>
 
   <!-- ⚙️ Script to Handle UI -->
   <script>
