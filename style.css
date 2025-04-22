@@ -4,7 +4,6 @@ body {
   font-family: 'Antonio', sans-serif;
   background: linear-gradient(to bottom, #007a99, #00b0b9);
   overflow-x: hidden;
-  background-image: url('images/cartoon-ocean-bg.png'); /* optional! */
   background-size: cover;
   background-position: center;
 }
