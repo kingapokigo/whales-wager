@@ -342,6 +342,22 @@ button:hover {
   text-shadow: 2px 2px #000;
 }
 
+#turn-zone {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  margin: 40px auto;
+  max-width: 1000px;
+  padding: 0 20px;
+}
+
+#dice-container, #card-output {
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
 /* === Responsive Design === */
 @media screen and (max-width: 480px) {
   .board-track {
