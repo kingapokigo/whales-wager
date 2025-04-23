@@ -124,16 +124,13 @@ function rollDice() {
   movePlayer(player, roll);
 
   gameRef.set({
-  players: players.map(p => {
-    return {
+    players: players.map(p => ({
       name: p.name,
       position: p.position,
       tokenImage: p.token.querySelector("img").src
-    };
-  }),
-  currentPlayerIndex: (currentPlayerIndex + 1) % players.length
-});
-}
+    })),
+    currentPlayerIndex: (currentPlayerIndex + 1) % players.length
+  });
 
 // 🐾 Move the player
 function movePlayer(player, steps) {
