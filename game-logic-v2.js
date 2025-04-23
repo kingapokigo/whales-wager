@@ -297,3 +297,10 @@ function startGame() {
 
 window.startGame = startGame;
 window.rollDice = rollDice;
+// 🌊 Auto prompt whale name if game already started
+window.addEventListener("load", () => {
+  const hasGameStarted = window.location.href.includes("web.app");
+  if (hasGameStarted) {
+    getOrSetPlayerName(); // Prompt on load
+  }
+});
