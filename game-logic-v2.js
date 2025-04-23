@@ -102,11 +102,20 @@ function getWhaleImage(index) {
   ];
   return colors[index % colors.length];
 }
+function getOrSetPlayerName() {
+  let name = localStorage.getItem("whaleName");
+  if (!name) {
+    name = prompt("What is your whale name (exactly as entered at the start)?");
+    localStorage.setItem("whaleName", name);
+  }
+  return name;
+}
 
 // 🎲 Roll the dice
 function rollDice() {
-  const myName = document.querySelector(".player-input input").value.trim();
-  const player = players[currentPlayerIndex];
+  const myName = getOrSetPlayerName(); 
+const player = players[currentPlayerIndex];  
+
 
   if (player.name !== myName) {
     alert("Not your turn yet!");
@@ -131,7 +140,7 @@ function rollDice() {
     })),
     currentPlayerIndex: (currentPlayerIndex + 1) % players.length
   });
-  
+
 }
 // 🐾 Move the player
 function movePlayer(player, steps) {
@@ -235,12 +244,17 @@ function getRandomToxicChallenge() {
     "Hold your breath for 15 seconds or go back!"
   ][Math.floor(Math.random() * 5)];
 }
-
-// 🔁 Update turn display
 function updateCurrentPlayerDisplay() {
   const player = players[currentPlayerIndex];
   document.getElementById("current-player").textContent = `🎯 ${player.name}'s turn!`;
+
+  const myName = localStorage.getItem("whaleName");
+  const rollButton = document.querySelector("button[onclick='rollDice()']");
+  if (rollButton) {
+    rollButton.disabled = player.name !== myName;
+  }
 }
+
 
 // ⏩ Next player
 function nextPlayer() {
