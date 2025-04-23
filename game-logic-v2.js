@@ -272,6 +272,8 @@ function playLandingSound() {
 function startGame() {
   gameRef = firebase.database().ref("gameState");
   setupFirebaseListener();
+  getOrSetPlayerName();
+
 
   document.getElementById("player-setup").classList.add("hidden");
   document.getElementById("game-board").classList.remove("hidden");
