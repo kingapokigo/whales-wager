@@ -131,6 +131,7 @@ function rollDice() {
     })),
     currentPlayerIndex: (currentPlayerIndex + 1) % players.length
   });
+  
 }
 // 🐾 Move the player
 function movePlayer(player, steps) {
