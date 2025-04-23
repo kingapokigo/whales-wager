@@ -6,6 +6,37 @@
   <title>Whale's Wager</title>
   <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase SDKs (v9 compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+  <!-- Initialize Firebase ONCE -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBkdeGX_6c0pGwU8NvU-hYpRbtLp01Zn0",
+      authDomain: "whaleswager-8cd32.firebaseapp.com",
+      databaseURL: "https://whaleswager-8cd32-default-rtdb.firebaseio.com",
+      projectId: "whaleswager-8cd32",
+      storageBucket: "whaleswager-8cd32.appspot.com",
+      messagingSenderId: "211512398071",
+      appId: "1:211512398071:web:51aec1fa35e18c05bf43f2",
+      measurementId: "G-BWTQKR4G9R"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+  </script>
+</head>
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whale's Wager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- 🎨 Floating Background Decor -->
@@ -118,27 +149,6 @@
       }
     });
   </script>
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-database.js"></script>
-
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyBkdeGX_6c0pGwU8NvU-hYpRbtLp01Zn0",
-    authDomain: "whaleswager-8cd32.firebaseapp.com",
-    projectId: "whaleswager-8cd32",
-    storageBucket: "whaleswager-8cd32.appspot.com",
-    messagingSenderId: "211512398071",
-    appId: "1:211512398071:web:51aec1fa35e18c05bf43f2",
-    measurementId: "G-BWTQKR4G9R"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
-  // Set up Realtime Database
-  const db = firebase.database();
-</script>
 
   <!-- 🧠 Game Logic Lives Here -->
   <script src="game-logic-v2.js"></script>
