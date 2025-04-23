@@ -1,42 +1,45 @@
+
 console.log("🐳 Whale’s Wager JS v2.4 Loaded!");
+
 const boardSize = 80;
 let players = [];
 let currentPlayerIndex = 0;
 let boardSpaces = [];
-const gameRef = firebase.database().ref("gameState");
+let gameRef; // Declare gameRef without initializing
 
-// Listen for changes and update local game
-gameRef.on("value", (snapshot) => {
-  const data = snapshot.val();
-  if (!data) return;
+// 🧠 Firebase Listener Setup
+function setupFirebaseListener() {
+  gameRef.on("value", (snapshot) => {
+    const data = snapshot.val();
+    if (!data) return;
 
-  players = data.players.map((p, index) => {
-    const token = document.createElement("div");
-    token.classList.add("whale-token");
-    token.innerHTML = `<img src="${p.tokenImage}" alt="${p.name}'s Whale">`;
+    players = data.players.map((p, index) => {
+      const token = document.createElement("div");
+      token.classList.add("whale-token");
+      token.innerHTML = `<img src="${p.tokenImage}" alt="${p.name}'s Whale">`;
 
-    return {
-      name: p.name,
-      token,
-      position: p.position,
-      skipsTurn: false
-    };
+      return {
+        name: p.name,
+        token,
+        position: p.position,
+        skipsTurn: false
+      };
+    });
+
+    currentPlayerIndex = data.currentPlayerIndex || 0;
+    updateCurrentPlayerDisplay();
+
+    boardSpaces.forEach(space => {
+      while (space.firstChild) space.removeChild(space.firstChild);
+    });
+
+    players.forEach(player => {
+      if (boardSpaces[player.position]) {
+        boardSpaces[player.position].appendChild(player.token);
+      }
+    });
   });
-
-  currentPlayerIndex = data.currentPlayerIndex || 0;
-  updateCurrentPlayerDisplay();
-
-  // Clear and redraw board
-  boardSpaces.forEach(space => {
-    while (space.firstChild) space.removeChild(space.firstChild);
-  });
-
-  players.forEach(player => {
-    if (boardSpaces[player.position]) {
-      boardSpaces[player.position].appendChild(player.token);
-    }
-  });
-});
+}
 
 // 🧱 Create board tiles
 function createBoardSpaces() {
@@ -99,8 +102,9 @@ function getWhaleImage(index) {
   ];
   return colors[index % colors.length];
 }
+
+// 🎲 Roll the dice
 function rollDice() {
-  // Only allow current player to roll
   const myName = document.querySelector(".player-input input").value.trim();
   const player = players[currentPlayerIndex];
 
@@ -119,7 +123,6 @@ function rollDice() {
   document.getElementById("dice-image").src = `images/dice-${roll}.png`;
   movePlayer(player, roll);
 
-  // Save updated game state to Firebase
   gameRef.set({
     players: players.map(p => ({
       name: p.name,
@@ -129,15 +132,6 @@ function rollDice() {
     currentPlayerIndex: (currentPlayerIndex + 1) % players.length
   });
 }
-
-// Save updated game state to Firebase
-gameRef.set({
-  players: players.map(p => ({
-    name: p.name,
-    position: p.position
-  })),
-  currentPlayerIndex: (currentPlayerIndex + 1) % players.length
-});
 
 // 🐾 Move the player
 function movePlayer(player, steps) {
@@ -159,8 +153,6 @@ function movePlayer(player, steps) {
   player.position = newPosition;
   boardSpaces[newPosition].appendChild(player.token);
   playLandingSound();
-
-  // 💥 Trigger the card draw here
   drawCard(player);
 }
 
@@ -264,25 +256,27 @@ function playLandingSound() {
 
 // 🚀 Game start
 function startGame() {
+  gameRef = firebase.database().ref("gameState");
+  setupFirebaseListener();
+
   document.getElementById("player-setup").classList.add("hidden");
   document.getElementById("game-board").classList.remove("hidden");
   document.getElementById("card-output").classList.remove("hidden");
   document.getElementById("whale-track-label").classList.remove("hidden");
 
   createBoardSpaces();
- setTimeout(() => {
-  createPlayerTokens();
+  setTimeout(() => {
+    createPlayerTokens();
 
-  // Save to Firebase when the game starts
-  gameRef.set({
-    players: players.map(p => ({
-      name: p.name,
-      position: p.position,
-      tokenImage: p.token.querySelector("img").src
-    })),
-    currentPlayerIndex: currentPlayerIndex
-  });
-}, 0);
+    gameRef.set({
+      players: players.map(p => ({
+        name: p.name,
+        position: p.position,
+        tokenImage: p.token.querySelector("img").src
+      })),
+      currentPlayerIndex: currentPlayerIndex
+    });
+  }, 0);
 }
 
 window.startGame = startGame;
