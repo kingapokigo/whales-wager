@@ -139,8 +139,6 @@ gameRef.set({
   currentPlayerIndex: (currentPlayerIndex + 1) % players.length
 });
 
-}
-
 // 🐾 Move the player
 function movePlayer(player, steps) {
   const oldTile = boardSpaces[player.position];
@@ -285,7 +283,7 @@ function startGame() {
     currentPlayerIndex: currentPlayerIndex
   });
 }, 0);
-
+}
 
 window.startGame = startGame;
 window.rollDice = rollDice;
